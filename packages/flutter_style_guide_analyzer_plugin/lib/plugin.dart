@@ -295,16 +295,17 @@ class SeeAlsoDartdocVisitor extends RecursiveAstVisitor<void> {
   }
 }
 
-class StartWithSpaceDartdocVisitor extends DartdocVisitor {
+class StartWithSpaceDartdocVisitor extends RecursiveAstVisitor<void> {
   StartWithSpaceDartdocVisitor(this.addError);
 
   final void Function(int offset, int length, StyleCode errorCode) addError;
 
-  void checkComment(Comment comment) {
-    if (comment == null) {
+  @override
+  void visitComment(Comment node) {
+    if (node == null) {
       return;
     }
-    for (final token in comment.tokens) {
+    for (final token in node.tokens) {
       if (token.lexeme != '///' && !token.lexeme.startsWith('/// ')) {
         addError(
           token.offset,
@@ -314,65 +315,6 @@ class StartWithSpaceDartdocVisitor extends DartdocVisitor {
         );
       }
     }
-  }
-}
-
-abstract class DartdocVisitor extends RecursiveAstVisitor<void> {
-  void checkComment(Comment comment);
-
-  @override
-  void visitClassDeclaration(ClassDeclaration node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitClassTypeAlias(ClassTypeAlias node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitConstructorDeclaration(ConstructorDeclaration node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitEnumConstantDeclaration(EnumConstantDeclaration node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitEnumDeclaration(EnumDeclaration node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitFieldDeclaration(FieldDeclaration node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitFunctionDeclaration(FunctionDeclaration node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitFunctionTypeAlias(FunctionTypeAlias node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitLibraryDirective(LibraryDirective node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitMethodDeclaration(MethodDeclaration node) {
-    checkComment(node.documentationComment);
-  }
-
-  @override
-  void visitTopLevelVariableDeclaration(TopLevelVariableDeclaration node) {
-    checkComment(node.documentationComment);
   }
 }
 

@@ -176,6 +176,8 @@ class Driver implements AnalysisDriverGeneric {
       SeeAlsoDartdocVisitor(addError),
       StartWithSpaceDartdocVisitor(addError),
       MultiEmptyLineDartdocVisitor(addError),
+      StartsWithEmptyLineDartdocVisitor(addError),
+      EndsWithEmptyLineDartdocVisitor(addError),
     ];
     try {
       for (final visitor in visitors) {
@@ -340,6 +342,50 @@ class MultiEmptyLineDartdocVisitor extends RecursiveAstVisitor<void> {
               'Multi empty line should not be used.'),
         );
       }
+    }
+  }
+}
+
+class StartsWithEmptyLineDartdocVisitor extends RecursiveAstVisitor<void> {
+  StartsWithEmptyLineDartdocVisitor(this.addError);
+
+  final void Function(int offset, int length, StyleCode errorCode) addError;
+
+  @override
+  void visitComment(Comment node) {
+    if (node == null) {
+      return;
+    }
+    final line = node.tokens.first;
+    if (line.lexeme == '///') {
+      addError(
+        line.offset,
+        line.length,
+        StyleCode('dartdoc.starts-with-empty-line',
+            'Doc comments should not start with empty line.'),
+      );
+    }
+  }
+}
+
+class EndsWithEmptyLineDartdocVisitor extends RecursiveAstVisitor<void> {
+  EndsWithEmptyLineDartdocVisitor(this.addError);
+
+  final void Function(int offset, int length, StyleCode errorCode) addError;
+
+  @override
+  void visitComment(Comment node) {
+    if (node == null) {
+      return;
+    }
+    final line = node.tokens.last;
+    if (line.lexeme == '///') {
+      addError(
+        line.offset,
+        line.length,
+        StyleCode('dartdoc.ends-with-empty-line',
+            'Doc comments should not end with empty line.'),
+      );
     }
   }
 }

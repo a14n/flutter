@@ -24,8 +24,8 @@ final _log = Logger('plugin');
 class FlutterStyleGuidePlugin extends ServerPlugin {
   FlutterStyleGuidePlugin(ResourceProvider provider) : super(provider) {
     Logger.root.level = Level.FINE;
-    final file = io.File(
-        '/home/aar-dw/perso/dev/dart/flutter/flutter/test_style_guide/plugin.log');
+    final file =
+        io.File('/home/aar-dw/perso/dev/dart/flutter/flutter/plugin-style.log');
     Logger.root.onRecord.listen((rec) => file.writeAsStringSync(
         '${rec.level.name} ${rec.time} ${rec.loggerName} : ${rec.message}\n',
         mode: io.FileMode.append,
@@ -175,6 +175,7 @@ class Driver implements AnalysisDriverGeneric {
       EOFVisitor(addError),
       SeeAlsoDartdocVisitor(addError),
       StartWithSpaceDartdocVisitor(addError),
+      MultiEmptyLineDartdocVisitor(addError),
     ];
     try {
       for (final visitor in visitors) {
@@ -287,7 +288,7 @@ class SeeAlsoDartdocVisitor extends RecursiveAstVisitor<void> {
         addError(
           lineTokens.last.offset,
           lineTokens.last.length,
-          StyleCode('dartdoc.seseealsoe.list.end',
+          StyleCode('dartdoc.seealso.list.end',
               'Each line should end with a period.'),
         );
       }
@@ -312,6 +313,31 @@ class StartWithSpaceDartdocVisitor extends RecursiveAstVisitor<void> {
           token.length,
           StyleCode('dartdoc.space',
               'Documentation comments should start with "/// "'),
+        );
+      }
+    }
+  }
+}
+
+class MultiEmptyLineDartdocVisitor extends RecursiveAstVisitor<void> {
+  MultiEmptyLineDartdocVisitor(this.addError);
+
+  final void Function(int offset, int length, StyleCode errorCode) addError;
+
+  @override
+  void visitComment(Comment node) {
+    if (node == null) {
+      return;
+    }
+    for (int i = 0; i < node.tokens.length - 2; i++) {
+      final line = node.tokens[i];
+      final nextLine = node.tokens[i + 1];
+      if (line.lexeme == '///' && nextLine.lexeme == '///') {
+        addError(
+          nextLine.offset,
+          nextLine.length,
+          StyleCode('dartdoc.multi-empty-line',
+              'Multi empty line should not be used.'),
         );
       }
     }

@@ -178,6 +178,7 @@ class Driver implements AnalysisDriverGeneric {
       MultiEmptyLineDartdocVisitor(addError),
       StartsWithEmptyLineDartdocVisitor(addError),
       EndsWithEmptyLineDartdocVisitor(addError),
+      DeprecatedVisitor(addError),
     ];
     try {
       for (final visitor in visitors) {
@@ -385,6 +386,83 @@ class EndsWithEmptyLineDartdocVisitor extends RecursiveAstVisitor<void> {
         line.length,
         StyleCode('dartdoc.ends-with-empty-line',
             'Doc comments should not end with empty line.'),
+      );
+    }
+  }
+}
+
+class DeprecatedVisitor extends RecursiveAstVisitor<void> {
+  DeprecatedVisitor(this.addError);
+
+  final void Function(int offset, int length, StyleCode errorCode) addError;
+
+  @override
+  void visitClassDeclaration(ClassDeclaration node) {
+    super.visitClassDeclaration(node);
+    _check(node);
+  }
+
+  @override
+  void visitMethodDeclaration(MethodDeclaration node) {
+    super.visitMethodDeclaration(node);
+    _check(node);
+  }
+
+  @override
+  void visitFunctionDeclaration(FunctionDeclaration node) {
+    super.visitFunctionDeclaration(node);
+    _check(node);
+  }
+
+  @override
+  void visitTopLevelVariableDeclaration(TopLevelVariableDeclaration node) {
+    super.visitTopLevelVariableDeclaration(node);
+    _check(node);
+  }
+
+  @override
+  void visitFieldDeclaration(FieldDeclaration node) {
+    super.visitFieldDeclaration(node);
+    _check(node);
+  }
+
+  @override
+  void visitMixinDeclaration(MixinDeclaration node) {
+    super.visitMixinDeclaration(node);
+    _check(node);
+  }
+
+  @override
+  void visitEnumDeclaration(EnumDeclaration node) {
+    super.visitEnumDeclaration(node);
+    _check(node);
+  }
+
+  void _check(Declaration node) {
+    if (node.documentationComment == null) {
+      return;
+    }
+    final isDeprecated =
+        node.metadata.any((e) => e.elementAnnotation.isDeprecated);
+    if (isDeprecated &&
+        !node.documentationComment.tokens.first.lexeme
+            .startsWith(RegExp(r'/// \(Deprecated, use \[.*\] instead\)'))) {
+      addError(
+        node.offset,
+        node.length,
+        StyleCode('dartdoc.deprecated',
+            'Comment should start with " (Deprecated, use [...] instead)".'),
+      );
+    }
+    if (!isDeprecated &&
+        node.documentationComment.tokens.first.lexeme
+            .toLowerCase()
+            .contains('is deprecated')) {
+      addError(
+        node.offset,
+        node.length,
+        StyleCode('dartdoc.deprecated',
+            'Comment mention deprecation but the target is not annotated with @deprecated.'),
       );
     }
   }

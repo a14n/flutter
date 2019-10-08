@@ -416,8 +416,8 @@ class XcodeProjectInfo {
   bool get definesCustomSchemes => !(schemes.contains('Runner') && schemes.length == 1);
   bool get definesCustomBuildConfigurations {
     return !(buildConfigurations.contains('Debug') &&
-        buildConfigurations.contains('Release') &&
-        buildConfigurations.length == 2);
+      buildConfigurations.contains('Release') &&
+      buildConfigurations.length == 2);
   }
 
   /// The expected scheme for [buildInfo].

@@ -76,9 +76,10 @@ class BuildBundleCommand extends BuildSubCommand {
   final String description = 'Build the Flutter assets directory from your app.';
 
   @override
-  final String usageFooter = 'The Flutter assets directory contains your '
-      'application code and resources; they are used by some Flutter Android and'
-      ' iOS runtimes.';
+  final String usageFooter =
+    'The Flutter assets directory contains your '
+    'application code and resources; they are used by some Flutter Android and'
+    ' iOS runtimes.';
 
   @override
   Future<Map<CustomDimensions, String>> get usageValues async {

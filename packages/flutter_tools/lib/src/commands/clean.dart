@@ -94,9 +94,10 @@ class CleanCommand extends FlutterCommand {
       if (platform.isWindows) {
         printError(
           'Failed to remove $path. '
-            'A program may still be using a file in the directory or the directory itself. '
-            'To find and stop such a program, see: '
-            'https://superuser.com/questions/1333118/cant-delete-empty-folder-because-it-is-used');
+          'A program may still be using a file in the directory or the directory itself. '
+          'To find and stop such a program, see: '
+          'https://superuser.com/questions/1333118/cant-delete-empty-folder-because-it-is-used'
+        );
       } else {
         printError('Failed to remove $path: $error');
       }

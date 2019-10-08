@@ -22,13 +22,13 @@ class BotDetector {
 
   bool get isRunningOnBot {
     if (
-        // Explicitly stated to not be a bot.
-        platform.environment['BOT'] == 'false'
+      // Explicitly stated to not be a bot.
+      platform.environment['BOT'] == 'false'
 
-        // Set by the IDEs to the IDE name, so a strong signal that this is not a bot.
-        || platform.environment.containsKey('FLUTTER_HOST')
-        // When set, GA logs to a local file (normally for tests) so we don't need to filter.
-        || platform.environment.containsKey('FLUTTER_ANALYTICS_LOG_FILE')
+      // Set by the IDEs to the IDE name, so a strong signal that this is not a bot.
+      || platform.environment.containsKey('FLUTTER_HOST')
+      // When set, GA logs to a local file (normally for tests) so we don't need to filter.
+      || platform.environment.containsKey('FLUTTER_ANALYTICS_LOG_FILE')
     ) {
       return false;
     }
@@ -47,8 +47,7 @@ class BotDetector {
         || platform.environment.containsKey('CIRRUS_CI')
 
         // https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html
-        || (platform.environment.containsKey('AWS_REGION') &&
-            platform.environment.containsKey('CODEBUILD_INITIATOR'))
+        || (platform.environment.containsKey('AWS_REGION') && platform.environment.containsKey('CODEBUILD_INITIATOR'))
 
         // https://wiki.jenkins.io/display/JENKINS/Building+a+software+project#Buildingasoftwareproject-belowJenkinsSetEnvironmentVariables
         || platform.environment.containsKey('JENKINS_URL')
@@ -234,19 +233,17 @@ class Uuid {
 
     return
       '${_bitsDigits(16, 4)}${_bitsDigits(16, 4)}-'
-          '${_bitsDigits(16, 4)}-'
-          '4${_bitsDigits(12, 3)}-'
-          '${_printDigits(special, 1)}${_bitsDigits(12, 3)}-'
-          '${_bitsDigits(16, 4)}${_bitsDigits(16, 4)}${_bitsDigits(16, 4)}';
+      '${_bitsDigits(16, 4)}-'
+      '4${_bitsDigits(12, 3)}-'
+      '${_printDigits(special, 1)}${_bitsDigits(12, 3)}-'
+      '${_bitsDigits(16, 4)}${_bitsDigits(16, 4)}${_bitsDigits(16, 4)}';
   }
 
-  String _bitsDigits(int bitCount, int digitCount) =>
-      _printDigits(_generateBits(bitCount), digitCount);
+  String _bitsDigits(int bitCount, int digitCount) => _printDigits(_generateBits(bitCount), digitCount);
 
   int _generateBits(int bitCount) => _random.nextInt(1 << bitCount);
 
-  String _printDigits(int value, int count) =>
-      value.toRadixString(16).padLeft(count, '0');
+  String _printDigits(int value, int count) => value.toRadixString(16).padLeft(count, '0');
 }
 
 /// Given a data structure which is a Map of String to dynamic values, return
@@ -450,18 +447,18 @@ List<String> _wrapTextAsLines(String text, { int start = 0, int columnWidth, boo
   /// Based on: https://en.wikipedia.org/wiki/Whitespace_character#Unicode
   bool isWhitespace(_AnsiRun run) {
     final int rune = run.character.isNotEmpty ? run.character.codeUnitAt(0) : 0x0;
-    return rune >= 0x0009 && rune <= 0x000D ||
-        rune == 0x0020 ||
-        rune == 0x0085 ||
-        rune == 0x1680 ||
-        rune == 0x180E ||
-        rune >= 0x2000 && rune <= 0x200A ||
-        rune == 0x2028 ||
-        rune == 0x2029 ||
-        rune == 0x202F ||
-        rune == 0x205F ||
-        rune == 0x3000 ||
-        rune == 0xFEFF;
+    return rune >= 0x0009 && rune <= 0x000D
+        || rune == 0x0020
+        || rune == 0x0085
+        || rune == 0x1680
+        || rune == 0x180E
+        || rune >= 0x2000 && rune <= 0x200A
+        || rune == 0x2028
+        || rune == 0x2029
+        || rune == 0x202F
+        || rune == 0x205F
+        || rune == 0x3000
+        || rune == 0xFEFF;
   }
 
   // Splits a string so that the resulting list has the same number of elements

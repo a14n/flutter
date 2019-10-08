@@ -165,7 +165,7 @@ String validatedBuildNumberForPlatform(TargetPlatform targetPlatform, String bui
     tmpBuildNumber = segments.join('.');
     if (tmpBuildNumber != buildNumber) {
       printTrace('Invalid build-number: $buildNumber for iOS/macOS, overridden by $tmpBuildNumber.\n'
-          'See CFBundleVersion at https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html');
+        'See CFBundleVersion at https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html');
     }
     return tmpBuildNumber;
   }
@@ -183,7 +183,7 @@ String validatedBuildNumberForPlatform(TargetPlatform targetPlatform, String bui
     tmpBuildNumberStr = tmpBuildNumberInt.toString();
     if (tmpBuildNumberStr != buildNumber) {
       printTrace('Invalid build-number: $buildNumber for Android, overridden by $tmpBuildNumberStr.\n'
-          'See versionCode at https://developer.android.com/studio/publish/versioning');
+        'See versionCode at https://developer.android.com/studio/publish/versioning');
     }
     return tmpBuildNumberStr;
   }
@@ -212,7 +212,7 @@ String validatedBuildNameForPlatform(TargetPlatform targetPlatform, String build
     tmpBuildName = segments.join('.');
     if (tmpBuildName != buildName) {
       printTrace('Invalid build-name: $buildName for iOS/macOS, overridden by $tmpBuildName.\n'
-          'See CFBundleShortVersionString at https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html');
+        'See CFBundleShortVersionString at https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html');
     }
     return tmpBuildName;
   }

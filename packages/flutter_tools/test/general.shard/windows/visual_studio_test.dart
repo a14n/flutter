@@ -27,8 +27,7 @@ void main() {
   const String vcvarsPath = visualStudioPath + r'\VC\Auxiliary\Build\vcvars64.bat';
   const String vswherePath = programFilesPath + r'\Microsoft Visual Studio\Installer\vswhere.exe';
 
-  final MockPlatform windowsPlatform = MockPlatform()
-      ..environment['PROGRAMFILES(X86)'] = r'C:\Program Files (x86)\';
+  final MockPlatform windowsPlatform = MockPlatform()..environment['PROGRAMFILES(X86)'] = r'C:\Program Files (x86)\';
   MockProcessManager mockProcessManager;
   final MemoryFileSystem memoryFilesystem = MemoryFileSystem(style: FileSystemStyle.windows);
 
@@ -78,8 +77,7 @@ void main() {
     final MockProcessResult result = MockProcessResult();
     when(result.exitCode).thenReturn(0);
 
-    final String finalResponse =
-        json.encode(<Map<String, dynamic>>[response]);
+    final String finalResponse = json.encode(<Map<String, dynamic>>[response]);
     when<String>(result.stdout).thenReturn(finalResponse);
     when<String>(result.stderr).thenReturn('');
     final List<String> requirementArguments = requiredComponents == null

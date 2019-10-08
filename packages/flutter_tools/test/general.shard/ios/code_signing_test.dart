@@ -268,8 +268,7 @@ void main() {
     3 valid identities found''',
         '',
       )));
-      mockTerminalStdInStream =
-          Stream<String>.fromFuture(Future<String>.value('3'));
+      mockTerminalStdInStream = Stream<String>.fromFuture(Future<String>.value('3'));
       when(mockProcessManager.run(
         <String>['security', 'find-certificate', '-c', '3333CCCC33', '-p'],
         environment: anyNamed('environment'),
@@ -502,8 +501,7 @@ void main() {
     3 valid identities found''',
         '',
       )));
-      mockTerminalStdInStream =
-          Stream<String>.fromFuture(Future<String>.value('3'));
+      mockTerminalStdInStream = Stream<String>.fromFuture(Future<String>.value('3'));
       when(mockProcessManager.run(
         <String>['security', 'find-certificate', '-c', '3333CCCC33', '-p'],
         environment: anyNamed('environment'),
@@ -609,8 +607,7 @@ void main() {
     3 valid identities found''',
             '',
       )));
-      mockTerminalStdInStream =
-          Stream<String>.fromFuture(Future<String>.value('3'));
+      mockTerminalStdInStream = Stream<String>.fromFuture(Future<String>.value('3'));
       when(mockProcessManager.run(
         <String>['security', 'find-certificate', '-c', '3333CCCC33', '-p'],
         environment: anyNamed('environment'),

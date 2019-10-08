@@ -114,10 +114,10 @@ void main() {
       when(mockProc.stdout).thenAnswer((_) => const Stream<List<int>>.empty());
       when(mockProc.stderr).thenAnswer((_) => const Stream<List<int>>.empty());
       await genSnapshot.run(
-          snapshotType:
-              SnapshotType(TargetPlatform.android_x64, BuildMode.release),
-          darwinArch: null,
-          additionalArgs: <String>['--additional_arg']);
+        snapshotType: SnapshotType(TargetPlatform.android_x64, BuildMode.release),
+        darwinArch: null,
+        additionalArgs: <String>['--additional_arg'],
+      );
       verify(mockProcessManager.start(
         <String>[
           'gen_snapshot',
@@ -197,15 +197,15 @@ void main() {
         ])
         .transform<List<int>>(utf8.encoder));
       await genSnapshot.run(
-          snapshotType:
-              SnapshotType(TargetPlatform.android_x64, BuildMode.release),
-          darwinArch: null,
-          additionalArgs: <String>['--strip']);
+        snapshotType: SnapshotType(TargetPlatform.android_x64, BuildMode.release),
+        darwinArch: null,
+        additionalArgs: <String>['--strip'],
+      );
       verify(mockProcessManager.start(
-              <String>['gen_snapshot', '--causal_async_stacks', '--strip'],
-              workingDirectory: anyNamed('workingDirectory'),
-              environment: anyNamed('environment')))
-          .called(1);
+        <String>['gen_snapshot', '--causal_async_stacks', '--strip'],
+        workingDirectory: anyNamed('workingDirectory'),
+        environment: anyNamed('environment'),
+      )).called(1);
       expect(testLogger.errorText, contains('ABC'));
       expect(testLogger.errorText, isNot(contains('ELF library')));
       expect(testLogger.errorText, contains('XYZ'));

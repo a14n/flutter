@@ -37,19 +37,16 @@ void main() {
     });
 
     test('device.getDevices', () async {
-      final String flutterBin =
-          fs.path.join(getFlutterRoot(), 'bin', 'flutter');
+      final String flutterBin = fs.path.join(getFlutterRoot(), 'bin', 'flutter');
 
       const ProcessManager processManager = LocalProcessManager();
       process = await processManager.start(
           <String>[flutterBin, '--show-test-device', 'daemon'],
           workingDirectory: tempDir.path);
 
-      final StreamController<String> stdout =
-          StreamController<String>.broadcast();
+      final StreamController<String> stdout = StreamController<String>.broadcast();
 
-      transformToLines(process.stdout)
-          .listen((String line) => stdout.add(line));
+      transformToLines(process.stdout).listen((String line) => stdout.add(line));
 
       final Stream<Map<String, dynamic>> stream =
         stdout.stream.where((String line) {

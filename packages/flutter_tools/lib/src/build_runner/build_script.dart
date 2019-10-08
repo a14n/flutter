@@ -419,8 +419,8 @@ Future<bool> _isAppEntryPoint(AssetId dartId, AssetReader reader) async {
   // Allow two or fewer arguments so that entrypoints intended for use with
   // [spawnUri] get counted.
   return result.unit.declarations.any((CompilationUnitMember node) {
-    return node is FunctionDeclaration &&
-        node.name.name == 'main' &&
-        node.functionExpression.parameters.parameters.length <= 2;
+    return node is FunctionDeclaration
+        && node.name.name == 'main'
+        && node.functionExpression.parameters.parameters.length <= 2;
   });
 }

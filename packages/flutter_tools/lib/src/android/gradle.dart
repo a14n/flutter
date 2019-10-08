@@ -82,9 +82,11 @@ enum FlutterPluginVersion {
 // anyway.  If we can prove it really is impossible, delete the filter.
 // This technically matches everything *except* the NDK message, since it's
 // passed to a function that filters out all lines that don't match a filter.
-final RegExp ndkMessageFilter = RegExp(r'^(?!NDK is missing a ".*" directory'
+final RegExp ndkMessageFilter = RegExp(
+  r'^(?!NDK is missing a ".*" directory'
   r'|If you are not using NDK, unset the NDK variable from ANDROID_NDK_HOME or local.properties to remove this warning'
-  r'|If you are using NDK, verify the ndk.dir is set to a valid NDK directory.  It is currently set to .*)');
+  r'|If you are using NDK, verify the ndk.dir is set to a valid NDK directory.  It is currently set to .*)'
+);
 
 // This regex is intentionally broad. AndroidX errors can manifest in multiple
 // different ways and each one depends on the specific code config and
@@ -99,10 +101,12 @@ final RegExp ndkMessageFilter = RegExp(r'^(?!NDK is missing a ".*" directory'
 // https://github.com/flutter/flutter/issues/23995 "error: package android.support.annotation does not exist import android.support.annotation.NonNull;"
 final RegExp androidXFailureRegex = RegExp(r'(AAPT|androidx|android\.support)');
 
-final RegExp androidXPluginWarningRegex = RegExp(r'\*{57}'
+final RegExp androidXPluginWarningRegex = RegExp(
+  r'\*{57}'
   r"|WARNING: This version of (\w+) will break your Android build if it or its dependencies aren't compatible with AndroidX."
   r'|See https://goo.gl/CP92wY for more information on the problem and how to fix it.'
-  r'|This warning prints for all Android build failures. The real root cause of the error may be unrelated.');
+  r'|This warning prints for all Android build failures. The real root cause of the error may be unrelated.'
+);
 
 FlutterPluginVersion getFlutterPluginVersion(AndroidProject project) {
   final File plugin = project.hostAppGradleRoot.childFile(
@@ -139,8 +143,7 @@ Future<File> getGradleAppOut(AndroidProject androidProject) async {
     case FlutterPluginVersion.managed:
       // Fall through. The managed plugin matches plugin v2 for now.
     case FlutterPluginVersion.v2:
-      final GradleProject gradleProject =
-          await gradleUtils.getAppProject(FlutterProject.current());
+      final GradleProject gradleProject = await gradleUtils.getAppProject(FlutterProject.current());
       return fs.file(gradleProject.apkDirectory.childFile('app.apk'));
   }
   return null;
@@ -404,8 +407,7 @@ distributionUrl=https\\://services.gradle.org/distributions/gradle-$gradleVersio
 /// Returns true if [targetVersion] is within the range [min] and [max] inclusive.
 bool _isWithinVersionRange(String targetVersion, {String min, String max}) {
   final Version parsedTargetVersion = Version.parse(targetVersion);
-  return parsedTargetVersion >= Version.parse(min) &&
-      parsedTargetVersion <= Version.parse(max);
+  return parsedTargetVersion >= Version.parse(min) && parsedTargetVersion <= Version.parse(max);
 }
 
 const String defaultGradleVersion = '5.6.2';

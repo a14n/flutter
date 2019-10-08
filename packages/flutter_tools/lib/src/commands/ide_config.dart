@@ -22,20 +22,22 @@ class IdeConfigCommand extends FlutterCommand {
     argParser.addFlag(
       'update-templates',
       negatable: false,
-      help: 'Update the templates in the template directory from the current '
-          'configuration files. This is the opposite of what $name usually does. '
-          'Will search the flutter tree for .iml files and copy any missing ones '
-          'into the template directory. If --overwrite is also specified, it will '
-          'update any out-of-date files, and remove any deleted files from the '
-          'template directory.',
+      help:
+        'Update the templates in the template directory from the current '
+        'configuration files. This is the opposite of what $name usually does. '
+        'Will search the flutter tree for .iml files and copy any missing ones '
+        'into the template directory. If --overwrite is also specified, it will '
+        'update any out-of-date files, and remove any deleted files from the '
+        'template directory.',
     );
     argParser.addFlag(
       'with-root-module',
       negatable: true,
       defaultsTo: true,
-      help: 'Also create module that corresponds to the root of Flutter tree. '
-          'This makes the entire Flutter tree browsable and searchable in IDE. '
-          'Without this flag, only the child modules will be visible in IDE.',
+      help:
+        'Also create module that corresponds to the root of Flutter tree. '
+        'This makes the entire Flutter tree browsable and searchable in IDE. '
+        'Without this flag, only the child modules will be visible in IDE.',
     );
   }
 
@@ -46,15 +48,16 @@ class IdeConfigCommand extends FlutterCommand {
   Future<Set<DevelopmentArtifact>> get requiredArtifacts async => const <DevelopmentArtifact>{};
 
   @override
-  final String description = 'Configure the IDE for use in the Flutter tree.\n\n'
-      'If run on a Flutter tree that is already configured for the IDE, this '
-      'command will add any new configurations, recreate any files that are '
-      'missing. If --overwrite is specified, will revert existing files to '
-      'the template versions, reset the module list, and return configuration '
-      'settings to the template versions.\n\n'
-      'This command is intended for Flutter developers to help them set up the'
-      "Flutter tree for development in an IDE. It doesn't affect other projects.\n\n"
-      'Currently, IntelliJ is the default (and only) IDE that may be configured.';
+  final String description =
+    'Configure the IDE for use in the Flutter tree.\n\n'
+    'If run on a Flutter tree that is already configured for the IDE, this '
+    'command will add any new configurations, recreate any files that are '
+    'missing. If --overwrite is specified, will revert existing files to '
+    'the template versions, reset the module list, and return configuration '
+    'settings to the template versions.\n\n'
+    'This command is intended for Flutter developers to help them set up the'
+    "Flutter tree for development in an IDE. It doesn't affect other projects.\n\n"
+    'Currently, IntelliJ is the default (and only) IDE that may be configured.';
 
   @override
   final bool hidden;
@@ -146,17 +149,16 @@ class IdeConfigCommand extends FlutterCommand {
         r'(\.name|modules.xml|vcs.xml)$',
       );
       final bool isATrackedIdeaFile = _hasDirectoryInPath(srcFile, '.idea') &&
-          (_trackedIdeaFileRegExp.hasMatch(relativePath) ||
-              _hasDirectoryInPath(srcFile, 'runConfigurations'));
+        (_trackedIdeaFileRegExp.hasMatch(relativePath) || _hasDirectoryInPath(srcFile, 'runConfigurations'));
       final bool isAnImlOutsideIdea = !isATrackedIdeaFile && srcFile.path.endsWith('.iml');
       if (!isATrackedIdeaFile && !isAnImlOutsideIdea) {
         continue;
       }
 
-      final File finalDestinationFile = fs.file(fs.path.absolute(
-          _templateDirectory.absolute.path, '$relativePath${Template.copyTemplateExtension}'));
-      final String relativeDestination =
-          fs.path.relative(finalDestinationFile.path, from: _flutterRoot.absolute.path);
+      final File finalDestinationFile = fs.file(
+        fs.path.absolute(_templateDirectory.absolute.path, '$relativePath${Template.copyTemplateExtension}'),
+      );
+      final String relativeDestination = fs.path.relative(finalDestinationFile.path, from: _flutterRoot.absolute.path);
       if (finalDestinationFile.existsSync()) {
         if (_fileIsIdentical(srcFile, finalDestinationFile)) {
           printTrace('  $relativeDestination (identical)');
@@ -202,8 +204,7 @@ class IdeConfigCommand extends FlutterCommand {
       );
       if (!manifest.contains(relativePath)) {
         templateFile.deleteSync();
-        final String relativeDestination =
-            fs.path.relative(templateFile.path, from: _flutterRoot.absolute.path);
+        final String relativeDestination = fs.path.relative(templateFile.path, from: _flutterRoot.absolute.path);
         printStatus('  $relativeDestination (removed)');
       }
       // If the directory is now empty, then remove it, and do the same for its parent,
@@ -251,8 +252,7 @@ class IdeConfigCommand extends FlutterCommand {
 
     printStatus('Wrote $generatedCount files.');
     printStatus('');
-    printStatus('Your IntelliJ configuration is now up to date. It is prudent to '
-        'restart IntelliJ, if running.');
+    printStatus('Your IntelliJ configuration is now up to date. It is prudent to restart IntelliJ, if running.');
 
     return null;
   }

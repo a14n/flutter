@@ -333,7 +333,8 @@ void main() {
         '--org', 'com.bar.foo',
         '-i', 'objc',
         '-a', 'java',
-      ], <String>[
+      ],
+      <String>[
         'android/src/main/java/com/bar/foo/flutter_project/FlutterProjectPlugin.java',
         'example/android/app/src/main/java/com/bar/foo/flutter_project_example/MainActivity.java',
       ],
@@ -353,7 +354,8 @@ void main() {
         '--project-name', 'xyz',
         '-i', 'objc',
         '-a', 'java',
-      ], <String>[
+      ],
+      <String>[
         'android/src/main/java/com/example/xyz/XyzPlugin.java',
         'example/android/app/src/main/java/com/example/xyz_example/MainActivity.java',
       ],
@@ -1151,8 +1153,7 @@ void main() {
     expect(expectedFile.existsSync(), isTrue);
     expect(expectedFile.readAsStringSync(), equals(samplesIndexJson));
   }, overrides: <Type, Generator>{
-    HttpClientFactory: () =>
-        () => MockHttpClient(200, result: samplesIndexJson),
+    HttpClientFactory: () => () => MockHttpClient(200, result: samplesIndexJson),
   });
   testUsingContext('provides an error to the user if samples json download fails', () async {
     final String outputFile = fs.path.join(tempDir.path, 'flutter_samples.json');
@@ -1167,8 +1168,7 @@ void main() {
     await expectLater(runner.run(args), throwsToolExit(exitCode: 2, message: 'Failed to write samples'));
     expect(fs.file(outputFile).existsSync(), isFalse);
   }, overrides: <Type, Generator>{
-    HttpClientFactory: () =>
-        () => MockHttpClient(404, result: 'not found'),
+    HttpClientFactory: () => () => MockHttpClient(404, result: 'not found'),
   });
 }
 

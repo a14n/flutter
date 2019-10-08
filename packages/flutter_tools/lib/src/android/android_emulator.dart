@@ -97,11 +97,9 @@ AndroidEmulator _loadEmulatorInfo(String id) {
     if (iniFile.existsSync()) {
       final Map<String, String> ini = parseIniLines(iniFile.readAsLinesSync());
       if (ini['path'] != null) {
-        final File configFile =
-            fs.file(fs.path.join(ini['path'], 'config.ini'));
+        final File configFile = fs.file(fs.path.join(ini['path'], 'config.ini'));
         if (configFile.existsSync()) {
-          final Map<String, String> properties =
-              parseIniLines(configFile.readAsLinesSync());
+          final Map<String, String> properties = parseIniLines(configFile.readAsLinesSync());
           return AndroidEmulator(id, properties);
         }
       }

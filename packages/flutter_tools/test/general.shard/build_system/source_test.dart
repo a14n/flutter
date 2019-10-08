@@ -26,8 +26,7 @@ void main() {
     when(mockPlatform.isWindows).thenReturn(true);
     testbed = Testbed(setup: () {
       fs.directory('cache').createSync();
-      final Directory outputs = fs.directory('outputs')
-          ..createSync();
+      final Directory outputs = fs.directory('outputs')..createSync();
       environment = Environment(
         outputDir: outputs,
         projectDir: fs.currentDirectory,

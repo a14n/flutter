@@ -39,25 +39,20 @@ void main() {
   group('EmulatorManager', () {
     testUsingContext('getEmulators', () async {
       // Test that EmulatorManager.getEmulators() doesn't throw.
-      final List<Emulator> emulators =
-          await emulatorManager.getAllAvailableEmulators();
+      final List<Emulator> emulators = await emulatorManager.getAllAvailableEmulators();
       expect(emulators, isList);
     });
 
     testUsingContext('getEmulatorsById', () async {
-      final _MockEmulator emulator1 =
-          _MockEmulator('Nexus_5', 'Nexus 5', 'Google');
-      final _MockEmulator emulator2 =
-          _MockEmulator('Nexus_5X_API_27_x86', 'Nexus 5X', 'Google');
-      final _MockEmulator emulator3 =
-          _MockEmulator('iOS Simulator', 'iOS Simulator', 'Apple');
+      final _MockEmulator emulator1 = _MockEmulator('Nexus_5', 'Nexus 5', 'Google');
+      final _MockEmulator emulator2 = _MockEmulator('Nexus_5X_API_27_x86', 'Nexus 5X', 'Google');
+      final _MockEmulator emulator3 = _MockEmulator('iOS Simulator', 'iOS Simulator', 'Apple');
       final List<Emulator> emulators = <Emulator>[
         emulator1,
         emulator2,
         emulator3,
       ];
-      final TestEmulatorManager testEmulatorManager =
-          TestEmulatorManager(emulators);
+      final TestEmulatorManager testEmulatorManager = TestEmulatorManager(emulators);
 
       Future<void> expectEmulator(String id, List<Emulator> expected) async {
         expect(await testEmulatorManager.getEmulatorsMatching(id), expected);
@@ -81,8 +76,7 @@ void main() {
     });
 
     testUsingContext('create emulator with a unique name does not throw', () async {
-      final CreateEmulatorResult res =
-          await emulatorManager.createEmulator(name: 'test');
+      final CreateEmulatorResult res = await emulatorManager.createEmulator(name: 'test');
       expect(res.success, equals(true));
     }, overrides: <Type, Generator>{
       ProcessManager: () => mockProcessManager,
@@ -91,8 +85,7 @@ void main() {
     });
 
     testUsingContext('create emulator with an existing name errors', () async {
-      final CreateEmulatorResult res =
-          await emulatorManager.createEmulator(name: 'existing-avd-1');
+      final CreateEmulatorResult res = await emulatorManager.createEmulator(name: 'existing-avd-1');
       expect(res.success, equals(false));
     }, overrides: <Type, Generator>{
       ProcessManager: () => mockProcessManager,
@@ -187,11 +180,11 @@ class MockProcessManager extends Mock implements ProcessManager {
   /// We have to send a command that fails in order to get the list of valid
   /// system images paths. This is an example of the output to use in the mock.
   static const String mockCreateFailureOutput =
-      'Error: Package path (-k) not specified. Valid system image paths are:\n'
-      'system-images;android-27;google_apis;x86\n'
-      'system-images;android-P;google_apis;x86\n'
-      'system-images;android-27;google_apis_playstore;x86\n'
-      'null\n'; // Yep, these really end with null (on dantup's machine at least)
+    'Error: Package path (-k) not specified. Valid system image paths are:\n'
+    'system-images;android-27;google_apis;x86\n'
+    'system-images;android-P;google_apis;x86\n'
+    'system-images;android-27;google_apis_playstore;x86\n'
+    'null\n'; // Yep, these really end with null (on dantup's machine at least)
 
   static const ListEquality<String> _equality = ListEquality<String>();
   final List<String> _existingAvds = <String>['existing-avd-1'];

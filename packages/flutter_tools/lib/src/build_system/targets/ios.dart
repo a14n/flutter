@@ -73,8 +73,9 @@ abstract class AotAssemblyBase extends Target {
       }
       final ProcessResult result = await processManager.run(<String>[
         'lipo',
-        ...iosArchs.map((DarwinArch iosArch) =>
-            fs.path.join(outputPath, getNameForDarwinArch(iosArch), 'App.framework', 'App')),
+        ...iosArchs.map((DarwinArch iosArch) {
+          return fs.path.join(outputPath, getNameForDarwinArch(iosArch), 'App.framework', 'App');
+        }),
         '-create',
         '-output',
         fs.path.join(outputPath, 'App.framework', 'App'),

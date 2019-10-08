@@ -384,8 +384,7 @@ class _RecompileRequest extends _CompilationRequest {
   String packagesFilePath;
 
   @override
-  Future<CompilerOutput> _run(ResidentCompiler compiler) async =>
-      compiler._recompile(this);
+  Future<CompilerOutput> _run(ResidentCompiler compiler) async => compiler._recompile(this);
 }
 
 class _CompileExpressionRequest extends _CompilationRequest {
@@ -407,16 +406,14 @@ class _CompileExpressionRequest extends _CompilationRequest {
   bool isStatic;
 
   @override
-  Future<CompilerOutput> _run(ResidentCompiler compiler) async =>
-      compiler._compileExpression(this);
+  Future<CompilerOutput> _run(ResidentCompiler compiler) async => compiler._compileExpression(this);
 }
 
 class _RejectRequest extends _CompilationRequest {
   _RejectRequest(Completer<CompilerOutput> completer) : super(completer);
 
   @override
-  Future<CompilerOutput> _run(ResidentCompiler compiler) async =>
-      compiler._reject();
+  Future<CompilerOutput> _run(ResidentCompiler compiler) async => compiler._reject();
 }
 
 /// Wrapper around incremental frontend server compiler, that communicates with

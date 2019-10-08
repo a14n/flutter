@@ -131,18 +131,19 @@ void main() {
   }));
 
   test('debug macOS application creates correctly structured framework', () => testbed.run(() async {
-    fs.file(fs.path.join('bin', 'cache', 'artifacts', 'engine', 'darwin-x64',
-        'vm_isolate_snapshot.bin')).createSync(recursive: true);
-    fs.file(fs.path.join('bin', 'cache', 'artifacts', 'engine', 'darwin-x64',
-        'isolate_snapshot.bin')).createSync(recursive: true);
-    fs.file(fs.path.join(environment.buildDir.path, 'App.framework', 'App'))
-        ..createSync(recursive: true);
+    fs.file(fs.path.join(
+      'bin', 'cache', 'artifacts', 'engine', 'darwin-x64', 'vm_isolate_snapshot.bin',
+    )).createSync(recursive: true);
+    fs.file(fs.path.join(
+      'bin', 'cache', 'artifacts', 'engine', 'darwin-x64', 'isolate_snapshot.bin',
+    )).createSync(recursive: true);
+    fs.file(fs.path.join(environment.buildDir.path, 'App.framework', 'App'))..createSync(recursive: true);
 
     final String inputKernel = fs.path.join(environment.buildDir.path, 'app.dill');
-    final String outputKernel = fs.path.join('App.framework', 'Versions', 'A', 'Resources',
-        'flutter_assets', 'kernel_blob.bin');
-    final String outputPlist = fs.path.join('App.framework', 'Versions', 'A', 'Resources',
-        'Info.plist');
+    final String outputKernel = fs.path.join(
+      'App.framework', 'Versions', 'A', 'Resources', 'flutter_assets', 'kernel_blob.bin',
+    );
+    final String outputPlist = fs.path.join('App.framework', 'Versions', 'A', 'Resources', 'Info.plist');
     fs.file(inputKernel)
       ..createSync(recursive: true)
       ..writeAsStringSync('testing');
@@ -154,18 +155,18 @@ void main() {
   }));
 
   test('release/profile macOS application has no blob or precompiled runtime', () => testbed.run(() async {
-    fs.file(fs.path.join('bin', 'cache', 'artifacts', 'engine', 'darwin-x64',
-        'vm_isolate_snapshot.bin')).createSync(recursive: true);
-    fs.file(fs.path.join('bin', 'cache', 'artifacts', 'engine', 'darwin-x64',
-        'isolate_snapshot.bin')).createSync(recursive: true);
-    fs.file(fs.path.join(environment.buildDir.path, 'App.framework', 'App'))
-        ..createSync(recursive: true);
-    final String outputKernel = fs.path.join('App.framework', 'Resources',
-        'flutter_assets', 'kernel_blob.bin');
-    final String precompiledVm = fs.path.join('App.framework', 'Resources',
-        'flutter_assets', 'vm_snapshot_data');
-    final String precompiledIsolate = fs.path.join('App.framework', 'Resources',
-        'flutter_assets', 'isolate_snapshot_data');
+    fs.file(fs.path.join(
+      'bin', 'cache', 'artifacts', 'engine', 'darwin-x64', 'vm_isolate_snapshot.bin',
+    )).createSync(recursive: true);
+    fs.file(fs.path.join(
+      'bin', 'cache', 'artifacts', 'engine', 'darwin-x64', 'isolate_snapshot.bin',
+    )).createSync(recursive: true);
+    fs.file(fs.path.join(environment.buildDir.path, 'App.framework', 'App'))..createSync(recursive: true);
+    final String outputKernel = fs.path.join('App.framework', 'Resources', 'flutter_assets', 'kernel_blob.bin');
+    final String precompiledVm = fs.path.join('App.framework', 'Resources', 'flutter_assets', 'vm_snapshot_data');
+    final String precompiledIsolate = fs.path.join(
+      'App.framework', 'Resources', 'flutter_assets', 'isolate_snapshot_data',
+    );
     await const ProfileMacOSBundleFlutterAssets().build(environment..defines[kBuildMode] = 'profile');
 
     expect(fs.file(outputKernel).existsSync(), false);
@@ -174,13 +175,15 @@ void main() {
   }));
 
   test('release/profile macOS application updates when App.framework updates', () => testbed.run(() async {
-    fs.file(fs.path.join('bin', 'cache', 'artifacts', 'engine', 'darwin-x64',
-        'vm_isolate_snapshot.bin')).createSync(recursive: true);
-    fs.file(fs.path.join('bin', 'cache', 'artifacts', 'engine', 'darwin-x64',
-        'isolate_snapshot.bin')).createSync(recursive: true);
+    fs.file(fs.path.join(
+      'bin', 'cache', 'artifacts', 'engine', 'darwin-x64', 'vm_isolate_snapshot.bin',
+    )).createSync(recursive: true);
+    fs.file(fs.path.join(
+      'bin', 'cache', 'artifacts', 'engine', 'darwin-x64', 'isolate_snapshot.bin',
+    )).createSync(recursive: true);
     final File inputFramework = fs.file(fs.path.join(environment.buildDir.path, 'App.framework', 'App'))
-        ..createSync(recursive: true)
-        ..writeAsStringSync('ABC');
+      ..createSync(recursive: true)
+      ..writeAsStringSync('ABC');
 
     await const ProfileMacOSBundleFlutterAssets().build(environment..defines[kBuildMode] = 'profile');
     final File outputFramework = fs.file(fs.path.join(environment.outputDir.path, 'App.framework', 'App'));

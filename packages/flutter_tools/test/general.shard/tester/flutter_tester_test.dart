@@ -127,8 +127,7 @@ void main() {
         mainPath = fs.path.join(projectPath, 'lin', 'main.dart');
 
         mockProcessManager = MockProcessManager();
-        mockProcessManager.processFactory =
-            (List<String> commands) => mockProcess;
+        mockProcessManager.processFactory = (List<String> commands) => mockProcess;
 
         mockArtifacts = MockArtifacts();
         final String artifactPath = fs.path.join(flutterRoot, 'artifact');

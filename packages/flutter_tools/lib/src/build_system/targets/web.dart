@@ -103,7 +103,7 @@ class Dart2JSTarget extends Target {
 
   @override
   List<Target> get dependencies => const <Target>[
-    WebEntrypointTarget()
+    WebEntrypointTarget(),
   ];
 
   @override
@@ -183,7 +183,7 @@ class WebReleaseBundle extends Target {
     Source.pattern('{OUTPUT_DIR}/assets/FontManifest.json'),
     Source.pattern('{OUTPUT_DIR}/assets/LICENSE'),
     Source.pattern('{OUTPUT_DIR}/index.html'),
-    Source.behavior(AssetOutputBehavior('assets'))
+    Source.behavior(AssetOutputBehavior('assets')),
   ];
 
   @override

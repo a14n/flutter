@@ -23,8 +23,7 @@ AndroidStudio get androidStudio => context.get<AndroidStudio>();
 // /Applications/Android Studio.app/Contents/
 // $HOME/Applications/Android Studio.app/Contents/
 
-final RegExp _dotHomeStudioVersionMatcher =
-    RegExp(r'^\.(AndroidStudio[^\d]*)([\d.]+)');
+final RegExp _dotHomeStudioVersionMatcher = RegExp(r'^\.(AndroidStudio[^\d]*)([\d.]+)');
 
 String get javaPath => androidStudio?.javaPath;
 
@@ -74,8 +73,7 @@ class AndroidStudio implements Comparable<AndroidStudio> {
   }
 
   factory AndroidStudio.fromHomeDot(Directory homeDotDir) {
-    final Match versionMatch =
-        _dotHomeStudioVersionMatcher.firstMatch(homeDotDir.basename);
+    final Match versionMatch = _dotHomeStudioVersionMatcher.firstMatch(homeDotDir.basename);
     if (versionMatch?.groupCount != 2) {
       return null;
     }
@@ -169,8 +167,7 @@ class AndroidStudio implements Comparable<AndroidStudio> {
         orElse: () => null);
   }
 
-  static List<AndroidStudio> allInstalled() =>
-      platform.isMacOS ? _allMacOS() : _allLinuxOrWindows();
+  static List<AndroidStudio> allInstalled() => platform.isMacOS ? _allMacOS() : _allLinuxOrWindows();
 
   static List<AndroidStudio> _allMacOS() {
     final List<FileSystemEntity> candidatePaths = <FileSystemEntity>[];
@@ -288,9 +285,9 @@ class AndroidStudio implements Comparable<AndroidStudio> {
       return;
     }
 
-    final String javaPath = platform.isMacOS ?
-        fs.path.join(directory, 'jre', 'jdk', 'Contents', 'Home') :
-        fs.path.join(directory, 'jre');
+    final String javaPath = platform.isMacOS
+      ? fs.path.join(directory, 'jre', 'jdk', 'Contents', 'Home')
+      : fs.path.join(directory, 'jre');
     final String javaExecutable = fs.path.join(javaPath, 'bin', 'java');
     if (!processManager.canRun(javaExecutable)) {
       _validationMessages.add('Unable to find bundled Java version.');

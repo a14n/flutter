@@ -47,16 +47,16 @@ class BuildAarCommand extends BuildSubCommand {
     } else {
       usage[CustomDimensions.commandBuildAarProjectType] = 'app';
     }
-    usage[CustomDimensions.commandBuildAarTargetPlatform] =
-        (argResults['target-platform'] as List<String>).join(',');
+    usage[CustomDimensions.commandBuildAarTargetPlatform] = (argResults['target-platform'] as List<String>).join(',');
     return usage;
   }
 
   @override
-  final String description = 'Build a repository containing an AAR and a POM file.\n\n'
-      'The POM file is used to include the dependencies that the AAR was compiled against.\n\n'
-      'To learn more about how to use these artifacts, see '
-      'https://docs.gradle.org/current/userguide/repository_types.html#sub:maven_local';
+  final String description =
+    'Build a repository containing an AAR and a POM file.\n\n'
+    'The POM file is used to include the dependencies that the AAR was compiled against.\n\n'
+    'To learn more about how to use these artifacts, see '
+    'https://docs.gradle.org/current/userguide/repository_types.html#sub:maven_local';
 
   @override
   Future<FlutterCommandResult> runCommand() async {

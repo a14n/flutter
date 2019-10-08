@@ -19,9 +19,9 @@ class ProxyValidator extends DoctorValidator {
   /// an empty string will be returned. Checks for the lowercase version of the
   /// environment variable first, then uppercase to match Dart's HTTP implementation.
   static String _getEnv(String key) =>
-      platform.environment[key.toLowerCase()]?.trim() ??
-      platform.environment[key.toUpperCase()]?.trim() ??
-      '';
+    platform.environment[key.toLowerCase()]?.trim() ??
+    platform.environment[key.toUpperCase()]?.trim() ??
+    '';
 
   @override
   Future<ValidationResult> validate() async {
@@ -44,8 +44,7 @@ class ProxyValidator extends DoctorValidator {
       }
     }
 
-    final bool hasIssues =
-        messages.any((ValidationMessage msg) => msg.isHint || msg.isHint);
+    final bool hasIssues = messages.any((ValidationMessage msg) => msg.isHint || msg.isHint);
 
     return ValidationResult(
       hasIssues ? ValidationType.partial : ValidationType.installed,

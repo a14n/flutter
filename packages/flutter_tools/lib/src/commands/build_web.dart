@@ -9,7 +9,7 @@ import '../build_info.dart';
 import '../features.dart';
 import '../project.dart';
 import '../runner/flutter_command.dart'
-    show DevelopmentArtifact, FlutterCommandResult;
+  show DevelopmentArtifact, FlutterCommandResult;
 import '../web/compile.dart';
 import 'build.dart';
 
@@ -27,11 +27,10 @@ class BuildWebCommand extends BuildSubCommand {
   }
 
   @override
-  Future<Set<DevelopmentArtifact>> get requiredArtifacts async =>
-      const <DevelopmentArtifact>{
-        DevelopmentArtifact.universal,
-        DevelopmentArtifact.web,
-      };
+  Future<Set<DevelopmentArtifact>> get requiredArtifacts async => const <DevelopmentArtifact>{
+    DevelopmentArtifact.universal,
+    DevelopmentArtifact.web,
+  };
 
   @override
   final String name = 'web';

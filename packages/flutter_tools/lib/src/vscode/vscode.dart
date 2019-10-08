@@ -62,8 +62,7 @@ class VsCode {
     String extensionDirectory, {
     String edition,
   }) {
-    final String packageJsonPath =
-        fs.path.join(installPath, 'resources', 'app', 'package.json');
+    final String packageJsonPath = fs.path.join(installPath, 'resources', 'app', 'package.json');
     final String versionString = _getVersionFromPackageJson(packageJsonPath);
     Version version;
     if (versionString != null) {
@@ -148,8 +147,7 @@ class VsCode {
     final String progFiles = platform.environment['programfiles'];
     final String localAppData = platform.environment['localappdata'];
 
-    final List<_VsCodeInstallLocation> searchLocations =
-        <_VsCodeInstallLocation>[];
+    final List<_VsCodeInstallLocation> searchLocations = <_VsCodeInstallLocation>[];
 
     if (localAppData != null) {
       searchLocations.add(_VsCodeInstallLocation(
@@ -205,8 +203,7 @@ class VsCode {
 
     for (_VsCodeInstallLocation searchLocation in searchLocations) {
       if (fs.isDirectorySync(searchLocation.installPath)) {
-        final String extensionDirectory =
-            fs.path.join(homeDirPath, searchLocation.extensionsFolder, 'extensions');
+        final String extensionDirectory = fs.path.join(homeDirPath, searchLocation.extensionsFolder, 'extensions');
         results.add(VsCode.fromDirectory(searchLocation.installPath, extensionDirectory, edition: searchLocation.edition));
       }
     }
@@ -215,8 +212,7 @@ class VsCode {
   }
 
   @override
-  String toString() =>
-      'VS Code ($version)${_extensionVersion != Version.unknown ? ', Flutter ($_extensionVersion)' : ''}';
+  String toString() => 'VS Code ($version)${_extensionVersion != Version.unknown ? ', Flutter ($_extensionVersion)' : ''}';
 
   static String _getVersionFromPackageJson(String packageJsonPath) {
     if (!fs.isFileSync(packageJsonPath)) {

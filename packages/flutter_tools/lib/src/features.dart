@@ -194,8 +194,7 @@ class Feature {
     if (configSetting == null) {
       return null;
     }
-    final StringBuffer buffer = StringBuffer('Enable or disable $name. '
-        'This setting will take effect on ');
+    final StringBuffer buffer = StringBuffer('Enable or disable $name. This setting will take effect on ');
     final List<String> channels = <String>[
       if (master.available) 'master',
       if (dev.available) 'dev',

@@ -119,8 +119,7 @@ class ResidentWebRunner extends ResidentRunner {
       return printHelpDetails();
     }
     const String fire = '🔥';
-    const String rawMessage =
-        '  To hot restart (and rebuild state), press "r" or "R".';
+    const String rawMessage = '  To hot restart (and rebuild state), press "r" or "R".';
     final String message = terminal.color(
       fire + terminal.bolden(rawMessage),
       TerminalColor.red,
@@ -154,8 +153,7 @@ class ResidentWebRunner extends ResidentRunner {
     if (!fs.isFileSync(mainPath)) {
       String message = 'Tried to run $mainPath, but that file does not exist.';
       if (target == null) {
-        message +=
-            '\nConsider using the -t option to specify the Dart file to start.';
+        message += '\nConsider using the -t option to specify the Dart file to start.';
       }
       printError(message);
       return 1;

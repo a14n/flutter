@@ -153,8 +153,7 @@ class Cache {
       return;
     }
     assert(_lock == null);
-    final File lockFile =
-        fs.file(fs.path.join(flutterRoot, 'bin', 'cache', 'lockfile'));
+    final File lockFile = fs.file(fs.path.join(flutterRoot, 'bin', 'cache', 'lockfile'));
     try {
       _lock = lockFile.openSync(mode: FileMode.write);
     } on FileSystemException catch (e) {
@@ -884,15 +883,12 @@ class AndroidMavenArtifacts extends ArtifactSet {
 
   @override
   Future<void> update() async {
-    final Directory tempDir =
-        fs.systemTempDirectory.createTempSync('flutter_gradle_wrapper.');
+    final Directory tempDir = fs.systemTempDirectory.createTempSync('flutter_gradle_wrapper.');
     injectGradleWrapperIfNeeded(tempDir);
 
     final Status status = logger.startProgress('Downloading Android Maven dependencies...',
         timeout: timeoutConfiguration.slowOperation);
-    final File gradle = tempDir.childFile(
-        platform.isWindows ? 'gradlew.bat' : 'gradlew',
-      );
+    final File gradle = tempDir.childFile(platform.isWindows ? 'gradlew.bat' : 'gradlew');
     assert(gradle.existsSync());
     os.makeExecutable(gradle);
 
@@ -1000,18 +996,17 @@ class GradleWrapper extends CachedArtifact {
   }
 }
 
- const String _cipdBaseUrl =
-    'https://chrome-infra-packages.appspot.com/dl';
+ const String _cipdBaseUrl = 'https://chrome-infra-packages.appspot.com/dl';
 
 /// Common functionality for pulling Fuchsia SDKs.
 abstract class _FuchsiaSDKArtifacts extends CachedArtifact {
-  _FuchsiaSDKArtifacts(Cache cache, String platform) :
-    _path = 'fuchsia/sdk/core/$platform-amd64',
-    super(
-      'fuchsia-$platform',
-      cache,
-      DevelopmentArtifact.fuchsia,
-    );
+  _FuchsiaSDKArtifacts(Cache cache, String platform)
+    : _path = 'fuchsia/sdk/core/$platform-amd64',
+      super(
+        'fuchsia-$platform',
+        cache,
+        DevelopmentArtifact.fuchsia,
+      );
 
   final String _path;
 

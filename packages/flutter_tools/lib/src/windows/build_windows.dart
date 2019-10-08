@@ -39,8 +39,7 @@ Future<void> buildWindows(WindowsProject windowsProject, BuildInfo buildInfo, {S
 
   final String vcvarsScript = visualStudio.vcvarsPath;
   if (vcvarsScript == null) {
-    throwToolExit('Unable to find suitable Visual Studio toolchain. '
-        'Please run `flutter doctor` for more details.');
+    throwToolExit('Unable to find suitable Visual Studio toolchain. Please run `flutter doctor` for more details.');
   }
 
   if (!buildInfo.isDebug) {

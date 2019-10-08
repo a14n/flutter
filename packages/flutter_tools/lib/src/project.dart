@@ -27,8 +27,7 @@ FlutterProjectFactory get projectFactory => context.get<FlutterProjectFactory>()
 class FlutterProjectFactory {
   FlutterProjectFactory();
 
-  final Map<String, FlutterProject> _projects =
-      <String, FlutterProject>{};
+  final Map<String, FlutterProject> _projects = <String, FlutterProject>{};
 
   /// Returns a [FlutterProject] view of the given directory or a ToolExit error,
   /// if `pubspec.yaml` or `example/pubspec.yaml` is invalid.
@@ -843,12 +842,10 @@ class FuchsiaProject {
   final FlutterProject project;
 
   Directory _editableHostAppDirectory;
-  Directory get editableHostAppDirectory =>
-      _editableHostAppDirectory ??= project.directory.childDirectory('fuchsia');
+  Directory get editableHostAppDirectory => _editableHostAppDirectory ??= project.directory.childDirectory('fuchsia');
 
   bool existsSync() => editableHostAppDirectory.existsSync();
 
   Directory _meta;
-  Directory get meta =>
-      _meta ??= editableHostAppDirectory.childDirectory('meta');
+  Directory get meta => _meta ??= editableHostAppDirectory.childDirectory('meta');
 }

@@ -76,8 +76,7 @@ class FlutterTesterDevice extends Device {
   @override
   void clearLogs() { }
 
-  final _FlutterTesterDeviceLogReader _logReader =
-      _FlutterTesterDeviceLogReader();
+  final _FlutterTesterDeviceLogReader _logReader = _FlutterTesterDeviceLogReader();
 
   @override
   DeviceLogReader getLogReader({ ApplicationPackage app }) => _logReader;
@@ -217,8 +216,7 @@ class FlutterTesterDevices extends PollingDeviceDiscovery {
 
   static bool showFlutterTesterDevice = false;
 
-  final FlutterTesterDevice _testerDevice =
-      FlutterTesterDevice(kTesterDeviceId);
+  final FlutterTesterDevice _testerDevice = FlutterTesterDevice(kTesterDeviceId);
 
   @override
   bool get canListAnything => true;
@@ -233,8 +231,7 @@ class FlutterTesterDevices extends PollingDeviceDiscovery {
 }
 
 class _FlutterTesterDeviceLogReader extends DeviceLogReader {
-  final StreamController<String> _logLinesController =
-      StreamController<String>.broadcast();
+  final StreamController<String> _logLinesController = StreamController<String>.broadcast();
 
   @override
   int get appPid => 0;

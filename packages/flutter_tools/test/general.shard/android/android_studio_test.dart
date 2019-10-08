@@ -59,11 +59,9 @@ void main() {
       fs.file(homeFile).createSync(recursive: true);
       fs.file(homeFile).writeAsStringSync(installPath);
 
-      final AndroidStudio studio =
-      AndroidStudio.fromHomeDot(fs.directory(studioHome));
+      final AndroidStudio studio = AndroidStudio.fromHomeDot(fs.directory(studioHome));
       expect(studio, isNotNull);
-      expect(studio.pluginsPath,
-          equals('/home/me/.AndroidStudioWithCheese5.0/config/plugins'));
+      expect(studio.pluginsPath, equals('/home/me/.AndroidStudioWithCheese5.0/config/plugins'));
     }, overrides: <Type, Generator>{
       FileSystem: () => fs,
       // Custom home paths are not supported on macOS nor Windows yet,

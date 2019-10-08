@@ -49,7 +49,7 @@ Future<void> main(List<String> arguments) async {
       '--no-color',
       '-r', 'compact',
       '-j', '1',
-      ...arguments
+      ...arguments,
     ]);
     exit(exitCode);
   });
@@ -64,8 +64,7 @@ class VMPlatform extends PlatformPlugin {
   final String precompiledPath = path.join('.dart_tool', 'build', 'generated', 'flutter_tools');
 
   @override
-  StreamChannel<void> loadChannel(String codePath, SuitePlatform platform) =>
-      throw UnimplementedError();
+  StreamChannel<void> loadChannel(String codePath, SuitePlatform platform) => throw UnimplementedError();
 
   @override
   Future<RunnerSuite> load(

@@ -200,10 +200,8 @@ class VMService {
           throw rpc.RpcException.invalidParams(
               'Invalid \'expression\': $expression');
         }
-        final List<String> definitions =
-            List<String>.from(params['definitions'].asList);
-        final List<String> typeDefinitions =
-            List<String>.from(params['typeDefinitions'].asList);
+        final List<String> definitions = List<String>.from(params['definitions'].asList);
+        final List<String> typeDefinitions = List<String>.from(params['typeDefinitions'].asList);
         final String libraryUri = params['libraryUri'].asString;
         final String klass = params['klass'].exists ? params['klass'].asString : null;
         final bool isStatic = params['isStatic'].asBoolOr(false);
@@ -212,8 +210,12 @@ class VMService {
           final String kernelBytesBase64 = await compileExpression(isolateId,
               expression, definitions, typeDefinitions, libraryUri, klass,
               isStatic);
-          return <String, dynamic>{'type': 'Success',
-            'result': <String, dynamic> {'kernelBytes': kernelBytesBase64}};
+          return <String, dynamic>{
+            'type': 'Success',
+            'result': <String, dynamic> {
+              'kernelBytes': kernelBytesBase64,
+            },
+          };
         } on rpc.RpcException {
           rethrow;
         } catch (e, st) {
@@ -293,8 +295,7 @@ class VMService {
   /// The singleton [VM] object. Owns [Isolate] and [FlutterView] objects.
   VM get vm => _vm;
 
-  final Map<String, StreamController<ServiceEvent>> _eventControllers =
-      <String, StreamController<ServiceEvent>>{};
+  final Map<String, StreamController<ServiceEvent>> _eventControllers = <String, StreamController<ServiceEvent>>{};
 
   final Set<String> _listeningFor = <String>{};
 
@@ -645,8 +646,7 @@ class ServiceEvent extends ServiceObject {
     _upgradeCollection(map, owner);
     _kind = map['kind'];
     assert(map['isolate'] == null || owner == map['isolate']);
-    _timestamp =
-        DateTime.fromMillisecondsSinceEpoch(map['timestamp']);
+    _timestamp = DateTime.fromMillisecondsSinceEpoch(map['timestamp']);
     if (map['extensionKind'] != null) {
       _extensionKind = map['extensionKind'];
       _extensionData = map['extensionData'];
@@ -660,13 +660,13 @@ class ServiceEvent extends ServiceObject {
   }
 
   bool get isPauseEvent {
-    return kind == kPauseStart ||
-           kind == kPauseExit ||
-           kind == kPauseBreakpoint ||
-           kind == kPauseInterrupted ||
-           kind == kPauseException ||
-           kind == kPausePostRequest ||
-           kind == kNone;
+    return kind == kPauseStart
+        || kind == kPauseExit
+        || kind == kPauseBreakpoint
+        || kind == kPauseInterrupted
+        || kind == kPauseException
+        || kind == kPausePostRequest
+        || kind == kNone;
   }
 }
 
@@ -872,8 +872,7 @@ class VM extends ServiceObjectOwner {
     assert(params != null);
     try {
       final Map<String, dynamic> result = await _vmService._sendRequest(method, params);
-      final String resultString =
-          truncateLogs ? _truncate(result.toString(), 250, '...') : result.toString();
+      final String resultString = truncateLogs ? _truncate(result.toString(), 250, '...') : result.toString();
       printTrace('Result: $resultString');
       return result;
     } on WebSocketChannelException catch (error) {
@@ -1052,8 +1051,7 @@ class HeapSpace extends ServiceObject {
   }
 
   Duration get avgCollectionPeriod {
-    final double mcs = _averageCollectionPeriodInMillis *
-                       Duration.microsecondsPerMillisecond;
+    final double mcs = _averageCollectionPeriodInMillis * Duration.microsecondsPerMillisecond;
     return Duration(microseconds: mcs.ceil());
   }
 

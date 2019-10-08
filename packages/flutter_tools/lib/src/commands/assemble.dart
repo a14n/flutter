@@ -44,15 +44,27 @@ class AssembleCommand extends FlutterCommand {
       abbr: 'd',
       help: 'Allows passing configuration to a target with --define=target=key=value.',
     );
-    argParser.addOption('build-inputs', help: 'A file path where a newline '
+    argParser.addOption(
+      'build-inputs',
+      help:
+        'A file path where a newline '
         'separated file containing all inputs used will be written after a build.'
         ' This file is not included as a build input or output. This file is not'
-        ' written if the build fails for any reason.');
-    argParser.addOption('build-outputs', help: 'A file path where a newline '
+        ' written if the build fails for any reason.',
+    );
+    argParser.addOption(
+      'build-outputs',
+      help:
+        'A file path where a newline '
         'separated file containing all outputs used will be written after a build.'
         ' This file is not included as a build input or output. This file is not'
-        ' written if the build fails for any reason.');
-    argParser.addOption('output', abbr: 'o', help: 'A directory where output '
+        ' written if the build fails for any reason.',
+    );
+    argParser.addOption(
+      'output',
+      abbr: 'o',
+      help:
+        'A directory where output '
         'files will be written. Must be either absolute or relative from the '
         'root of the current Flutter project.',
     );

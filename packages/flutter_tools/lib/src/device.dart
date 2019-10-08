@@ -101,12 +101,12 @@ class DeviceManager {
   Stream<Device> getDevicesById(String deviceId) async* {
     final List<Device> devices = await getAllConnectedDevices().toList();
     deviceId = deviceId.toLowerCase();
-    bool exactlyMatchesDeviceId(Device device) =>
-        device.id.toLowerCase() == deviceId ||
-        device.name.toLowerCase() == deviceId;
-    bool startsWithDeviceId(Device device) =>
-        device.id.toLowerCase().startsWith(deviceId) ||
-        device.name.toLowerCase().startsWith(deviceId);
+    bool exactlyMatchesDeviceId(Device device) {
+      return device.id.toLowerCase() == deviceId || device.name.toLowerCase() == deviceId;
+    }
+    bool startsWithDeviceId(Device device) {
+      return device.id.toLowerCase().startsWith(deviceId) || device.name.toLowerCase().startsWith(deviceId);
+    }
 
     final Device exactMatch = devices.firstWhere(
         exactlyMatchesDeviceId, orElse: () => null);
@@ -193,8 +193,8 @@ class DeviceManager {
             device,
       ];
     } else if (devices.length == 1 &&
-             !hasSpecifiedDeviceId &&
-             !isDeviceSupportedForProject(devices.single, flutterProject)) {
+        !hasSpecifiedDeviceId &&
+        !isDeviceSupportedForProject(devices.single, flutterProject)) {
       // If there is only a single device but it is not supported, then return
       // early.
       return <Device>[];

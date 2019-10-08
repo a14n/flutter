@@ -18,8 +18,7 @@ void main() {
     });
     testUsingContext('flags emulators with config', () {
       const String emulatorID = '1234';
-      final AndroidEmulator emulator =
-          AndroidEmulator(emulatorID, <String, String>{'name': 'test'});
+      final AndroidEmulator emulator = AndroidEmulator(emulatorID, <String, String>{'name': 'test'});
       expect(emulator.id, emulatorID);
       expect(emulator.hasConfig, true);
     });
@@ -31,8 +30,7 @@ void main() {
         'hw.device.manufacturer': manufacturer,
         'avd.ini.displayname': displayName,
       };
-      final AndroidEmulator emulator =
-          AndroidEmulator(emulatorID, properties);
+      final AndroidEmulator emulator = AndroidEmulator(emulatorID, properties);
       expect(emulator.id, emulatorID);
       expect(emulator.name, displayName);
       expect(emulator.manufacturer, manufacturer);
@@ -45,8 +43,7 @@ void main() {
       final Map<String, String> properties = <String, String>{
         'avd.ini.displayname': displayName,
       };
-      final AndroidEmulator emulator =
-          AndroidEmulator(emulatorID, properties);
+      final AndroidEmulator emulator = AndroidEmulator(emulatorID, properties);
       expect(emulator.name, displayName);
     });
     testUsingContext('uses cleaned up ID if no displayname is set', () {
@@ -56,8 +53,7 @@ void main() {
       final Map<String, String> properties = <String, String>{
         'avd.ini.notadisplayname': 'this is not a display name',
       };
-      final AndroidEmulator emulator =
-          AndroidEmulator(emulatorID, properties);
+      final AndroidEmulator emulator = AndroidEmulator(emulatorID, properties);
       expect(emulator.name, 'This is my ID');
     });
     testUsingContext('parses ini files', () {

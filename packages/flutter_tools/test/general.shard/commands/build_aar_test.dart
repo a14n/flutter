@@ -123,8 +123,9 @@ void main() {
         gradleCacheDir.childFile(platform.isWindows ? 'gradlew.bat' : 'gradlew').createSync();
 
         tempDir.childFile('pubspec.yaml')
-            ..createSync(recursive: true)
-            ..writeAsStringSync('''name: test
+          ..createSync(recursive: true)
+          ..writeAsStringSync('''
+name: test
 environment:
   sdk: ">=2.1.0 <3.0.0"
 dependencies:

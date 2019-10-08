@@ -121,8 +121,7 @@ void main() {
     testUsingContext('does not show if HTTP_PROXY is only whitespace', () {
       expect(ProxyValidator.shouldShow, isFalse);
     }, overrides: <Type, Generator>{
-      Platform: () =>
-          FakePlatform()..environment = <String, String>{'HTTP_PROXY': ' '},
+      Platform: () => FakePlatform()..environment = <String, String>{'HTTP_PROXY': ' '},
     });
 
     testUsingContext('shows when HTTP_PROXY is set', () {
@@ -1004,13 +1003,13 @@ class VsCodeValidatorTestTargets extends VsCodeValidator {
     : super(VsCode.fromDirectory(installDirectory, extensionDirectory, edition: edition));
 
   static VsCodeValidatorTestTargets get installedWithExtension =>
-      VsCodeValidatorTestTargets._(validInstall, validExtensions);
+    VsCodeValidatorTestTargets._(validInstall, validExtensions);
 
   static VsCodeValidatorTestTargets get installedWithExtension64bit =>
-      VsCodeValidatorTestTargets._(validInstall, validExtensions, edition: '64-bit edition');
+    VsCodeValidatorTestTargets._(validInstall, validExtensions, edition: '64-bit edition');
 
   static VsCodeValidatorTestTargets get installedWithoutExtension =>
-      VsCodeValidatorTestTargets._(validInstall, missingExtensions);
+    VsCodeValidatorTestTargets._(validInstall, missingExtensions);
 
   static final String validInstall = fs.path.join('test', 'data', 'vscode', 'application');
   static final String validExtensions = fs.path.join('test', 'data', 'vscode', 'extensions');

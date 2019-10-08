@@ -91,7 +91,7 @@ class AndroidPlugin extends PluginPlatform {
         'java',
         package.replaceAll('.', fs.path.separator),
         '$pluginClass.java',
-      )
+      ),
     );
     // Check if the plugin is implemented in Kotlin since the plugin's pubspec.yaml
     // doesn't include this information.
@@ -102,7 +102,7 @@ class AndroidPlugin extends PluginPlatform {
           'kotlin',
           package.replaceAll('.', fs.path.separator),
           '$pluginClass.kt',
-        )
+        ),
       );
     }
     assert(mainPluginClass.existsSync());

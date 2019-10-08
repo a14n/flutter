@@ -580,8 +580,7 @@ class AndroidSdk {
       _sdkManagerEnv = <String, String>{};
       final String javaBinary = findJavaBinary();
       if (javaBinary != null) {
-        _sdkManagerEnv['PATH'] =
-            fs.path.dirname(javaBinary) + os.pathVarSeparator + platform.environment['PATH'];
+        _sdkManagerEnv['PATH'] = fs.path.dirname(javaBinary) + os.pathVarSeparator + platform.environment['PATH'];
       }
     }
     return _sdkManagerEnv;

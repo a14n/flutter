@@ -46,8 +46,7 @@ void main() {
 
     when(mockProcessManager.canRun(any)).thenReturn(true);
     when(mockProcessManager.start(any)).thenAnswer(
-            (Invocation invocation) =>
-        Future<Process>.value(mockFrontendServer)
+      (Invocation invocation) => Future<Process>.value(mockFrontendServer),
     );
   });
 
@@ -60,17 +59,15 @@ void main() {
   testUsingContext('compile expression can compile single expression', () async {
     final BufferLogger bufferLogger = logger;
 
-    final Completer<List<int>> compileResponseCompleter =
-        Completer<List<int>>();
-    final Completer<List<int>> compileExpressionResponseCompleter =
-        Completer<List<int>>();
+    final Completer<List<int>> compileResponseCompleter = Completer<List<int>>();
+    final Completer<List<int>> compileExpressionResponseCompleter = Completer<List<int>>();
 
-    when(mockFrontendServer.stdout)
-        .thenAnswer((Invocation invocation) =>
-    Stream<List<int>>.fromFutures(
+    when(mockFrontendServer.stdout).thenAnswer((Invocation invocation) => Stream<List<int>>.fromFutures(
       <Future<List<int>>>[
         compileResponseCompleter.future,
-        compileExpressionResponseCompleter.future]));
+        compileExpressionResponseCompleter.future,
+      ],
+    ));
 
     compileResponseCompleter.complete(Future<List<int>>.value(utf8.encode(
       'result abc\nline1\nline2\nabc\nabc /path/to/main.dart.dill 0\n'
@@ -115,14 +112,13 @@ void main() {
     final Completer<List<int>> compileExpressionResponseCompleter1 = Completer<List<int>>();
     final Completer<List<int>> compileExpressionResponseCompleter2 = Completer<List<int>>();
 
-    when(mockFrontendServer.stdout)
-        .thenAnswer((Invocation invocation) =>
-    Stream<List<int>>.fromFutures(
-        <Future<List<int>>>[
-          compileResponseCompleter.future,
-          compileExpressionResponseCompleter1.future,
-          compileExpressionResponseCompleter2.future,
-        ]));
+    when(mockFrontendServer.stdout).thenAnswer((Invocation invocation) => Stream<List<int>>.fromFutures(
+      <Future<List<int>>>[
+        compileResponseCompleter.future,
+        compileExpressionResponseCompleter1.future,
+        compileExpressionResponseCompleter2.future,
+      ],
+    ));
 
     // The test manages timing via completers.
     unawaited(

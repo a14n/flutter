@@ -34,8 +34,7 @@ class AnalyzeOnce extends AnalyzeBase {
 
   @override
   Future<void> analyze() async {
-    final String currentDirectory =
-        (workingDirectory ?? fs.currentDirectory).path;
+    final String currentDirectory = (workingDirectory ?? fs.currentDirectory).path;
 
     // find directories from argResults.rest
     final Set<String> directories = Set<String>.from(argResults.rest

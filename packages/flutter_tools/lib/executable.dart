@@ -56,9 +56,9 @@ Future<void> main(List<String> args) async {
   final bool verbose = args.contains('-v') || args.contains('--verbose');
 
   final bool doctor = (args.isNotEmpty && args.first == 'doctor') ||
-      (args.length == 2 && verbose && args.last == 'doctor');
+    (args.length == 2 && verbose && args.last == 'doctor');
   final bool help = args.contains('-h') || args.contains('--help') ||
-      (args.isNotEmpty && args.first == 'help') || (args.length == 1 && verbose);
+    (args.isNotEmpty && args.first == 'help') || (args.length == 1 && verbose);
   final bool muteCommandLogging = help || doctor;
   final bool verboseHelp = help && verbose;
 

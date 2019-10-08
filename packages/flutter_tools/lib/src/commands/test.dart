@@ -295,7 +295,6 @@ class TestCommand extends FastFlutterCommand {
 
 Iterable<String> _findTests(Directory directory) {
   return directory.listSync(recursive: true, followLinks: false)
-      .where((FileSystemEntity entity) => entity.path.endsWith('_test.dart') &&
-      fs.isFileSync(entity.path))
-      .map((FileSystemEntity entity) => fs.path.absolute(entity.path));
+    .where((FileSystemEntity entity) => entity.path.endsWith('_test.dart') && fs.isFileSync(entity.path))
+    .map((FileSystemEntity entity) => fs.path.absolute(entity.path));
 }

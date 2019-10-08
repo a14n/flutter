@@ -299,12 +299,11 @@ class FlutterVersion {
     // to the server if we haven't checked recently so won't happen on every
     // command.
     final DateTime latestFlutterCommitDate = await _getLatestAvailableFlutterDate();
-    final VersionCheckResult remoteVersionStatus =
-        latestFlutterCommitDate == null
-            ? VersionCheckResult.unknown
-            : latestFlutterCommitDate.isAfter(localFrameworkCommitDate)
-                ? VersionCheckResult.newVersionAvailable
-                : VersionCheckResult.versionIsCurrent;
+    final VersionCheckResult remoteVersionStatus = latestFlutterCommitDate == null
+      ? VersionCheckResult.unknown
+      : latestFlutterCommitDate.isAfter(localFrameworkCommitDate)
+        ? VersionCheckResult.newVersionAvailable
+        : VersionCheckResult.versionIsCurrent;
 
     // Do not load the stamp before the above server check as it may modify the stamp file.
     final VersionCheckStamp stamp = await VersionCheckStamp.load();
@@ -313,16 +312,13 @@ class FlutterVersion {
 
     // We show a warning if either we know there is a new remote version, or we couldn't tell but the local
     // version is outdated.
-    final bool canShowWarning =
-        remoteVersionStatus == VersionCheckResult.newVersionAvailable ||
-            (remoteVersionStatus == VersionCheckResult.unknown &&
-                installationSeemsOutdated);
+    final bool canShowWarning = remoteVersionStatus == VersionCheckResult.newVersionAvailable ||
+      (remoteVersionStatus == VersionCheckResult.unknown && installationSeemsOutdated);
 
     if (beenAWhileSinceWarningWasPrinted && canShowWarning) {
-      final String updateMessage =
-          remoteVersionStatus == VersionCheckResult.newVersionAvailable
-              ? newVersionAvailableMessage()
-              : versionOutOfDateMessage(frameworkAge);
+      final String updateMessage = remoteVersionStatus == VersionCheckResult.newVersionAvailable
+        ? newVersionAvailableMessage()
+        : versionOutOfDateMessage(frameworkAge);
       printStatus(updateMessage, emphasis: true);
       await Future.wait<void>(<Future<void>>[
         stamp.store(

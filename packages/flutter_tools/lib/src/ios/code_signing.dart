@@ -78,8 +78,7 @@ const String fixWithDevelopmentTeamInstruction = '''
   4- Build or run your project again''';
 
 
-final RegExp _securityFindIdentityDeveloperIdentityExtractionPattern =
-    RegExp(r'^\s*\d+\).+"(.+Develop(ment|er).+)"$');
+final RegExp _securityFindIdentityDeveloperIdentityExtractionPattern = RegExp(r'^\s*\d+\).+"(.+Develop(ment|er).+)"$');
 final RegExp _securityFindIdentityCertificateCnExtractionPattern = RegExp(r'.*\(([a-zA-Z0-9]+)\)');
 final RegExp _certificateOrganizationalUnitExtractionPattern = RegExp(r'OU=([a-zA-Z0-9]+)');
 
@@ -121,8 +120,7 @@ Future<Map<String, String>> getCodeSigningIdentityDevelopmentTeam({
     return null;
   }
 
-  const List<String> findIdentityCommand =
-      <String>['security', 'find-identity', '-p', 'codesigning', '-v'];
+  const List<String> findIdentityCommand = <String>['security', 'find-identity', '-p', 'codesigning', '-v'];
 
   String findIdentityStdout;
   try {
@@ -156,9 +154,7 @@ Future<Map<String, String>> getCodeSigningIdentityDevelopmentTeam({
   printStatus('Signing iOS app for device deployment using developer identity: "$signingIdentity"');
 
   final String signingCertificateId =
-      _securityFindIdentityCertificateCnExtractionPattern
-          .firstMatch(signingIdentity)
-          ?.group(1);
+    _securityFindIdentityCertificateCnExtractionPattern.firstMatch(signingIdentity)?.group(1);
 
   // If `security`'s output format changes, we'd have to update the above regex.
   if (signingCertificateId == null) {
@@ -236,8 +232,7 @@ Future<String> _chooseSigningIdentity(List<String> validCodeSigningIdentities) a
     printStatus('  a) Abort', emphasis: true);
 
     final String choice = await terminal.promptForCharInput(
-      List<String>.generate(count, (int number) => '${number + 1}')
-          ..add('a'),
+      List<String>.generate(count, (int number) => '${number + 1}')..add('a'),
       prompt: 'Please select a certificate for code signing',
       displayAcceptedCharacters: true,
       defaultChoiceIndex: 0, // Just pressing enter chooses the first one.

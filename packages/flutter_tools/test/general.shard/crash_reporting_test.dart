@@ -261,12 +261,15 @@ Future<void> verifyCrashReportSent(RequestInfo crashInfo, {
   expect(crashInfo.fields['comments'], 'crash');
 
   final BufferLogger logger = context.get<Logger>();
-  expect(logger.statusText, 'Sending crash report to Google.\n'
-      'Crash report sent (report ID: test-report-id)\n');
+  expect(
+    logger.statusText,
+    'Sending crash report to Google.\n'
+    'Crash report sent (report ID: test-report-id)\n',
+  );
 
   // Verify that we've written the crash report to disk.
   final List<String> writtenFiles =
-  (await tools.crashFileSystem.directory('/').list(recursive: true).toList())
+    (await tools.crashFileSystem.directory('/').list(recursive: true).toList())
       .map((FileSystemEntity e) => e.path).toList();
   expect(writtenFiles, hasLength(crashes));
   expect(writtenFiles, contains('flutter_01.log'));

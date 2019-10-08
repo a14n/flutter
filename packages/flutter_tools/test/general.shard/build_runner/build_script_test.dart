@@ -30,8 +30,9 @@ void main() {
 
     await builder.build(mockBuildStep);
 
-    verify(mockBuildStep.writeAsString(any, argThat(contains('if (true) '
-        '{\n    await ui.webOnlyInitializePlatform')))).called(1);
+    verify(mockBuildStep.writeAsString(any, argThat(contains(
+      'if (true) {\n    await ui.webOnlyInitializePlatform',
+    )))).called(1);
   });
 
   test('FlutterWebShellBuilder correctly configures does not platform', () async {
@@ -42,8 +43,9 @@ void main() {
 
     await builder.build(mockBuildStep);
 
-    verify(mockBuildStep.writeAsString(any, argThat(contains('if (false) '
-        '{\n    await ui.webOnlyInitializePlatform')))).called(1);
+    verify(mockBuildStep.writeAsString(any, argThat(contains(
+      'if (false) {\n    await ui.webOnlyInitializePlatform',
+    )))).called(1);
   });
 
   test('FlutterWebShellBuilder correctly configures plugins', () async {

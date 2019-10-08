@@ -13,8 +13,7 @@ import '../ios/plist_parser.dart';
 import '../project.dart';
 
 /// Tests whether a [FileSystemEntity] is an macOS bundle directory
-bool _isBundleDirectory(FileSystemEntity entity) =>
-    entity is Directory && entity.path.endsWith('.app');
+bool _isBundleDirectory(FileSystemEntity entity) => entity is Directory && entity.path.endsWith('.app');
 
 abstract class MacOSApp extends ApplicationPackage {
   MacOSApp({@required String projectBundleId}) : super(id: projectBundleId);

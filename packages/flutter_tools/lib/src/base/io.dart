@@ -27,7 +27,7 @@
 /// in `dart:io` can sometimes be hard to use in tests.
 import 'dart:async';
 import 'dart:io' as io show exit, IOSink, Process, ProcessInfo, ProcessSignal,
-    stderr, stdin, Stdout, stdout;
+  stderr, stdin, Stdout, stdout;
 
 import 'package:meta/meta.dart';
 
@@ -36,51 +36,51 @@ import 'platform.dart';
 import 'process.dart';
 
 export 'dart:io'
-    show
-        BytesBuilder,
-        CompressionOptions,
-        // Directory,         NO! Use `file_system.dart`
-        exitCode,
-        // File,              NO! Use `file_system.dart`
-        // FileSystemEntity,  NO! Use `file_system.dart`
-        gzip,
-        HandshakeException,
-        HttpClient,
-        HttpClientRequest,
-        HttpClientResponse,
-        HttpClientResponseCompressionState,
-        HttpException,
-        HttpHeaders,
-        HttpRequest,
-        HttpServer,
-        HttpStatus,
-        InternetAddress,
-        InternetAddressType,
-        IOException,
-        IOSink,
-        // Link              NO! Use `file_system.dart`
-        pid,
-        // Platform          NO! use `platform.dart`
-        Process,
-        ProcessException,
-        // ProcessInfo,      NO! use `io.dart`
-        ProcessResult,
-        // ProcessSignal     NO! Use [ProcessSignal] below.
-        ProcessStartMode,
-        // RandomAccessFile  NO! Use `file_system.dart`
-        ServerSocket,
-        // stderr,           NO! Use `io.dart`
-        // stdin,            NO! Use `io.dart`
-        Stdin,
-        StdinException,
-        // stdout,           NO! Use `io.dart`
-        Stdout,
-        Socket,
-        SocketException,
-        systemEncoding,
-        WebSocket,
-        WebSocketException,
-        WebSocketTransformer;
+  show
+    BytesBuilder,
+    CompressionOptions,
+    // Directory,         NO! Use `file_system.dart`
+    exitCode,
+    // File,              NO! Use `file_system.dart`
+    // FileSystemEntity,  NO! Use `file_system.dart`
+    gzip,
+    HandshakeException,
+    HttpClient,
+    HttpClientRequest,
+    HttpClientResponse,
+    HttpClientResponseCompressionState,
+    HttpException,
+    HttpHeaders,
+    HttpRequest,
+    HttpServer,
+    HttpStatus,
+    InternetAddress,
+    InternetAddressType,
+    IOException,
+    IOSink,
+    // Link              NO! Use `file_system.dart`
+    pid,
+    // Platform          NO! use `platform.dart`
+    Process,
+    ProcessException,
+    // ProcessInfo,      NO! use `io.dart`
+    ProcessResult,
+    // ProcessSignal     NO! Use [ProcessSignal] below.
+    ProcessStartMode,
+    // RandomAccessFile  NO! Use `file_system.dart`
+    ServerSocket,
+    // stderr,           NO! Use `io.dart`
+    // stdin,            NO! Use `io.dart`
+    Stdin,
+    StdinException,
+    // stdout,           NO! Use `io.dart`
+    Stdout,
+    Socket,
+    SocketException,
+    systemEncoding,
+    WebSocket,
+    WebSocketException,
+    WebSocketTransformer;
 
 /// Exits the process with the given [exitCode].
 typedef ExitFunction = void Function(int exitCode);

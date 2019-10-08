@@ -42,7 +42,8 @@ class BuildApkCommand extends BuildSubCommand {
   final String name = 'apk';
 
   @override
-  final String description = 'Build an Android APK file from your app.\n\n'
+  final String description =
+    'Build an Android APK file from your app.\n\n'
     'This command can build debug and release versions of your application. \'debug\' builds support '
     'debugging and a quick development cycle. \'release\' builds don\'t support debugging and are '
     'suitable for deploying to app stores.';
@@ -51,10 +52,8 @@ class BuildApkCommand extends BuildSubCommand {
   Future<Map<CustomDimensions, String>> get usageValues async {
     final Map<CustomDimensions, String> usage = <CustomDimensions, String>{};
 
-    usage[CustomDimensions.commandBuildApkTargetPlatform] =
-        (argResults['target-platform'] as List<String>).join(',');
-    usage[CustomDimensions.commandBuildApkSplitPerAbi] =
-        argResults['split-per-abi'].toString();
+    usage[CustomDimensions.commandBuildApkTargetPlatform] = (argResults['target-platform'] as List<String>).join(',');
+    usage[CustomDimensions.commandBuildApkSplitPerAbi] = argResults['split-per-abi'].toString();
 
     if (argResults['release']) {
       usage[CustomDimensions.commandBuildApkBuildMode] = 'release';

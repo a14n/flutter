@@ -146,14 +146,16 @@ abstract class FlutterCommand extends Command<void> {
     );
     argParser.addOption('web-port',
       defaultsTo: null,
-      help: 'The host port to serve the web application from. If not provided, the tool '
+      help:
+        'The host port to serve the web application from. If not provided, the tool '
         'will select a random open port on the host.',
       hide: hide,
     );
     argParser.addFlag('web-browser-launch',
       defaultsTo: true,
       negatable: true,
-      help: 'Whether to automatically launch browsers for web devices '
+      help:
+        'Whether to automatically launch browsers for web devices '
         'that do so. Setting this to true allows using the Dart debug extension '
         'on Chrome and other browsers which support extensions.',
       hide: hide,
@@ -200,16 +202,18 @@ abstract class FlutterCommand extends Command<void> {
       )
       ..addMultiOption(FlutterOptions.kFileSystemRoot,
         hide: hide,
-        help: 'Specify the path, that is used as root in a virtual file system\n'
-            'for compilation. Input file name should be specified as Uri in\n'
-            'filesystem-scheme scheme. Use only in Dart 2 mode.\n'
-            'Requires --output-dill option to be explicitly specified.\n',
+        help:
+          'Specify the path, that is used as root in a virtual file system\n'
+          'for compilation. Input file name should be specified as Uri in\n'
+          'filesystem-scheme scheme. Use only in Dart 2 mode.\n'
+          'Requires --output-dill option to be explicitly specified.\n',
       )
       ..addOption(FlutterOptions.kFileSystemScheme,
         defaultsTo: 'org-dartlang-root',
         hide: hide,
-        help: 'Specify the scheme that is used for virtual file system used in\n'
-            'compilation. See more details on filesystem-root option.\n',
+        help:
+          'Specify the scheme that is used for virtual file system used in\n'
+          'compilation. See more details on filesystem-root option.\n',
       );
   }
 
@@ -369,17 +373,16 @@ abstract class FlutterCommand extends Command<void> {
 
   BuildInfo getBuildInfo() {
     final bool trackWidgetCreation = argParser.options.containsKey('track-widget-creation')
-        ? argResults['track-widget-creation']
-        : false;
+      ? argResults['track-widget-creation']
+      : false;
 
     final String buildNumber = argParser.options.containsKey('build-number') && argResults['build-number'] != null
-        ? argResults['build-number']
-        : null;
+      ? argResults['build-number']
+      : null;
 
-    String extraFrontEndOptions =
-        argParser.options.containsKey(FlutterOptions.kExtraFrontEndOptions)
-            ? argResults[FlutterOptions.kExtraFrontEndOptions]
-            : null;
+    String extraFrontEndOptions = argParser.options.containsKey(FlutterOptions.kExtraFrontEndOptions)
+      ? argResults[FlutterOptions.kExtraFrontEndOptions]
+      : null;
     if (argParser.options.containsKey(FlutterOptions.kEnableExperiment) &&
         argResults[FlutterOptions.kEnableExperiment] != null) {
       for (String expFlag in argResults[FlutterOptions.kEnableExperiment]) {
@@ -430,8 +433,7 @@ abstract class FlutterCommand extends Command<void> {
   }
 
   /// Additional usage values to be sent with the usage ping.
-  Future<Map<CustomDimensions, String>> get usageValues async =>
-      const <CustomDimensions, String>{};
+  Future<Map<CustomDimensions, String>> get usageValues async => const <CustomDimensions, String>{};
 
   /// Runs this command.
   ///

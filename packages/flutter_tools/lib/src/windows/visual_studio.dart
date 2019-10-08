@@ -71,7 +71,7 @@ class VisualStudio {
     return _bestVisualStudioDetails[_isLaunchableKey] ?? true;
   }
 
-    /// True if the Visual Studio installation is as pre-release version.
+  /// True if the Visual Studio installation is as pre-release version.
   bool get isPrerelease => _bestVisualStudioDetails[_isPrereleaseKey] ?? false;
 
   /// True if a reboot is required to complete the Visual Studio installation.
@@ -143,8 +143,7 @@ class VisualStudio {
       // The C++ toolchain required by the template.
       'Microsoft.VisualStudio.Component.VC.Tools.x86.x64': cppToolchainDescription,
       // The Windows SDK version used by the template.
-      'Microsoft.VisualStudio.Component.Windows10SDK.17763':
-          'Windows 10 SDK (10.0.17763.0)',
+      'Microsoft.VisualStudio.Component.Windows10SDK.17763': 'Windows 10 SDK (10.0.17763.0)',
     };
   }
 
@@ -198,8 +197,7 @@ class VisualStudio {
         ...?requirementArguments,
       ]);
       if (whereResult.exitCode == 0) {
-        final List<Map<String, dynamic>> installations =
-            json.decode(whereResult.stdout).cast<Map<String, dynamic>>();
+        final List<Map<String, dynamic>> installations = json.decode(whereResult.stdout).cast<Map<String, dynamic>>();
         if (installations.isNotEmpty) {
           return installations[0];
         }
@@ -243,8 +241,7 @@ class VisualStudio {
     if (_cachedUsableVisualStudioDetails != null) {
       return _cachedUsableVisualStudioDetails;
     }
-    Map<String, dynamic> visualStudioDetails =
-        _visualStudioDetails(requiredComponents: _requiredComponents().keys);
+    Map<String, dynamic> visualStudioDetails = _visualStudioDetails(requiredComponents: _requiredComponents().keys);
     // If a stable version is not found, try searching for a pre-release version.
     visualStudioDetails ??= _visualStudioDetails(
         requiredComponents: _requiredComponents().keys,

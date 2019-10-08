@@ -40,7 +40,7 @@ void main() {
         buildDir: fs.currentDirectory,
         defines: <String, String>{
           kTargetFile: fs.path.join('lib', 'main.dart'),
-        }
+        },
       );
       environment.buildDir.createSync(recursive: true);
     }, overrides: <Type, Generator>{

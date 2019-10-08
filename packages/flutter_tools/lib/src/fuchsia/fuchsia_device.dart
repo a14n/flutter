@@ -246,8 +246,7 @@ class FuchsiaDevice extends Device {
       printError('Failed to find a free port');
       return LaunchResult.failed();
     }
-    final Directory packageRepo =
-        fs.directory(fs.path.join(getFuchsiaBuildDirectory(), '.pkg-repo'));
+    final Directory packageRepo = fs.directory(fs.path.join(getFuchsiaBuildDirectory(), '.pkg-repo'));
     packageRepo.createSync(recursive: true);
 
     final String appName = FlutterProject.current().manifest.appName;
@@ -307,8 +306,7 @@ class FuchsiaDevice extends Device {
       }
 
       // Instruct tiles_ctl to start the app.
-      final String fuchsiaUrl =
-          'fuchsia-pkg://$packageServerName/$appName#meta/$appName.cmx';
+      final String fuchsiaUrl = 'fuchsia-pkg://$packageServerName/$appName#meta/$appName.cmx';
       if (!await fuchsiaDeviceTools.tilesCtl.add(this, fuchsiaUrl, <String>[])) {
         printError('Failed to add the app to tiles');
         return LaunchResult.failed();
@@ -331,8 +329,7 @@ class FuchsiaDevice extends Device {
     }
 
     // In a debug or profile build, try to find the observatory uri.
-    final FuchsiaIsolateDiscoveryProtocol discovery =
-        getIsolateDiscoveryProtocol(appName);
+    final FuchsiaIsolateDiscoveryProtocol discovery = getIsolateDiscoveryProtocol(appName);
     try {
       final Uri observatoryUri = await discovery.uri;
       return LaunchResult.succeeded(observatoryUri: observatoryUri);
@@ -373,13 +370,11 @@ class FuchsiaDevice extends Device {
   }
 
   @override
-  DeviceLogReader getLogReader({ApplicationPackage app}) =>
-      _logReader ??= _FuchsiaLogReader(this, app);
+  DeviceLogReader getLogReader({ApplicationPackage app}) => _logReader ??= _FuchsiaLogReader(this, app);
   _FuchsiaLogReader _logReader;
 
   @override
-  DevicePortForwarder get portForwarder =>
-      _portForwarder ??= _FuchsiaPortForwarder(this);
+  DevicePortForwarder get portForwarder => _portForwarder ??= _FuchsiaPortForwarder(this);
   _FuchsiaPortForwarder _portForwarder;
 
   @override

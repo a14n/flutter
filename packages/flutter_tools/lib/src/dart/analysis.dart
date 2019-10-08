@@ -23,17 +23,14 @@ class AnalysisServer {
   final List<String> directories;
 
   Process _process;
-  final StreamController<bool> _analyzingController =
-      StreamController<bool>.broadcast();
-  final StreamController<FileAnalysisErrors> _errorsController =
-      StreamController<FileAnalysisErrors>.broadcast();
+  final StreamController<bool> _analyzingController = StreamController<bool>.broadcast();
+  final StreamController<FileAnalysisErrors> _errorsController = StreamController<FileAnalysisErrors>.broadcast();
   bool _didServerErrorOccur = false;
 
   int _id = 0;
 
   Future<void> start() async {
-    final String snapshot =
-        fs.path.join(sdkPath, 'bin/snapshots/analysis_server.dart.snapshot');
+    final String snapshot = fs.path.join(sdkPath, 'bin/snapshots/analysis_server.dart.snapshot');
     final List<String> command = <String>[
       fs.path.join(sdkPath, 'bin', 'dart'),
       snapshot,
@@ -49,19 +46,18 @@ class AnalysisServer {
     unawaited(_process.exitCode.whenComplete(() => _process = null));
 
     final Stream<String> errorStream =
-        _process.stderr.transform<String>(utf8.decoder).transform<String>(const LineSplitter());
+      _process.stderr.transform<String>(utf8.decoder).transform<String>(const LineSplitter());
     errorStream.listen(printError);
 
     final Stream<String> inStream =
-        _process.stdout.transform<String>(utf8.decoder).transform<String>(const LineSplitter());
+      _process.stdout.transform<String>(utf8.decoder).transform<String>(const LineSplitter());
     inStream.listen(_handleServerResponse);
 
     _sendCommand('server.setSubscriptions', <String, dynamic>{
       'subscriptions': <String>['STATUS'],
     });
 
-    _sendCommand('analysis.setAnalysisRoots',
-        <String, dynamic>{'included': directories, 'excluded': <String>[]});
+    _sendCommand('analysis.setAnalysisRoots', <String, dynamic>{'included': directories, 'excluded': <String>[]});
   }
 
   bool get didServerErrorOccur => _didServerErrorOccur;
@@ -226,10 +222,11 @@ class AnalysisError implements Comparable<AnalysisError> {
     // Can't use "padLeft" because of ANSI color sequences in the colorized
     // severity.
     final String padding = ' ' * math.max(0, 7 - severity.length);
-    return '$padding${colorSeverity.toLowerCase()} $_separator '
-        '$messageSentenceFragment $_separator '
-        '${fs.path.relative(file)}:$startLine:$startColumn $_separator '
-        '$code';
+    return
+      '$padding${colorSeverity.toLowerCase()} $_separator '
+      '$messageSentenceFragment $_separator '
+      '${fs.path.relative(file)}:$startLine:$startColumn $_separator '
+      '$code';
   }
 
   String toLegacyString() {

@@ -29,7 +29,7 @@ Future<List<int>> fetchUrl(Uri url, {int maxAttempts}) async {
       return null;
     }
     printStatus('Download failed -- attempting retry $attempts in '
-        '$durationSeconds second${ durationSeconds == 1 ? "" : "s"}...');
+      '$durationSeconds second${ durationSeconds == 1 ? "" : "s"}...');
     await Future<void>.delayed(Duration(seconds: durationSeconds));
     if (durationSeconds < 64) {
       durationSeconds *= 2;

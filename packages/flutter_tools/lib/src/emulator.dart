@@ -30,15 +30,16 @@ class EmulatorManager {
   Future<List<Emulator>> getEmulatorsMatching(String searchText) async {
     final List<Emulator> emulators = await getAllAvailableEmulators();
     searchText = searchText.toLowerCase();
-    bool exactlyMatchesEmulatorId(Emulator emulator) =>
-        emulator.id?.toLowerCase() == searchText ||
-        emulator.name?.toLowerCase() == searchText;
-    bool startsWithEmulatorId(Emulator emulator) =>
-        emulator.id?.toLowerCase()?.startsWith(searchText) == true ||
-        emulator.name?.toLowerCase()?.startsWith(searchText) == true;
+    bool exactlyMatchesEmulatorId(Emulator emulator) {
+      return emulator.id?.toLowerCase() == searchText || emulator.name?.toLowerCase() == searchText;
+    }
 
-    final Emulator exactMatch =
-        emulators.firstWhere(exactlyMatchesEmulatorId, orElse: () => null);
+    bool startsWithEmulatorId(Emulator emulator) {
+      return emulator.id?.toLowerCase()?.startsWith(searchText) == true
+          || emulator.name?.toLowerCase()?.startsWith(searchText) == true;
+    }
+
+    final Emulator exactMatch = emulators.firstWhere(exactlyMatchesEmulatorId, orElse: () => null);
     if (exactMatch != null) {
       return <Emulator>[exactMatch];
     }
@@ -90,9 +91,9 @@ class EmulatorManager {
       return CreateEmulatorResult(name,
           success: false,
           error:
-              'No suitable Android AVD system images are available. You may need to install these'
-              ' using sdkmanager, for example:\n'
-              '  sdkmanager "system-images;android-27;google_apis_playstore;x86"');
+            'No suitable Android AVD system images are available. You may need to install these'
+            ' using sdkmanager, for example:\n'
+            '  sdkmanager "system-images;android-27;google_apis_playstore;x86"');
     }
 
     // Cleans up error output from avdmanager to make it more suitable to show
@@ -104,12 +105,11 @@ class EmulatorManager {
         return null;
       }
       return error
-          .split('\n')
-          .where((String l) => l.trim() != 'null')
-          .where((String l) =>
-              l.trim() != 'Use --force if you want to replace it.')
-          .join('\n')
-          .trim();
+        .split('\n')
+        .where((String l) => l.trim() != 'null')
+        .where((String l) => l.trim() != 'Use --force if you want to replace it.')
+        .join('\n')
+        .trim();
     }
 
     final List<String> args = <String>[
@@ -269,14 +269,11 @@ abstract class Emulator {
     // Join columns into lines of text
     final RegExp whiteSpaceAndDots = RegExp(r'[•\s]+$');
     return table
-        .map<String>((List<String> row) {
-          return indices
-                  .map<String>((int i) => row[i].padRight(widths[i]))
-                  .join(' • ') +
-              ' • ${row.last}';
-        })
-        .map<String>((String line) => line.replaceAll(whiteSpaceAndDots, ''))
-        .toList();
+      .map<String>((List<String> row) {
+        return indices.map<String>((int i) => row[i].padRight(widths[i])).join(' • ') + ' • ${row.last}';
+      })
+      .map<String>((String line) => line.replaceAll(whiteSpaceAndDots, ''))
+      .toList();
   }
 
   static void printEmulators(List<Emulator> emulators) {

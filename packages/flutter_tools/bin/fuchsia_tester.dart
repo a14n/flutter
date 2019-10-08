@@ -70,8 +70,7 @@ Future<void> run(List<String> args) async {
       .any((String option) => !argResults.options.contains(option))) {
     throwToolExit('Missing option! All options must be specified.');
   }
-  final Directory tempDir =
-      fs.systemTempDirectory.createTempSync('flutter_fuchsia_tester.');
+  final Directory tempDir = fs.systemTempDirectory.createTempSync('flutter_fuchsia_tester.');
   try {
     Cache.flutterRoot = tempDir.path;
 
@@ -95,13 +94,11 @@ Future<void> run(List<String> args) async {
 
     // Put the tester shell where runTests expects it.
     // TODO(garymm): Switch to a Fuchsia-specific Artifacts impl.
-    final Link testerDestLink =
-        fs.link(artifacts.getArtifactPath(Artifact.flutterTester));
+    final Link testerDestLink = fs.link(artifacts.getArtifactPath(Artifact.flutterTester));
     testerDestLink.parent.createSync(recursive: true);
     testerDestLink.createSync(fs.path.absolute(shellPath));
 
-    final Directory sdkRootDest =
-        fs.directory(artifacts.getArtifactPath(Artifact.flutterPatchedSdkPath));
+    final Directory sdkRootDest = fs.directory(artifacts.getArtifactPath(Artifact.flutterPatchedSdkPath));
     sdkRootDest.createSync(recursive: true);
     for (FileSystemEntity artifact in sdkRootSrc.listSync()) {
       fs.link(sdkRootDest.childFile(artifact.basename).path).createSync(artifact.path);
@@ -109,8 +106,7 @@ Future<void> run(List<String> args) async {
     // TODO(tvolkert): Remove once flutter_tester no longer looks for this.
     fs.link(sdkRootDest.childFile('platform.dill').path).createSync('platform_strong.dill');
 
-    PackageMap.globalPackagesPath =
-        fs.path.normalize(fs.path.absolute(argResults[_kOptionPackages]));
+    PackageMap.globalPackagesPath = fs.path.normalize(fs.path.absolute(argResults[_kOptionPackages]));
 
     Directory testDirectory;
     CoverageCollector collector;

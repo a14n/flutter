@@ -25,11 +25,12 @@ class ShellCompletionCommand extends FlutterCommand {
   final String name = 'bash-completion';
 
   @override
-  final String description = 'Output command line shell completion setup scripts.\n\n'
-      'This command prints the flutter command line completion setup script for Bash and Zsh. To '
-      'use it, specify an output file and follow the instructions in the generated output file to '
-      'install it in your shell environment. Once it is sourced, your shell will be able to '
-      'complete flutter commands and options.';
+  final String description =
+    'Output command line shell completion setup scripts.\n\n'
+    'This command prints the flutter command line completion setup script for Bash and Zsh. To '
+    'use it, specify an output file and follow the instructions in the generated output file to '
+    'install it in your shell environment. Once it is sourced, your shell will be able to '
+    'complete flutter commands and options.';
 
   @override
   final List<String> aliases = <String>['zsh-completion'];
@@ -56,7 +57,7 @@ class ShellCompletionCommand extends FlutterCommand {
     if (outputFile.existsSync() && !argResults['overwrite']) {
       throwToolExit(
         'Output file ${outputFile.path} already exists, will not overwrite. '
-            'Use --overwrite to force overwriting existing output file.',
+        'Use --overwrite to force overwriting existing output file.',
         exitCode: 1,
       );
     }

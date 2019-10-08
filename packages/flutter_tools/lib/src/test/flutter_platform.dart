@@ -324,7 +324,8 @@ class FlutterPlatform extends PlatformPlugin {
     } catch (err) {
       /// Rethrow a less confusing error if it is a test incompatibility.
       if (err.toString().contains('type \'Declarer\' is not a subtype of type \'Declarer\'')) {
-        throw UnsupportedError('Package incompatibility between flutter and test packages:\n'
+        throw UnsupportedError(
+          'Package incompatibility between flutter and test packages:\n'
           '  * flutter is incompatible with test <1.4.0.\n'
           '  * flutter is incompatible with mockito <4.0.0\n'
           'To fix this error, update test to at least \'^1.4.0\' and mockito to at least \'^4.0.0\'\n'
@@ -507,8 +508,7 @@ class FlutterPlatform extends PlatformPlugin {
         process,
         reportObservatoryUri: (Uri detectedUri) {
           assert(processObservatoryUri == null);
-          assert(explicitObservatoryPort == null ||
-              explicitObservatoryPort == detectedUri.port);
+          assert(explicitObservatoryPort == null || explicitObservatoryPort == detectedUri.port);
           if (startPaused && !machine) {
             printStatus('The test process has been started.');
             printStatus('You can now connect to it using observatory. To connect, load the following Web site in your browser:');
@@ -588,8 +588,7 @@ class FlutterPlatform extends PlatformPlugin {
           final WebSocket testSocket = await webSocket.future;
 
           final Completer<void> harnessDone = Completer<void>();
-          final StreamSubscription<dynamic> harnessToTest =
-              controller.stream.listen(
+          final StreamSubscription<dynamic> harnessToTest = controller.stream.listen(
             (dynamic event) {
               testSocket.add(json.encode(event));
             },
@@ -753,8 +752,7 @@ class FlutterPlatform extends PlatformPlugin {
         break;
       }
       if (directory.childFile(_kProjectRootSentinel).existsSync()) {
-        printTrace('Stopping scan for $_kTestConfigFileName; '
-            'found project root at ${directory.path}');
+        printTrace('Stopping scan for $_kTestConfigFileName; found project root at ${directory.path}');
         break;
       }
       directory = directory.parent;

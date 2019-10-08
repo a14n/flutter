@@ -363,8 +363,7 @@ DevFSContent _obtainLicenses(
     if (!file.existsSync()) {
       continue;
     }
-    final List<String> rawLicenses =
-        file.readAsStringSync().split(_licenseSeparator);
+    final List<String> rawLicenses = file.readAsStringSync().split(_licenseSeparator);
     for (String rawLicense in rawLicenses) {
       List<String> packageNames;
       String licenseText;
@@ -393,8 +392,7 @@ DevFSContent _obtainLicenses(
 
   final List<String> combinedLicensesList = packageLicenses.keys.map<String>(
     (String license) {
-      final List<String> packageNames = packageLicenses[license].toList()
-       ..sort();
+      final List<String> packageNames = packageLicenses[license].toList()..sort();
       return packageNames.join('\n') + '\n\n' + license;
     }
   ).toList();

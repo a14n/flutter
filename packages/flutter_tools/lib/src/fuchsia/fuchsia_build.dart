@@ -66,8 +66,7 @@ Future<void> _buildAssets(
     includeDefaultFonts: false,
   );
 
-  final Map<String, DevFSContent> assetEntries =
-      Map<String, DevFSContent>.from(assets.entries);
+  final Map<String, DevFSContent> assetEntries = Map<String, DevFSContent>.from(assets.entries);
   await writeBundle(fs.directory(assetDir), assetEntries);
 
   final String appName = fuchsiaProject.project.manifest.appName;
@@ -129,8 +128,7 @@ Future<void> _buildPackage(
     pkg.createSync(recursive: true);
   }
 
-  final File srcCmx =
-      fs.file(fs.path.join(fuchsiaProject.meta.path, '$appName.cmx'));
+  final File srcCmx = fs.file(fs.path.join(fuchsiaProject.meta.path, '$appName.cmx'));
   final File dstCmx = fs.file(fs.path.join(outDir, '$appName.cmx'));
   _rewriteCmx(buildInfo.mode, srcCmx, dstCmx);
 

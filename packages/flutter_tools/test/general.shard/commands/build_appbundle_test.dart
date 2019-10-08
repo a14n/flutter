@@ -141,8 +141,9 @@ void main() {
         gradleCacheDir.childFile(platform.isWindows ? 'gradlew.bat' : 'gradlew').createSync();
 
         tempDir.childFile('pubspec.yaml')
-            ..createSync(recursive: true)
-            ..writeAsStringSync('''name: test
+          ..createSync(recursive: true)
+          ..writeAsStringSync('''
+name: test
 environment:
   sdk: ">=2.1.0 <3.0.0"
 dependencies:
@@ -265,8 +266,8 @@ flutter:
         environment: anyNamed('environment'),
       )).thenAnswer((_) {
         const String r8StdoutWarning =
-            'Execution failed for task \':app:transformClassesAndResourcesWithR8ForStageInternal\'.'
-            '> com.android.tools.r8.CompilationFailedException: Compilation failed to complete';
+          'Execution failed for task \':app:transformClassesAndResourcesWithR8ForStageInternal\'.'
+          '> com.android.tools.r8.CompilationFailedException: Compilation failed to complete';
         return Future<Process>.value(
           createMockProcess(
             exitCode: 1,
@@ -321,8 +322,8 @@ Future<BuildAppBundleCommand> runBuildAppBundleCommand(
 }
 
 class FakeFlutterProjectFactory extends FlutterProjectFactory {
-  FakeFlutterProjectFactory(this._directoryOverride) :
-    assert(_directoryOverride != null);
+  FakeFlutterProjectFactory(this._directoryOverride)
+    : assert(_directoryOverride != null);
 
   final Directory _directoryOverride;
 

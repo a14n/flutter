@@ -262,8 +262,7 @@ class AndroidApk extends ApplicationPackage {
 }
 
 /// Tests whether a [FileSystemEntity] is an iOS bundle directory
-bool _isBundleDirectory(FileSystemEntity entity) =>
-    entity is Directory && entity.path.endsWith('.app');
+bool _isBundleDirectory(FileSystemEntity entity) => entity is Directory && entity.path.endsWith('.app');
 
 abstract class IOSApp extends ApplicationPackage {
   IOSApp({@required String projectBundleId}) : super(id: projectBundleId);
@@ -564,12 +563,11 @@ class ApkManifestData {
         final String actionAttributeValue = action
             ?.firstAttribute('android:name')
             ?.value;
-        final String categoryAttributeValue =
-            category?.firstAttribute('android:name')?.value;
+        final String categoryAttributeValue = category?.firstAttribute('android:name')?.value;
         final bool isMainAction = actionAttributeValue != null &&
-            actionAttributeValue.startsWith('"android.intent.action.MAIN"');
+          actionAttributeValue.startsWith('"android.intent.action.MAIN"');
         final bool isLauncherCategory = categoryAttributeValue != null &&
-            categoryAttributeValue.startsWith('"android.intent.category.LAUNCHER"');
+          categoryAttributeValue.startsWith('"android.intent.category.LAUNCHER"');
         if (isMainAction && isLauncherCategory) {
           launchActivity = activity;
           break;
@@ -621,8 +619,7 @@ class ApkManifestData {
   final Map<String, Map<String, String>> _data;
 
   @visibleForTesting
-  Map<String, Map<String, String>> get data =>
-      UnmodifiableMapView<String, Map<String, String>>(_data);
+  Map<String, Map<String, String>> get data => UnmodifiableMapView<String, Map<String, String>>(_data);
 
   String get packageName => _data['package'] == null ? null : _data['package']['name'];
 

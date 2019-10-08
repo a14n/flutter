@@ -290,7 +290,7 @@ void main() {
           device: mockDevice,
           generator: residentCompiler,
           exception: const HttpException('Connection closed before full header was received, '
-              'uri = http://127.0.0.1:63394/5ZmLv8A59xY=/ws'),
+            'uri = http://127.0.0.1:63394/5ZmLv8A59xY=/ws'),
         ),
       ];
 
@@ -299,9 +299,9 @@ void main() {
       ).attach();
       expect(exitCode, 2);
       expect(mockLogger.statusText, contains('If you are using an emulator running Android Q Beta, '
-          'consider using an emulator running API level 29 or lower.'));
+        'consider using an emulator running API level 29 or lower.'));
       expect(mockLogger.statusText, contains('Learn more about the status of this issue on '
-          'https://issuetracker.google.com/issues/132325318'));
+        'https://issuetracker.google.com/issues/132325318'));
     }, overrides: <Type, Generator>{
       Artifacts: () => mockArtifacts,
       Logger: () => mockLogger,
@@ -328,9 +328,9 @@ void main() {
       ).attach();
       expect(exitCode, 2);
       expect(mockLogger.statusText, contains('If you are using an emulator running Android Q Beta, '
-          'consider using an emulator running API level 29 or lower.'));
+        'consider using an emulator running API level 29 or lower.'));
       expect(mockLogger.statusText, contains('Learn more about the status of this issue on '
-          'https://issuetracker.google.com/issues/132325318'));
+        'https://issuetracker.google.com/issues/132325318'));
     }, overrides: <Type, Generator>{
       Artifacts: () => mockArtifacts,
       Logger: () => mockLogger,

@@ -738,8 +738,7 @@ int compareIosVersions(String v1, String v2) {
 ///   ✓ com.apple.CoreSimulator.SimDeviceType.iPhone-6s-Plus
 ///   ✗ com.apple.CoreSimulator.SimDeviceType.iPad-2
 ///   ✗ com.apple.CoreSimulator.SimDeviceType.Apple-Watch-38mm
-final RegExp _iosDeviceTypePattern =
-    RegExp(r'com.apple.CoreSimulator.SimDeviceType.iPhone-(\d+)(.*)');
+final RegExp _iosDeviceTypePattern = RegExp(r'com.apple.CoreSimulator.SimDeviceType.iPhone-(\d+)(.*)');
 
 int compareIphoneVersions(String id1, String id2) {
   final Match m1 = _iosDeviceTypePattern.firstMatch(id1);

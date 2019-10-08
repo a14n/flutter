@@ -63,8 +63,8 @@ class PrebuiltFuchsiaApp extends FuchsiaApp {
 }
 
 class BuildableFuchsiaApp extends FuchsiaApp {
-  BuildableFuchsiaApp({this.project}) :
-      super(projectBundleId: project.project.manifest.appName);
+  BuildableFuchsiaApp({this.project})
+    : super(projectBundleId: project.project.manifest.appName);
 
   final FuchsiaProject project;
 

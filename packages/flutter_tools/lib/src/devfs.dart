@@ -182,8 +182,7 @@ class DevFSByteContent extends DevFSContent {
   Future<List<int>> contentsAsBytes() async => _bytes;
 
   @override
-  Stream<List<int>> contentsAsStream() =>
-      Stream<List<int>>.fromIterable(<List<int>>[_bytes]);
+  Stream<List<int>> contentsAsStream() => Stream<List<int>>.fromIterable(<List<int>>[_bytes]);
 }
 
 /// String content to be copied to the device.

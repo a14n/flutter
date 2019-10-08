@@ -34,8 +34,9 @@ class PubContext {
     }
   }
 
-  static PubContext getVerifyContext(String commandName) =>
-      PubContext._(<String>['verify', commandName.replaceAll('-', '_')]);
+  static PubContext getVerifyContext(String commandName) {
+    return PubContext._(<String>['verify', commandName.replaceAll('-', '_')]);
+  }
 
   static final PubContext create = PubContext._(<String>['create']);
   static final PubContext createPackage = PubContext._(<String>['create_pkg']);

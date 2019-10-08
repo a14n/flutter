@@ -60,8 +60,7 @@ enum CustomDimensions {
 String cdKey(CustomDimensions cd) => 'cd${cd.index + 1}';
 
 Map<String, String> _useCdKeys(Map<CustomDimensions, String> parameters) {
-  return parameters.map((CustomDimensions k, String v) =>
-      MapEntry<String, String>(cdKey(k), v));
+  return parameters.map((CustomDimensions k, String v) => MapEntry<String, String>(cdKey(k), v));
 }
 
 Usage get flutterUsage => Usage.instance;
@@ -166,9 +165,10 @@ class _DefaultUsage implements Usage {
     final String logFilePath = logFile ?? platform.environment['FLUTTER_ANALYTICS_LOG_FILE'];
     final bool usingLogFile = logFilePath != null && logFilePath.isNotEmpty;
 
-    if (// To support testing, only allow other signals to supress analytics
-        // when analytics are not being shunted to a file.
-        !usingLogFile && (
+    if (
+      // To support testing, only allow other signals to supress analytics
+      // when analytics are not being shunted to a file.
+      !usingLogFile && (
         // Ignore local user branches.
         version.startsWith('[user-branch]') ||
         // Many CI systems don't do a full git checkout.
@@ -177,7 +177,8 @@ class _DefaultUsage implements Usage {
         isRunningOnBot ||
         // Ignore when suppressed by FLUTTER_SUPPRESS_ANALYTICS.
         suppressEnvFlag
-      )) {
+      )
+    ) {
       // If we think we're running on a CI system, suppress sending analytics.
       suppressAnalytics = true;
       _analytics = AnalyticsMock();
@@ -188,12 +189,11 @@ class _DefaultUsage implements Usage {
       _analytics = LogToFileAnalytics(logFilePath);
     } else {
       _analytics = AnalyticsIO(
-            _kFlutterUA,
-            settingsName,
-            version,
-            documentDirectory:
-                configDirOverride != null ? fs.directory(configDirOverride) : null,
-          );
+        _kFlutterUA,
+        settingsName,
+        version,
+        documentDirectory: configDirOverride != null ? fs.directory(configDirOverride) : null,
+      );
     }
     assert(_analytics != null);
 
@@ -205,12 +205,11 @@ class _DefaultUsage implements Usage {
     // For each flutter experimental feature, record a session value in a comma
     // separated list.
     final String enabledFeatures = allFeatures
-        .where((Feature feature) {
-          return feature.configSetting != null &&
-                 Config.instance.getValue(feature.configSetting) == true;
-        })
-        .map((Feature feature) => feature.configSetting)
-        .join(',');
+      .where((Feature feature) {
+        return feature.configSetting != null && Config.instance.getValue(feature.configSetting) == true;
+      })
+      .map((Feature feature) => feature.configSetting)
+      .join(',');
     _analytics.setSessionValue(cdKey(CustomDimensions.enabledFlutterFeatures), enabledFeatures);
 
     // Record the host as the application installer ID - the context that flutter_tools is running in.
@@ -358,15 +357,15 @@ class _DefaultUsage implements Usage {
 // But stdout can't be used for testing since wrapper scripts like
 // xcode_backend.sh etc manipulates them.
 class LogToFileAnalytics extends AnalyticsMock {
-  LogToFileAnalytics(String logFilePath) :
-    logFile = fs.file(logFilePath)..createSync(recursive: true),
-    super(true);
+  LogToFileAnalytics(String logFilePath)
+    : logFile = fs.file(logFilePath)..createSync(recursive: true),
+      super(true);
 
   final File logFile;
   final Map<String, String> _sessionValues = <String, String>{};
 
   final StreamController<Map<String, dynamic>> _sendController =
-        StreamController<Map<String, dynamic>>.broadcast(sync: true);
+    StreamController<Map<String, dynamic>>.broadcast(sync: true);
 
   @override
   Stream<Map<String, dynamic>> get onSend => _sendController.stream;

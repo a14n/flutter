@@ -45,20 +45,21 @@ class FlutterCommandRunner extends CommandRunner<void> {
   FlutterCommandRunner({ bool verboseHelp = false }) : super(
     'flutter',
     'Manage your Flutter app development.\n'
-      '\n'
-      'Common commands:\n'
-      '\n'
-      '  flutter create <output directory>\n'
-      '    Create a new Flutter project in the specified directory.\n'
-      '\n'
-      '  flutter run [options]\n'
-      '    Run your Flutter application on an attached device or in an emulator.',
+    '\n'
+    'Common commands:\n'
+    '\n'
+    '  flutter create <output directory>\n'
+    '    Create a new Flutter project in the specified directory.\n'
+    '\n'
+    '  flutter run [options]\n'
+    '    Run your Flutter application on an attached device or in an emulator.',
   ) {
     argParser.addFlag('verbose',
         abbr: 'v',
         negatable: false,
-        help: 'Noisy logging, including all shell commands executed.\n'
-              'If used with --help, shows hidden options.');
+        help:
+          'Noisy logging, including all shell commands executed.\n'
+          'If used with --help, shows hidden options.');
     argParser.addFlag('quiet',
         negatable: false,
         hide: !verboseHelp,
@@ -70,9 +71,10 @@ class FlutterCommandRunner extends CommandRunner<void> {
         defaultsTo: true);
     argParser.addOption('wrap-column',
         hide: !verboseHelp,
-        help: 'Sets the output wrap column. If not set, uses the width of the terminal. No '
-            'wrapping occurs if not writing to a terminal. Use --no-wrap to turn off wrapping '
-            'when connected to a terminal.',
+        help:
+          'Sets the output wrap column. If not set, uses the width of the terminal. No '
+          'wrapping occurs if not writing to a terminal. Use --no-wrap to turn off wrapping '
+          'when connected to a terminal.',
         defaultsTo: null);
     argParser.addOption('device-id',
         abbr: 'd',

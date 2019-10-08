@@ -544,8 +544,7 @@ class AppDomain extends Domain {
     return app;
   }
 
-  bool isRestartSupported(bool enableHotReload, Device device) =>
-      enableHotReload && device.supportsHotRestart;
+  bool isRestartSupported(bool enableHotReload, Device device) => enableHotReload && device.supportsHotRestart;
 
   Future<OperationResult> _inProgressHotReload;
 
@@ -950,8 +949,7 @@ class EmulatorDomain extends Domain {
 
   Future<void> launch(Map<String, dynamic> args) async {
     final String emulatorId = _getStringArg(args, 'emulatorId', required: true);
-    final List<Emulator> matches =
-        await emulators.getEmulatorsMatching(emulatorId);
+    final List<Emulator> matches = await emulators.getEmulatorsMatching(emulatorId);
     if (matches.isEmpty) {
       throw "emulator '$emulatorId' not found";
     } else if (matches.length > 1) {

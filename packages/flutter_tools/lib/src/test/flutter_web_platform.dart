@@ -63,8 +63,7 @@ class FlutterWebPlatform extends PlatformPlugin {
   }
 
   static Future<FlutterWebPlatform> start(String root) async {
-    final shelf_io.IOServer server =
-        shelf_io.IOServer(await HttpMultiServer.loopback(0));
+    final shelf_io.IOServer server = shelf_io.IOServer(await HttpMultiServer.loopback(0));
     return FlutterWebPlatform._(
       server,
       Configuration.current,
@@ -176,8 +175,7 @@ class FlutterWebPlatform extends PlatformPlugin {
 
   // A map from browser identifiers to futures that will complete to the
   // [BrowserManager]s for those browsers, or `null` if they failed to load.
-  final Map<Runtime, Future<BrowserManager>> _browserManagers =
-      <Runtime, Future<BrowserManager>>{};
+  final Map<Runtime, Future<BrowserManager>> _browserManagers = <Runtime, Future<BrowserManager>>{};
 
   // Mappers for Dartifying stack traces, indexed by test path.
   final Map<String, StackTraceMapper> _mappers = <String, StackTraceMapper>{};
@@ -220,9 +218,9 @@ class FlutterWebPlatform extends PlatformPlugin {
       return null;
     }
 
-    final Uri suiteUrl = url.resolveUri(fs.path.toUri(fs.path.withoutExtension(
-            fs.path.relative(path, from: fs.path.join(_root, 'test'))) +
-        '.html'));
+    final Uri suiteUrl = url.resolveUri(fs.path.toUri(
+      fs.path.withoutExtension(fs.path.relative(path, from: fs.path.join(_root, 'test'))) + '.html',
+    ));
     final RunnerSuite suite = await browserManager
         .load(path, suiteUrl, suiteConfig, message, mapper: _mappers[path]);
     if (_closed) {
@@ -232,8 +230,7 @@ class FlutterWebPlatform extends PlatformPlugin {
   }
 
   @override
-  StreamChannel<dynamic> loadChannel(String path, SuitePlatform platform) =>
-      throw UnimplementedError();
+  StreamChannel<dynamic> loadChannel(String path, SuitePlatform platform) => throw UnimplementedError();
 
   /// Returns the [BrowserManager] for [runtime], which should be a browser.
   ///
@@ -243,10 +240,8 @@ class FlutterWebPlatform extends PlatformPlugin {
     if (managerFuture != null) {
       return managerFuture;
     }
-    final Completer<WebSocketChannel> completer =
-        Completer<WebSocketChannel>.sync();
-    final String path =
-        _webSocketHandler.create(webSocketHandler(completer.complete));
+    final Completer<WebSocketChannel> completer = Completer<WebSocketChannel>.sync();
+    final String path = _webSocketHandler.create(webSocketHandler(completer.complete));
     final Uri webSocketUrl = url.replace(scheme: 'ws').resolve(path);
     final Uri hostUrl = url
       .resolve('static/index.html')
@@ -272,8 +267,7 @@ class FlutterWebPlatform extends PlatformPlugin {
 
   @override
   Future<void> closeEphemeral() {
-    final List<Future<BrowserManager>> managers =
-        _browserManagers.values.toList();
+    final List<Future<BrowserManager>> managers = _browserManagers.values.toList();
     _browserManagers.clear();
     return Future.wait(managers.map((Future<BrowserManager> manager) async {
       final BrowserManager result = await manager;
@@ -330,8 +324,7 @@ class OneOffHandler {
       return shelf.Response.notFound(null);
     }
     final String path = components.removeAt(0);
-    final FutureOr<shelf.Response> Function(shelf.Request) handler =
-        _handlers.remove(path);
+    final FutureOr<shelf.Response> Function(shelf.Request) handler = _handlers.remove(path);
     if (handler == null) {
       return shelf.Response.notFound(null);
     }
@@ -481,8 +474,7 @@ class BrowserManager {
   CancelableCompleter<dynamic> _pauseCompleter;
 
   /// The controller for [_BrowserEnvironment.onRestart].
-  final StreamController<dynamic> _onRestartController =
-      StreamController<dynamic>.broadcast();
+  final StreamController<dynamic> _onRestartController = StreamController<dynamic>.broadcast();
 
   /// The environment to attach to each suite.
   Future<_BrowserEnvironment> _environment;
@@ -518,8 +510,7 @@ class BrowserManager {
     Future<WebSocketChannel> future, {
     bool debug = false,
   }) async {
-    final Chrome chrome =
-        await chromeLauncher.launch(url.toString(), headless: true);
+    final Chrome chrome = await chromeLauncher.launch(url.toString(), headless: true);
 
     final Completer<BrowserManager> completer = Completer<BrowserManager>();
 

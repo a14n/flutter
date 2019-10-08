@@ -25,8 +25,7 @@ const String kChromeEnvironment = 'CHROME_EXECUTABLE';
 const String kLinuxExecutable = 'google-chrome';
 
 /// The expected executable name on macOS.
-const String kMacOSExecutable =
-    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const String kMacOSExecutable = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 /// The expected executable name on Windows.
 const String kWindowsExecutable = r'Google\Chrome\Application\chrome.exe';

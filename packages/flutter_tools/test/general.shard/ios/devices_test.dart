@@ -288,8 +288,7 @@ void main() {
       }) {
         const String name = ' non-prebuilt succeeds in debug mode';
         testUsingContext(name + ' flaky: $showBuildSettingsFlakes', () async {
-          final Directory targetBuildDir =
-              projectDir.childDirectory('build/ios/iphoneos/Debug-arm64');
+          final Directory targetBuildDir = projectDir.childDirectory('build/ios/iphoneos/Debug-arm64');
 
           // The -showBuildSettings calls have a timeout and so go through
           // processManager.start().
@@ -297,11 +296,10 @@ void main() {
             flakes: showBuildSettingsFlakes ? 1 : 0,
             delay: const Duration(seconds: 62),
             filter: (List<String> args) => args.contains('-showBuildSettings'),
-            stdout:
-                () => Stream<String>
-                  .fromIterable(
-                      <String>['TARGET_BUILD_DIR = ${targetBuildDir.path}\n'])
-                  .transform(utf8.encoder),
+            stdout: () {
+              return Stream<String>.fromIterable(<String>['TARGET_BUILD_DIR = ${targetBuildDir.path}\n'])
+                .transform(utf8.encoder);
+            },
           );
 
           // Make all other subcommands succeed.
@@ -681,8 +679,8 @@ flutter:
 }
 
 class AbsoluteBuildableIOSApp extends BuildableIOSApp {
-  AbsoluteBuildableIOSApp(IosProject project, String projectBundleId) :
-    super(project, projectBundleId);
+  AbsoluteBuildableIOSApp(IosProject project, String projectBundleId)
+    : super(project, projectBundleId);
 
   static Future<AbsoluteBuildableIOSApp> fromProject(IosProject project) async {
     final String projectBundleId = await project.productBundleIdentifier;
@@ -690,8 +688,7 @@ class AbsoluteBuildableIOSApp extends BuildableIOSApp {
   }
 
   @override
-  String get deviceBundlePath =>
-      fs.path.join(project.parent.directory.path, 'build', 'ios', 'iphoneos', name);
+  String get deviceBundlePath => fs.path.join(project.parent.directory.path, 'build', 'ios', 'iphoneos', name);
 
 }
 

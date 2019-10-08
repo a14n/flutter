@@ -207,8 +207,7 @@ class ReplayVMServiceChannel extends StreamChannelMixin<String> {
     final Iterable<_Message> messages = json.decoder.convert(jsonData).map<_Message>(_toMessage);
     final Map<int, _Transaction> transactions = <int, _Transaction>{};
     for (_Message message in messages) {
-      final _Transaction transaction =
-          transactions.putIfAbsent(message.id, () => _Transaction());
+      final _Transaction transaction = transactions.putIfAbsent(message.id, () => _Transaction());
       if (message.type == _kRequest) {
         assert(transaction.request == null);
         transaction.request = message;

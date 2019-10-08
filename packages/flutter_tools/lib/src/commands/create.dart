@@ -62,7 +62,8 @@ class CreateCommand extends FlutterCommand {
     );
     argParser.addFlag('offline',
       defaultsTo: false,
-      help: 'When "flutter pub get" is run by the create command, this indicates '
+      help:
+        'When "flutter pub get" is run by the create command, this indicates '
         'whether to run it in offline mode or not. In offline mode, it will need to '
         'have all dependencies already available in the pub cache to succeed.',
     );
@@ -80,18 +81,19 @@ class CreateCommand extends FlutterCommand {
       valueHelp: 'type',
       allowedHelp: <String, String>{
         getEnumName(_ProjectType.app): '(default) Generate a Flutter application.',
-        getEnumName(_ProjectType.package): 'Generate a shareable Flutter project containing modular '
-            'Dart code.',
-        getEnumName(_ProjectType.plugin): 'Generate a shareable Flutter project containing an API '
-            'in Dart code with a platform-specific implementation for Android, for iOS code, or '
-            'for both.',
+        getEnumName(_ProjectType.package): 'Generate a shareable Flutter project containing modular Dart code.',
+        getEnumName(_ProjectType.plugin):
+          'Generate a shareable Flutter project containing an API '
+          'in Dart code with a platform-specific implementation for Android, for iOS code, or '
+          'for both.',
       },
       defaultsTo: null,
     );
     argParser.addOption(
       'sample',
       abbr: 's',
-      help: 'Specifies the Flutter code sample to use as the main.dart for an application. Implies '
+      help:
+        'Specifies the Flutter code sample to use as the main.dart for an application. Implies '
         '--template=app. The value should be the sample ID of the desired sample from the API '
         'documentation website (http://docs.flutter.dev). An example can be found at '
         'https://master-api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html',
@@ -100,7 +102,8 @@ class CreateCommand extends FlutterCommand {
     );
     argParser.addOption(
       'list-samples',
-      help: 'Specifies a JSON output file for a listing of Flutter code samples '
+      help:
+        'Specifies a JSON output file for a listing of Flutter code samples '
         'that can created with --sample.',
       valueHelp: 'path',
     );
@@ -118,8 +121,9 @@ class CreateCommand extends FlutterCommand {
     argParser.addOption(
       'org',
       defaultsTo: 'com.example',
-      help: 'The organization responsible for your new Flutter project, in reverse domain name notation. '
-            'This string is used in Java package names and as prefix in the iOS bundle identifier.',
+      help:
+        'The organization responsible for your new Flutter project, in reverse domain name notation. '
+        'This string is used in Java package names and as prefix in the iOS bundle identifier.',
     );
     argParser.addOption(
       'project-name',
@@ -166,7 +170,8 @@ class CreateCommand extends FlutterCommand {
   final String name = 'create';
 
   @override
-  final String description = 'Create a new Flutter project.\n\n'
+  final String description =
+    'Create a new Flutter project.\n\n'
     'If run on a project that already exists, this will repair the project, recreating any files that are missing.';
 
   @override
@@ -278,8 +283,8 @@ class CreateCommand extends FlutterCommand {
           // We can only be definitive that this is the wrong type if the .metadata file
           // exists and contains a type that we don't understand, or doesn't contain a type.
           throwToolExit('Sorry, unable to detect the type of project to recreate. '
-              'Try creating a fresh project and migrating your existing code to '
-              'the new project manually.');
+            'Try creating a fresh project and migrating your existing code to '
+            'the new project manually.');
         }
       }
     }
@@ -288,7 +293,7 @@ class CreateCommand extends FlutterCommand {
       // We can only be definitive that this is the wrong type if the .metadata file
       // exists and contains a type that doesn't match.
       throwToolExit("The requested template type '${getEnumName(template)}' doesn't match the "
-          "existing template type of '${getEnumName(detectedProjectType)}'.");
+        "existing template type of '${getEnumName(detectedProjectType)}'.");
     }
     return template;
   }
@@ -344,7 +349,7 @@ class CreateCommand extends FlutterCommand {
     String sampleCode;
     if (argResults['sample'] != null) {
       if (argResults['template'] != null &&
-        _stringToProjectType(argResults['template'] ?? 'app') != _ProjectType.app) {
+          _stringToProjectType(argResults['template'] ?? 'app') != _ProjectType.app) {
         throwToolExit('Cannot specify --sample with a project type other than '
           '"${getEnumName(_ProjectType.app)}"');
       }
@@ -473,16 +478,16 @@ To edit platform code in an IDE see https://flutter.dev/developing-packages/#edi
         }
       } else {
         printStatus("You'll need to install additional components before you can run "
-            'your Flutter app:');
+          'your Flutter app:');
         printStatus('');
 
         // Give the user more detailed analysis.
         await doctor.diagnose();
         printStatus('');
         printStatus("After installing components, run 'flutter doctor' in order to "
-            're-validate your setup.');
+          're-validate your setup.');
         printStatus("When complete, type 'flutter run' from the '$relativeAppPath' "
-            'directory in order to launch your app.');
+          'directory in order to launch your app.');
         printStatus('Your $application code is in $relativeAppMain');
       }
     }
@@ -777,7 +782,7 @@ String _validateProjectDir(String dirPath, { String flutterRoot, bool overwrite 
   // overwrite, on the theory that the user probably didn't expect it to exist.
   if (fs.isFileSync(dirPath)) {
     return "Invalid project name: '$dirPath' - refers to an existing file."
-        '${overwrite ? ' Refusing to overwrite a file with a directory.' : ''}';
+      '${overwrite ? ' Refusing to overwrite a file with a directory.' : ''}';
   }
 
   if (overwrite) {

@@ -198,14 +198,14 @@ class WebFs {
     final String targetBaseName = fs.path
       .withoutExtension(target).replaceFirst('lib${fs.path.separator}', '');
     final Map<String, String> mappedUrls = <String, String>{
-      'main.dart.js': 'packages/${flutterProject.manifest.appName}/'
-          '${targetBaseName}_web_entrypoint.dart.js',
-      '${targetBaseName}_web_entrypoint.dart.js.map': 'packages/${flutterProject.manifest.appName}/'
-          '${targetBaseName}_web_entrypoint.dart.js.map',
-      '${targetBaseName}_web_entrypoint.dart.bootstrap.js': 'packages/${flutterProject.manifest.appName}/'
-          '${targetBaseName}_web_entrypoint.dart.bootstrap.js',
-      '${targetBaseName}_web_entrypoint.digests': 'packages/${flutterProject.manifest.appName}/'
-          '${targetBaseName}_web_entrypoint.digests',
+      'main.dart.js':
+        'packages/${flutterProject.manifest.appName}/${targetBaseName}_web_entrypoint.dart.js',
+      '${targetBaseName}_web_entrypoint.dart.js.map':
+        'packages/${flutterProject.manifest.appName}/${targetBaseName}_web_entrypoint.dart.js.map',
+      '${targetBaseName}_web_entrypoint.dart.bootstrap.js':
+        'packages/${flutterProject.manifest.appName}/${targetBaseName}_web_entrypoint.dart.bootstrap.js',
+      '${targetBaseName}_web_entrypoint.digests':
+        'packages/${flutterProject.manifest.appName}/${targetBaseName}_web_entrypoint.digests',
     };
 
     // Initialize the dwds server.

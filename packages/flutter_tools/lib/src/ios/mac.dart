@@ -488,18 +488,21 @@ Future<XcodeBuildResult> buildXcodeProject({
   // build. showBuildSettings is reported to ocassionally timeout. Here, we give
   // it a lot of wiggle room (locally on Flutter Gallery, this takes ~1s).
   // When there is a timeout, we retry once. See issue #35988.
-  final List<String> showBuildSettingsCommand = (List<String>
-      .from(buildCommands)
-      ..add('-showBuildSettings'))
-      // Undocumented behavior: xcodebuild craps out if -showBuildSettings
-      // is used together with -allowProvisioningUpdates or
-      // -allowProvisioningDeviceRegistration and freezes forever.
-      .where((String buildCommand) {
-        return !const <String>[
-          '-allowProvisioningUpdates',
-          '-allowProvisioningDeviceRegistration',
-        ].contains(buildCommand);
-      }).toList();
+  final List<String> showBuildSettingsCommand =
+    <String>[
+      ...buildCommands,
+      '-showBuildSettings',
+    ]
+    // Undocumented behavior: xcodebuild craps out if -showBuildSettings
+    // is used together with -allowProvisioningUpdates or
+    // -allowProvisioningDeviceRegistration and freezes forever.
+    .where((String buildCommand) {
+      return !const <String>[
+        '-allowProvisioningUpdates',
+        '-allowProvisioningDeviceRegistration',
+      ].contains(buildCommand);
+    })
+    .toList();
   const Duration showBuildSettingsTimeout = Duration(minutes: 1);
   Map<String, String> buildSettings;
   try {
@@ -567,8 +570,7 @@ Future<XcodeBuildResult> buildXcodeProject({
 }
 
 String readGeneratedXcconfig(String appPath) {
-  final String generatedXcconfigPath =
-      fs.path.join(fs.currentDirectory.path, appPath, 'Flutter', 'Generated.xcconfig');
+  final String generatedXcconfigPath = fs.path.join(fs.currentDirectory.path, appPath, 'Flutter', 'Generated.xcconfig');
   final File generatedXcconfigFile = fs.file(generatedXcconfigPath);
   if (!generatedXcconfigFile.existsSync()) {
     return null;

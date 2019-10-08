@@ -91,10 +91,13 @@ void main() {
       when(processManager.canRun(sdk.adbPath)).thenReturn(true);
 
       final List<String> validationIssues = sdk.validateSdkWellFormed();
-      expect(validationIssues.first, 'No valid Android SDK platforms found in'
+      expect(
+        validationIssues.first,
+        'No valid Android SDK platforms found in'
         ' /.tmp_rand0/flutter_mock_android_sdk.rand0/platforms. Candidates were:\n'
         '  - android-22\n'
-        '  - android-23');
+        '  - android-23',
+      );
     }, overrides: <Type, Generator>{
       FileSystem: () => fs,
       ProcessManager: () => processManager,
@@ -147,8 +150,7 @@ void main() {
               osDir,
               'bin',
               'arm-linux-androideabi-gcc');
-          final String realNdkSysroot =
-              fs.path.join(realNdkDir, 'platforms', 'android-9', 'arch-arm');
+          final String realNdkSysroot = fs.path.join(realNdkDir, 'platforms', 'android-9', 'arch-arm');
 
           final AndroidSdk sdk = AndroidSdk.locateAndroidSdk();
           expect(sdk.directory, realSdkDir);
@@ -181,8 +183,7 @@ void main() {
           final String realNdkLinker = fs.path.join(
               realNdkToolchainBin,
               'arm-linux-androideabi-ld');
-          final String realNdkSysroot =
-              fs.path.join(realNdkDir, 'platforms', 'android-9', 'arch-arm');
+          final String realNdkSysroot = fs.path.join(realNdkDir, 'platforms', 'android-9', 'arch-arm');
 
           final AndroidSdk sdk = AndroidSdk.locateAndroidSdk();
           expect(sdk.directory, realSdkDir);

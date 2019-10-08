@@ -54,13 +54,11 @@ class _DefaultSignals implements Signals {
   final List<ProcessSignal> exitSignals;
 
   // A table mapping (signal, token) -> signal handler.
-  final Map<ProcessSignal, Map<Object, SignalHandler>> _handlersTable =
-      <ProcessSignal, Map<Object, SignalHandler>>{};
+  final Map<ProcessSignal, Map<Object, SignalHandler>> _handlersTable = <ProcessSignal, Map<Object, SignalHandler>>{};
 
   // A table mapping (signal) -> signal handler list. The list is in the order
   // that the signal handlers should be run.
-  final Map<ProcessSignal, List<SignalHandler>> _handlersList =
-      <ProcessSignal, List<SignalHandler>>{};
+  final Map<ProcessSignal, List<SignalHandler>> _handlersList = <ProcessSignal, List<SignalHandler>>{};
 
   // A table mapping (signal) -> low-level signal event stream.
   final Map<ProcessSignal, StreamSubscription<ProcessSignal>> _streamSubscriptions =

@@ -93,8 +93,7 @@ abstract class OperatingSystemUtils {
   Future<int> findFreePort({bool ipv6 = false}) async {
     int port = 0;
     ServerSocket serverSocket;
-    final InternetAddress loopback =
-        ipv6 ? InternetAddress.loopbackIPv6 : InternetAddress.loopbackIPv4;
+    final InternetAddress loopback = ipv6 ? InternetAddress.loopbackIPv6 : InternetAddress.loopbackIPv4;
     try {
       serverSocket = await ServerSocket.bind(loopback, 0);
       port = serverSocket.port;
@@ -174,8 +173,7 @@ class _PosixUtils extends OperatingSystemUtils {
   }
 
   @override
-  bool verifyZip(File zipFile) =>
-      processUtils.exitsHappySync(<String>['zip', '-T', zipFile.path]);
+  bool verifyZip(File zipFile) => processUtils.exitsHappySync(<String>['zip', '-T', zipFile.path]);
 
   // tar -xzf tarball -C dest
   @override
@@ -187,8 +185,7 @@ class _PosixUtils extends OperatingSystemUtils {
   }
 
   @override
-  bool verifyGzip(File gzippedFile) =>
-      processUtils.exitsHappySync(<String>['gzip', '-t', gzippedFile.path]);
+  bool verifyGzip(File gzippedFile) => processUtils.exitsHappySync(<String>['gzip', '-t', gzippedFile.path]);
 
   @override
   File makePipe(String path) {

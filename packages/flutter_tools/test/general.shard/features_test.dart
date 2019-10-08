@@ -103,8 +103,11 @@ void main() {
         configSetting: 'foo',
       );
 
-      expect(testFeature.generateHelpMessage(), 'Enable or disable example. '
-          'This setting will take effect on the master, dev, beta, and stable channels.');
+      expect(
+        testFeature.generateHelpMessage(),
+        'Enable or disable example. '
+        'This setting will take effect on the master, dev, beta, and stable channels.',
+      );
     });
 
     /// Flutter Web

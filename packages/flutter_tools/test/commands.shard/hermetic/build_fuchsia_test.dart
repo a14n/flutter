@@ -82,10 +82,9 @@ void main() {
       final BuildCommand command = BuildCommand();
       applyMocksToCommand(command);
       const String appName = 'app_name';
-      fs
-          .file(fs.path.join('fuchsia', 'meta', '$appName.cmx'))
-          ..createSync(recursive: true)
-          ..writeAsStringSync('{}');
+      fs.file(fs.path.join('fuchsia', 'meta', '$appName.cmx'))
+        ..createSync(recursive: true)
+        ..writeAsStringSync('{}');
       fs.file('.packages').createSync();
       final File pubspecFile = fs.file('pubspec.yaml')..createSync();
       pubspecFile.writeAsStringSync('name: $appName');
@@ -104,18 +103,17 @@ void main() {
       final BuildCommand command = BuildCommand();
       applyMocksToCommand(command);
       const String appName = 'app_name';
-      fs
-          .file(fs.path.join('fuchsia', 'meta', '$appName.cmx'))
-          ..createSync(recursive: true)
-          ..writeAsStringSync('{}');
+      fs.file(fs.path.join('fuchsia', 'meta', '$appName.cmx'))
+        ..createSync(recursive: true)
+        ..writeAsStringSync('{}');
       fs.file('.packages').createSync();
       fs.file(fs.path.join('lib', 'main.dart')).createSync(recursive: true);
       final File pubspecFile = fs.file('pubspec.yaml')..createSync();
       pubspecFile.writeAsStringSync('name: $appName');
       expect(
-          createTestCommandRunner(command)
-              .run(const <String>['build', 'fuchsia']),
-          throwsA(isInstanceOf<ToolExit>()));
+        createTestCommandRunner(command).run(const <String>['build', 'fuchsia']),
+        throwsA(isInstanceOf<ToolExit>()),
+      );
     }, overrides: <Type, Generator>{
       Platform: () => linuxPlatform,
       FileSystem: () => memoryFileSystem,
@@ -127,19 +125,16 @@ void main() {
     final BuildCommand command = BuildCommand();
     applyMocksToCommand(command);
     const String appName = 'app_name';
-    fs
-        .file(fs.path.join('fuchsia', 'meta', '$appName.cmx'))
-        ..createSync(recursive: true)
-        ..writeAsStringSync('{}');
+    fs.file(fs.path.join('fuchsia', 'meta', '$appName.cmx'))
+      ..createSync(recursive: true)
+      ..writeAsStringSync('{}');
     fs.file('.packages').createSync();
     fs.file(fs.path.join('lib', 'main.dart')).createSync(recursive: true);
     final File pubspecFile = fs.file('pubspec.yaml')..createSync();
     pubspecFile.writeAsStringSync('name: $appName');
 
-    await createTestCommandRunner(command)
-        .run(const <String>['build', 'fuchsia']);
-    final String farPath =
-        fs.path.join(getFuchsiaBuildDirectory(), 'pkg', 'app_name-0.far');
+    await createTestCommandRunner(command).run(const <String>['build', 'fuchsia']);
+    final String farPath = fs.path.join(getFuchsiaBuildDirectory(), 'pkg', 'app_name-0.far');
     expect(fs.file(farPath).existsSync(), isTrue);
   }, overrides: <Type, Generator>{
     Platform: () => linuxPlatform,
@@ -226,8 +221,7 @@ class MockFuchsiaSdk extends Mock implements FuchsiaSdk {
   final FuchsiaPM fuchsiaPM = MockFuchsiaPM();
 
   @override
-  final FuchsiaKernelCompiler fuchsiaKernelCompiler =
-      MockFuchsiaKernelCompiler();
+  final FuchsiaKernelCompiler fuchsiaKernelCompiler = MockFuchsiaKernelCompiler();
 }
 
 class MockFile extends Mock implements File {}

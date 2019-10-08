@@ -204,7 +204,7 @@ abstract class Target {
     return <String, Object>{
       'name': name,
       'dependencies': <String>[
-        for (Target target in dependencies) target.name
+        for (Target target in dependencies) target.name,
       ],
       'inputs': <String>[
         for (File file in resolveInputs(environment).sources) file.path,
@@ -430,24 +430,22 @@ class BuildSystem {
     // and don't need to be tracked by external systems.
     {
       buildInstance.inputFiles.removeWhere((String path, File file) {
-        return path.contains('.flutter-plugins') ||
-                       path.contains('xcconfig') ||
-                     path.contains('.dart_tool');
+        return path.contains('.flutter-plugins')
+            || path.contains('xcconfig')
+            || path.contains('.dart_tool');
       });
       buildInstance.outputFiles.removeWhere((String path, File file) {
-        return path.contains('.flutter-plugins') ||
-                       path.contains('xcconfig') ||
-                     path.contains('.dart_tool');
+        return path.contains('.flutter-plugins')
+            || path.contains('xcconfig')
+            || path.contains('.dart_tool');
       });
     }
     return BuildResult(
       success: passed,
       exceptions: buildInstance.exceptionMeasurements,
       performance: buildInstance.stepTimings,
-      inputFiles: buildInstance.inputFiles.values.toList()
-          ..sort((File a, File b) => a.path.compareTo(b.path)),
-      outputFiles: buildInstance.outputFiles.values.toList()
-          ..sort((File a, File b) => a.path.compareTo(b.path)),
+      inputFiles: buildInstance.inputFiles.values.toList()..sort((File a, File b) => a.path.compareTo(b.path)),
+      outputFiles: buildInstance.outputFiles.values.toList()..sort((File a, File b) => a.path.compareTo(b.path)),
     );
   }
 }

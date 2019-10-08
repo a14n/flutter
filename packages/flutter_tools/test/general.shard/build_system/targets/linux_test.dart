@@ -37,7 +37,7 @@ void main() {
         projectDir: fs.currentDirectory,
         defines: <String, String>{
           kBuildMode: 'debug',
-        }
+        },
       );
       fs.file('bin/cache/artifacts/engine/linux-x64/libflutter_linux_glfw.so').createSync(recursive: true);
       fs.file('bin/cache/artifacts/engine/linux-x64/flutter_export.h').createSync();

@@ -65,35 +65,44 @@ class AttachCommand extends FlutterCommand {
       ..addOption(
         'debug-port',
         hide: !verboseHelp,
-        help: 'Device port where the observatory is listening. Requires '
-        '--disable-service-auth-codes to also be provided to the Flutter '
-        'application at launch, otherwise this command will fail to connect to '
-        'the application. In general, --debug-uri should be used instead.',
-      )..addOption(
+        help:
+          'Device port where the observatory is listening. Requires '
+          '--disable-service-auth-codes to also be provided to the Flutter '
+          'application at launch, otherwise this command will fail to connect to '
+          'the application. In general, --debug-uri should be used instead.',
+      )
+      ..addOption(
         'debug-uri',
         help: 'The URI at which the observatory is listening.',
-      )..addOption(
+      )
+      ..addOption(
         'app-id',
-        help: 'The package name (Android) or bundle identifier (iOS) for the application. '
-              'This can be specified to avoid being prompted if multiple observatory ports '
-              'are advertised.\n'
-              'If you have multiple devices or emulators running, you should include the '
-              'device hostname as well, e.g. "com.example.myApp@my-iphone".\n'
-              'This parameter is case-insensitive.',
-      )..addOption(
+        help:
+          'The package name (Android) or bundle identifier (iOS) for the application. '
+          'This can be specified to avoid being prompted if multiple observatory ports '
+          'are advertised.\n'
+          'If you have multiple devices or emulators running, you should include the '
+          'device hostname as well, e.g. "com.example.myApp@my-iphone".\n'
+          'This parameter is case-insensitive.',
+      )
+      ..addOption(
         'pid-file',
-        help: 'Specify a file to write the process id to. '
-              'You can send SIGUSR1 to trigger a hot reload '
-              'and SIGUSR2 to trigger a hot restart.',
-      )..addOption(
+        help:
+          'Specify a file to write the process id to. '
+          'You can send SIGUSR1 to trigger a hot reload '
+          'and SIGUSR2 to trigger a hot restart.',
+      )
+      ..addOption(
         'project-root',
         hide: !verboseHelp,
         help: 'Normally used only in run target',
-      )..addFlag('machine',
+      )
+      ..addFlag('machine',
         hide: !verboseHelp,
         negatable: false,
-        help: 'Handle machine structured JSON command input and provide output '
-              'and progress in machine friendly format.',
+        help:
+          'Handle machine structured JSON command input and provide output '
+          'and progress in machine friendly format.',
       );
     usesTrackWidgetCreation(verboseHelp: verboseHelp);
     hotRunnerFactory ??= HotRunnerFactory();
@@ -279,8 +288,8 @@ class AttachCommand extends FlutterCommand {
       final List<FlutterDevice> flutterDevices =  <FlutterDevice>[flutterDevice];
       final DebuggingOptions debuggingOptions = DebuggingOptions.enabled(getBuildInfo());
       terminal.usesTerminalUi = daemon == null;
-      final ResidentRunner runner = useHot ?
-          hotRunnerFactory.build(
+      final ResidentRunner runner = useHot
+        ? hotRunnerFactory.build(
             flutterDevices,
             target: targetFile,
             debuggingOptions: debuggingOptions,

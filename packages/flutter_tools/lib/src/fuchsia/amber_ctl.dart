@@ -59,24 +59,21 @@ class FuchsiaAmberCtl {
   /// server accessible via [configUrl].
   Future<bool> addSrc(FuchsiaDevice device, FuchsiaPackageServer server) async {
     final String configUrl = '${server.url}/config.json';
-    final RunResult result =
-        await device.shell('amber_ctl add_src -x -f $configUrl');
+    final RunResult result = await device.shell('amber_ctl add_src -x -f $configUrl');
     return result.exitCode == 0;
   }
 
   /// Instructs the amber instance running on [device] to forget about the
   /// Fuchsia package server that it was accessing via [serverUrl].
   Future<bool> rmSrc(FuchsiaDevice device, FuchsiaPackageServer server) async {
-    final RunResult result =
-        await device.shell('amber_ctl rm_src -n ${server.url}');
+    final RunResult result = await device.shell('amber_ctl rm_src -n ${server.url}');
     return result.exitCode == 0;
   }
 
   /// Instructs the amber instance running on [device] to prefetch the package
   /// [packageName].
   Future<bool> getUp(FuchsiaDevice device, String packageName) async {
-    final RunResult result =
-        await device.shell('amber_ctl get_up -n $packageName');
+    final RunResult result = await device.shell('amber_ctl get_up -n $packageName');
     return result.exitCode == 0;
   }
 
@@ -85,8 +82,7 @@ class FuchsiaAmberCtl {
   /// on [device] about the [FuchsiaPackageServer].
   Future<bool> addRepoCfg(FuchsiaDevice device, FuchsiaPackageServer server) async {
     final String configUrl = '${server.url}/config.json';
-    final RunResult result =
-        await device.shell('amber_ctl add_repo_cfg -n ${server.name} -f $configUrl');
+    final RunResult result = await device.shell('amber_ctl add_repo_cfg -n ${server.name} -f $configUrl');
     return result.exitCode == 0;
   }
 

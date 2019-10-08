@@ -48,12 +48,10 @@ class DoctorCommand extends FlutterCommand {
       if (engineRevision.startsWith(RegExp(r'[a-f0-9]{1,40}'))) {
         final bool success = await doctor.checkRemoteArtifacts(engineRevision);
         if (!success) {
-          throwToolExit('Artifacts for engine $engineRevision are missing or are '
-              'not yet available.', exitCode: 1);
+          throwToolExit('Artifacts for engine $engineRevision are missing or are not yet available.', exitCode: 1);
         }
       } else {
-        throwToolExit('Remote artifact revision $engineRevision is not a valid '
-            'git hash.');
+        throwToolExit('Remote artifact revision $engineRevision is not a valid git hash.');
       }
     }
     final bool success = await doctor.diagnose(androidLicenses: argResults['android-licenses'], verbose: verbose);

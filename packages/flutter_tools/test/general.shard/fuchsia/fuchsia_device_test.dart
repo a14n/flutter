@@ -167,8 +167,7 @@ void main() {
         any,
         environment: anyNamed('environment'),
         workingDirectory: anyNamed('workingDirectory'),
-      )).thenAnswer((Invocation invocation) =>
-          Future<ProcessResult>.value(mockProcessResult));
+      )).thenAnswer((Invocation invocation) => Future<ProcessResult>.value(mockProcessResult));
       when(mockProcessResult.exitCode).thenReturn(1);
       when<String>(mockProcessResult.stdout).thenReturn('');
       when<String>(mockProcessResult.stderr).thenReturn('');
@@ -181,8 +180,7 @@ void main() {
         any,
         environment: anyNamed('environment'),
         workingDirectory: anyNamed('workingDirectory'),
-      )).thenAnswer((Invocation invocation) =>
-          Future<ProcessResult>.value(emptyStdoutProcessResult));
+      )).thenAnswer((Invocation invocation) => Future<ProcessResult>.value(emptyStdoutProcessResult));
       when(emptyStdoutProcessResult.exitCode).thenReturn(0);
       when<String>(emptyStdoutProcessResult.stdout).thenReturn('');
       when<String>(emptyStdoutProcessResult.stderr).thenReturn('');
@@ -274,8 +272,7 @@ void main() {
       }, overrides: <Type, Generator>{
         ProcessManager: () => mockProcessManager,
         SystemClock: () => SystemClock.fixed(DateTime(2018, 11, 9, 1, 25, 45)),
-        FuchsiaArtifacts: () =>
-            FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
+        FuchsiaArtifacts: () => FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
       });
 
       testUsingContext('cuts off prior logs', () async {
@@ -300,8 +297,7 @@ void main() {
       }, overrides: <Type, Generator>{
         ProcessManager: () => mockProcessManager,
         SystemClock: () => SystemClock.fixed(DateTime(2018, 11, 9, 1, 29, 45)),
-        FuchsiaArtifacts: () =>
-            FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
+        FuchsiaArtifacts: () => FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
       });
 
       testUsingContext('can be parsed for all apps', () async {
@@ -329,8 +325,7 @@ void main() {
       }, overrides: <Type, Generator>{
         ProcessManager: () => mockProcessManager,
         SystemClock: () => SystemClock.fixed(DateTime(2018, 11, 9, 1, 25, 45)),
-        FuchsiaArtifacts: () =>
-            FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
+        FuchsiaArtifacts: () => FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
       });
     });
   });
@@ -346,23 +341,17 @@ void main() {
       for (MockFlutterView view in views) {
         view.owner = vm;
       }
-      final MockFuchsiaDevice fuchsiaDevice =
-          MockFuchsiaDevice('123', portForwarder, false);
-      final FuchsiaIsolateDiscoveryProtocol discoveryProtocol =
-          FuchsiaIsolateDiscoveryProtocol(
+      final MockFuchsiaDevice fuchsiaDevice = MockFuchsiaDevice('123', portForwarder, false);
+      final FuchsiaIsolateDiscoveryProtocol discoveryProtocol = FuchsiaIsolateDiscoveryProtocol(
         fuchsiaDevice,
         expectedIsolateName,
         (Uri uri) async => vmService,
         true, // only poll once.
       );
-      when(fuchsiaDevice.servicePorts())
-          .thenAnswer((Invocation invocation) async => <int>[1]);
-      when(portForwarder.forward(1))
-          .thenAnswer((Invocation invocation) async => 2);
-      when(vmService.getVM())
-          .thenAnswer((Invocation invocation) => Future<void>.value(null));
-      when(vmService.refreshViews())
-          .thenAnswer((Invocation invocation) => Future<void>.value(null));
+      when(fuchsiaDevice.servicePorts()).thenAnswer((Invocation invocation) async => <int>[1]);
+      when(portForwarder.forward(1)).thenAnswer((Invocation invocation) async => 2);
+      when(vmService.getVM()).thenAnswer((Invocation invocation) => Future<void>.value(null));
+      when(vmService.refreshViews()).thenAnswer((Invocation invocation) => Future<void>.value(null));
       when(vmService.httpAddress).thenReturn(Uri.parse('example'));
       return discoveryProtocol.uri;
     }
@@ -431,16 +420,14 @@ void main() {
         app = BuildableFuchsiaApp(project: FlutterProject.current().fuchsia);
       }
 
-      final DebuggingOptions debuggingOptions =
-          DebuggingOptions.disabled(BuildInfo(mode, null));
+      final DebuggingOptions debuggingOptions = DebuggingOptions.disabled(BuildInfo(mode, null));
       return await device.startApp(app,
           prebuiltApplication: prebuilt,
           debuggingOptions: debuggingOptions);
     }
 
     testUsingContext('start prebuilt in release mode', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
       expect(launchResult.started, isTrue);
       expect(launchResult.hasObservatory, isFalse);
     }, overrides: <Type, Generator>{
@@ -459,8 +446,7 @@ void main() {
       final File far = fs.file('app_name-0.far')..createSync();
 
       final FuchsiaApp app = FuchsiaApp.fromPrebuiltApp(far);
-      final DebuggingOptions debuggingOptions =
-          DebuggingOptions.disabled(const BuildInfo(BuildMode.release, null));
+      final DebuggingOptions debuggingOptions = DebuggingOptions.disabled(const BuildInfo(BuildMode.release, null));
       final LaunchResult launchResult = await device.startApp(app,
           prebuiltApplication: true,
           debuggingOptions: debuggingOptions);
@@ -475,8 +461,7 @@ void main() {
     });
 
     testUsingContext('start prebuilt in debug mode', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: true, mode: BuildMode.debug);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: true, mode: BuildMode.debug);
       expect(launchResult.started, isTrue);
       expect(launchResult.hasObservatory, isTrue);
     }, overrides: <Type, Generator>{
@@ -487,8 +472,7 @@ void main() {
     });
 
     testUsingContext('start buildable in release mode', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: false, mode: BuildMode.release);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: false, mode: BuildMode.release);
       expect(launchResult.started, isTrue);
       expect(launchResult.hasObservatory, isFalse);
     }, overrides: <Type, Generator>{
@@ -499,8 +483,7 @@ void main() {
     });
 
     testUsingContext('start buildable in debug mode', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: false, mode: BuildMode.debug);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: false, mode: BuildMode.debug);
       expect(launchResult.started, isTrue);
       expect(launchResult.hasObservatory, isTrue);
     }, overrides: <Type, Generator>{
@@ -511,8 +494,7 @@ void main() {
     });
 
     testUsingContext('fail with correct LaunchResult when dev_finder fails', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
       expect(launchResult.started, isFalse);
       expect(launchResult.hasObservatory, isFalse);
     }, overrides: <Type, Generator>{
@@ -523,8 +505,7 @@ void main() {
     });
 
     testUsingContext('fail with correct LaunchResult when pm fails', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
       expect(launchResult.started, isFalse);
       expect(launchResult.hasObservatory, isFalse);
     }, overrides: <Type, Generator>{
@@ -535,8 +516,7 @@ void main() {
     });
 
     testUsingContext('fail with correct LaunchResult when amber fails', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
       expect(launchResult.started, isFalse);
       expect(launchResult.hasObservatory, isFalse);
     }, overrides: <Type, Generator>{
@@ -547,8 +527,7 @@ void main() {
     });
 
     testUsingContext('fail with correct LaunchResult when tiles fails', () async {
-      final LaunchResult launchResult =
-          await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
+      final LaunchResult launchResult = await setupAndStartApp(prebuilt: true, mode: BuildMode.release);
       expect(launchResult.started, isFalse);
       expect(launchResult.hasObservatory, isFalse);
     }, overrides: <Type, Generator>{
@@ -591,8 +570,9 @@ void main() {
 
       emptyStdoutProcessManager = MockProcessManager();
       emptyStdoutProcessResult = MockProcessResult();
-      when(emptyStdoutProcessManager.run(any)).thenAnswer((Invocation invocation) =>
-          Future<ProcessResult>.value(emptyStdoutProcessResult));
+      when(emptyStdoutProcessManager.run(any)).thenAnswer(
+        (Invocation invocation) => Future<ProcessResult>.value(emptyStdoutProcessResult),
+      );
       when(emptyStdoutProcessResult.exitCode).thenReturn(0);
       when<String>(emptyStdoutProcessResult.stdout).thenReturn('');
       when<String>(emptyStdoutProcessResult.stderr).thenReturn('');

@@ -311,8 +311,7 @@ class _DefaultProcessUtils implements ProcessUtils {
       String stdoutString;
       String stderrString;
       try {
-        Future<void> stdioFuture =
-            Future.wait<void>(<Future<void>>[stdoutFuture, stderrFuture]);
+        Future<void> stdioFuture = Future.wait<void>(<Future<void>>[stdoutFuture, stderrFuture]);
         if (exitCode == null) {
           // If we had to kill the process for a timeout, only wait a short time
           // for the stdio streams to drain in case killing the process didn't

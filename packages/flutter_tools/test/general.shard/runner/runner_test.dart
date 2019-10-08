@@ -132,8 +132,9 @@ class CrashingUsage implements Usage {
   String get clientId => _impl.clientId;
 
   @override
-  void sendCommand(String command, {Map<String, String> parameters}) =>
-      _impl.sendCommand(command, parameters: parameters);
+  void sendCommand(String command, {Map<String, String> parameters}) {
+    return _impl.sendCommand(command, parameters: parameters);
+  }
 
   @override
   void sendEvent(

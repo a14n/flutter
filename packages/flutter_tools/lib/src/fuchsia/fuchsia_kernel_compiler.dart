@@ -38,8 +38,7 @@ class FuchsiaKernelCompiler {
     final String outDir = getFuchsiaBuildDirectory();
     final String appName = fuchsiaProject.project.manifest.appName;
     final String fsRoot = fuchsiaProject.project.directory.path;
-    final String relativePackagesFile =
-        fs.path.relative(packagesFile, from: fsRoot);
+    final String relativePackagesFile = fs.path.relative(packagesFile, from: fsRoot);
     final String manifestPath = fs.path.join(outDir, '$appName.dilpmanifest');
     List<String> flags = <String>[
       '--target', 'flutter_runner',

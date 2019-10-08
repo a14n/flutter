@@ -21,7 +21,6 @@ void main() {
   MockIosProject iosProject;
   MockMacOSProject macosProject;
   MockAndroidProject androidProject;
-  File packagesFile;
   Directory dummyPackageDirectory;
 
   setUp(() async {
@@ -47,9 +46,9 @@ void main() {
 
     // Set up a simple .packages file for all the tests to use, pointing to one package.
     dummyPackageDirectory = fs.directory('/pubcache/apackage/lib/');
-    packagesFile = fs.file(fs.path.join(flutterProject.directory.path, PackageMap.globalPackagesPath));
-    packagesFile..createSync(recursive: true)
-        ..writeAsStringSync('apackage:file://${dummyPackageDirectory.path}');
+    fs.file(fs.path.join(flutterProject.directory.path, PackageMap.globalPackagesPath))
+      ..createSync(recursive: true)
+      ..writeAsStringSync('apackage:file://${dummyPackageDirectory.path}');
   });
 
   // Makes the dummy package pointed to by packagesFile look like a plugin.

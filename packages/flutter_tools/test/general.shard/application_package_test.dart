@@ -210,8 +210,7 @@ void main() {
     };
 
     testUsingContext('Error on non-existing file', () {
-      final PrebuiltIOSApp iosApp =
-          IOSApp.fromPrebuiltApp(fs.file('not_existing.ipa'));
+      final PrebuiltIOSApp iosApp = IOSApp.fromPrebuiltApp(fs.file('not_existing.ipa'));
       expect(iosApp, isNull);
       final BufferLogger logger = context.get<Logger>();
       expect(
@@ -222,8 +221,7 @@ void main() {
 
     testUsingContext('Error on non-app-bundle folder', () {
       fs.directory('regular_folder').createSync();
-      final PrebuiltIOSApp iosApp =
-          IOSApp.fromPrebuiltApp(fs.file('regular_folder'));
+      final PrebuiltIOSApp iosApp = IOSApp.fromPrebuiltApp(fs.file('regular_folder'));
       expect(iosApp, isNull);
       final BufferLogger logger = context.get<Logger>();
       expect(
@@ -285,10 +283,8 @@ void main() {
           return null;
         }
         final Directory targetDirectory = invocation.positionalArguments[1];
-        final String bundlePath1 =
-            fs.path.join(targetDirectory.path, 'Payload', 'bundle1.app');
-        final String bundlePath2 =
-            fs.path.join(targetDirectory.path, 'Payload', 'bundle2.app');
+        final String bundlePath1 = fs.path.join(targetDirectory.path, 'Payload', 'bundle1.app');
+        final String bundlePath2 = fs.path.join(targetDirectory.path, 'Payload', 'bundle2.app');
         fs.directory(bundlePath1).createSync(recursive: true);
         fs.directory(bundlePath2).createSync(recursive: true);
       });
@@ -360,8 +356,7 @@ void main() {
     };
 
     testUsingContext('Error on non-existing file', () {
-      final PrebuiltFuchsiaApp fuchsiaApp =
-          FuchsiaApp.fromPrebuiltApp(fs.file('not_existing.far'));
+      final PrebuiltFuchsiaApp fuchsiaApp = FuchsiaApp.fromPrebuiltApp(fs.file('not_existing.far'));
       expect(fuchsiaApp, isNull);
       final BufferLogger logger = context.get<Logger>();
       expect(
@@ -372,8 +367,7 @@ void main() {
 
     testUsingContext('Error on non-far file', () {
       fs.directory('regular_folder').createSync();
-      final PrebuiltFuchsiaApp fuchsiaApp =
-          FuchsiaApp.fromPrebuiltApp(fs.file('regular_folder'));
+      final PrebuiltFuchsiaApp fuchsiaApp = FuchsiaApp.fromPrebuiltApp(fs.file('regular_folder'));
       expect(fuchsiaApp, isNull);
       final BufferLogger logger = context.get<Logger>();
       expect(
@@ -400,8 +394,8 @@ void main() {
   });
 }
 
-const String _aaptDataWithExplicitEnabledAndMainLauncherActivity =
-'''N: android=http://schemas.android.com/apk/res/android
+const String _aaptDataWithExplicitEnabledAndMainLauncherActivity = '''
+N: android=http://schemas.android.com/apk/res/android
   E: manifest (line=7)
     A: android:versionCode(0x0101021b)=(type 0x10)0x1
     A: android:versionName(0x0101021c)="0.0.1" (Raw: "0.0.1")
@@ -441,8 +435,8 @@ const String _aaptDataWithExplicitEnabledAndMainLauncherActivity =
             A: android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")''';
 
 
-const String _aaptDataWithDefaultEnabledAndMainLauncherActivity =
-'''N: android=http://schemas.android.com/apk/res/android
+const String _aaptDataWithDefaultEnabledAndMainLauncherActivity = '''
+N: android=http://schemas.android.com/apk/res/android
   E: manifest (line=7)
     A: android:versionCode(0x0101021b)=(type 0x10)0x1
     A: android:versionName(0x0101021c)="0.0.1" (Raw: "0.0.1")
@@ -481,8 +475,8 @@ const String _aaptDataWithDefaultEnabledAndMainLauncherActivity =
             A: android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")''';
 
 
-const String _aaptDataWithNoEnabledActivity =
-'''N: android=http://schemas.android.com/apk/res/android
+const String _aaptDataWithNoEnabledActivity = '''
+N: android=http://schemas.android.com/apk/res/android
   E: manifest (line=7)
     A: android:versionCode(0x0101021b)=(type 0x10)0x1
     A: android:versionName(0x0101021c)="0.0.1" (Raw: "0.0.1")
@@ -511,8 +505,8 @@ const String _aaptDataWithNoEnabledActivity =
           E: category (line=45)
             A: android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")''';
 
-const String _aaptDataWithNoMainActivity =
-'''N: android=http://schemas.android.com/apk/res/android
+const String _aaptDataWithNoMainActivity = '''
+N: android=http://schemas.android.com/apk/res/android
   E: manifest (line=7)
     A: android:versionCode(0x0101021b)=(type 0x10)0x1
     A: android:versionName(0x0101021c)="0.0.1" (Raw: "0.0.1")
@@ -539,8 +533,8 @@ const String _aaptDataWithNoMainActivity =
           E: category (line=43)
             A: android:name(0x01010003)="android.intent.category.LAUNCHER" (Raw: "android.intent.category.LAUNCHER")''';
 
-const String _aaptDataWithNoLauncherActivity =
-'''N: android=http://schemas.android.com/apk/res/android
+const String _aaptDataWithNoLauncherActivity = '''
+N: android=http://schemas.android.com/apk/res/android
   E: manifest (line=7)
     A: android:versionCode(0x0101021b)=(type 0x10)0x1
     A: android:versionName(0x0101021c)="0.0.1" (Raw: "0.0.1")
@@ -567,8 +561,8 @@ const String _aaptDataWithNoLauncherActivity =
           E: action (line=43)
             A: android:name(0x01010003)="android.intent.action.MAIN" (Raw: "android.intent.action.MAIN")''';
 
-const String _aaptDataWithDistNamespace =
-'''N: android=http://schemas.android.com/apk/res/android
+const String _aaptDataWithDistNamespace = '''
+N: android=http://schemas.android.com/apk/res/android
   N: dist=http://schemas.android.com/apk/distribution
     E: manifest (line=7)
       A: android:versionCode(0x0101021b)=(type 0x10)0x1

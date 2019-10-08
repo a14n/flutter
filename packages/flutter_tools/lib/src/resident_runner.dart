@@ -181,11 +181,10 @@ class FlutterDevice {
     // If any of the flutter views are paused, we might not be able to
     // cleanly exit since the service extension may not have been registered.
     if (flutterViews.any((FlutterView view) {
-      return view != null &&
-             view.uiIsolate != null &&
-             view.uiIsolate.pauseEvent.isPauseEvent;
-      }
-    )) {
+        return view != null
+            && view.uiIsolate != null
+            && view.uiIsolate.pauseEvent.isPauseEvent;
+        })) {
       await device.stopApp(package);
       return;
     }
@@ -636,8 +635,7 @@ abstract class ResidentRunner {
   bool get supportsRestart => false;
 
   Future<OperationResult> restart({ bool fullRestart = false, bool pauseAfterRestart = false, String reason }) {
-    final String mode = isRunningProfile ? 'profile' :
-        isRunningRelease ? 'release' : 'this';
+    final String mode = isRunningProfile ? 'profile' : isRunningRelease ? 'release' : 'this';
     throw '${fullRestart ? 'Restart' : 'Reload'} is not supported in $mode mode';
   }
 

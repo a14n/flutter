@@ -119,8 +119,7 @@ class ArtifactUnpacker {
       default:
         throwToolExit('Unsupported target platform: $platform');
     }
-    final String targetHash =
-        readHashFileIfPossible(Cache.instance.getStampFileFor(cacheStamp));
+    final String targetHash = readHashFileIfPossible(Cache.instance.getStampFileFor(cacheStamp));
     if (targetHash == null) {
       printError('Failed to find engine stamp file');
       return false;

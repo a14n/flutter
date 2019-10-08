@@ -19,8 +19,7 @@ import 'platform_plugins.dart';
 import 'project.dart';
 
 void _renderTemplateToFile(String template, dynamic context, String filePath) {
-  final String renderedTemplate =
-     mustache.Template(template).renderString(context);
+  final String renderedTemplate = mustache.Template(template).renderString(context);
   final File file = fs.file(filePath);
   file.createSync(recursive: true);
   file.writeAsStringSync(renderedTemplate);
@@ -70,12 +69,16 @@ class Plugin {
   }
 
   factory Plugin._fromMultiPlatformYaml(String name, String path, dynamic pluginYaml) {
-    assert (pluginYaml != null && pluginYaml['platforms'] != null,
-            'Invalid multi-platform plugin specification.');
+    assert(
+      pluginYaml != null && pluginYaml['platforms'] != null,
+      'Invalid multi-platform plugin specification.',
+    );
     final dynamic platformsYaml = pluginYaml['platforms'];
 
-    assert (_validateMultiPlatformYaml(platformsYaml).isEmpty,
-            'Invalid multi-platform plugin specification.');
+    assert(
+      _validateMultiPlatformYaml(platformsYaml).isEmpty,
+      'Invalid multi-platform plugin specification.',
+    );
 
     final Map<String, PluginPlatform> platforms = <String, PluginPlatform>{};
 
@@ -88,28 +91,23 @@ class Plugin {
     }
 
     if (platformsYaml[IOSPlugin.kConfigKey] != null) {
-      platforms[IOSPlugin.kConfigKey] =
-          IOSPlugin.fromYaml(name, platformsYaml[IOSPlugin.kConfigKey]);
+      platforms[IOSPlugin.kConfigKey] = IOSPlugin.fromYaml(name, platformsYaml[IOSPlugin.kConfigKey]);
     }
 
     if (platformsYaml[LinuxPlugin.kConfigKey] != null) {
-      platforms[LinuxPlugin.kConfigKey] =
-          LinuxPlugin.fromYaml(name, platformsYaml[LinuxPlugin.kConfigKey]);
+      platforms[LinuxPlugin.kConfigKey] = LinuxPlugin.fromYaml(name, platformsYaml[LinuxPlugin.kConfigKey]);
     }
 
     if (platformsYaml[MacOSPlugin.kConfigKey] != null) {
-      platforms[MacOSPlugin.kConfigKey] =
-          MacOSPlugin.fromYaml(name, platformsYaml[MacOSPlugin.kConfigKey]);
+      platforms[MacOSPlugin.kConfigKey] = MacOSPlugin.fromYaml(name, platformsYaml[MacOSPlugin.kConfigKey]);
     }
 
     if (platformsYaml[WebPlugin.kConfigKey] != null) {
-      platforms[WebPlugin.kConfigKey] =
-          WebPlugin.fromYaml(name, platformsYaml[WebPlugin.kConfigKey]);
+      platforms[WebPlugin.kConfigKey] = WebPlugin.fromYaml(name, platformsYaml[WebPlugin.kConfigKey]);
     }
 
     if (platformsYaml[WindowsPlugin.kConfigKey] != null) {
-      platforms[WindowsPlugin.kConfigKey] =
-          WindowsPlugin.fromYaml(name, platformsYaml[WindowsPlugin.kConfigKey]);
+      platforms[WindowsPlugin.kConfigKey] = WindowsPlugin.fromYaml(name, platformsYaml[WindowsPlugin.kConfigKey]);
     }
 
     return Plugin(
@@ -135,12 +133,11 @@ class Plugin {
       }
 
       final String iosPrefix = pluginYaml['iosPrefix'] ?? '';
-      platforms[IOSPlugin.kConfigKey] =
-          IOSPlugin(
-            name: name,
-            classPrefix: iosPrefix,
-            pluginClass: pluginClass,
-          );
+      platforms[IOSPlugin.kConfigKey] = IOSPlugin(
+        name: name,
+        classPrefix: iosPrefix,
+        pluginClass: pluginClass,
+      );
     }
     return Plugin(
       name: name,
@@ -259,8 +256,7 @@ List<Plugin> findPlugins(FlutterProject project) {
 bool _writeFlutterPluginsList(FlutterProject project, List<Plugin> plugins) {
   final File pluginsFile = project.flutterPluginsFile;
   final String oldContents = _readFlutterPluginsList(project);
-  final String pluginManifest =
-      plugins.map<String>((Plugin p) => '${p.name}=${escapePath(p.path)}').join('\n');
+  final String pluginManifest = plugins.map<String>((Plugin p) => '${p.name}=${escapePath(p.path)}').join('\n');
   if (pluginManifest.isNotEmpty) {
     pluginsFile.writeAsStringSync('$pluginManifest\n', flush: true);
   } else {
@@ -423,7 +419,7 @@ Future<void> _writeAndroidPluginRegistrant(FlutterProject project, List<Plugin> 
         'GeneratedPluginRegistrant.java',
       );
       templateContent = _androidPluginRegistryTemplateNewEmbedding;
-    break;
+      break;
     case '1':
       registryPath = fs.path.join(
         javaSourcePath,
@@ -433,7 +429,7 @@ Future<void> _writeAndroidPluginRegistrant(FlutterProject project, List<Plugin> 
         'GeneratedPluginRegistrant.java',
       );
       templateContent = _androidPluginRegistryTemplateOldEmbedding;
-    break;
+      break;
     default:
       throwToolExit('Unsupported Android embedding');
   }

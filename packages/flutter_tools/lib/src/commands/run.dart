@@ -258,8 +258,7 @@ class RunCommand extends RunCommandBase {
     return getBuildInfo().isDebug && shouldUseHotMode;
   }
 
-  bool get runningWithPrebuiltApplication =>
-      argResults['use-application-binary'] != null;
+  bool get runningWithPrebuiltApplication => argResults['use-application-binary'] != null;
 
   bool get stayResident => argResults['resident'];
   bool get awaitFirstFrameWhenTracing => argResults['await-first-frame-when-tracing'];
@@ -416,9 +415,9 @@ class RunCommand extends RunCommandBase {
     ];
     // Only support "web mode" with a single web device due to resident runner
     // refactoring required otherwise.
-    final bool webMode = featureFlags.isWebEnabled &&
-                         devices.length == 1  &&
-                         await devices.single.targetPlatform == TargetPlatform.web_javascript;
+    final bool webMode = featureFlags.isWebEnabled
+                      && devices.length == 1
+                      && await devices.single.targetPlatform == TargetPlatform.web_javascript;
 
     ResidentRunner runner;
     final String applicationBinaryPath = argResults['use-application-binary'];
@@ -429,8 +428,8 @@ class RunCommand extends RunCommandBase {
         debuggingOptions: _createDebuggingOptions(),
         benchmarkMode: argResults['benchmark'],
         applicationBinary: applicationBinaryPath == null
-            ? null
-            : fs.file(applicationBinaryPath),
+          ? null
+          : fs.file(applicationBinaryPath),
         projectRootPath: argResults['project-root'],
         packagesFilePath: globalResults['packages'],
         dillOutputPath: argResults['output-dill'],

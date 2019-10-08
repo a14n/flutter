@@ -307,9 +307,9 @@ flutter:
     final ProcessManager mockProcessManager = MockProcessManager();
     const String dummyEmulatorId = 'dummyEmulatorId';
     final Future<Socket> Function(String host, int port) unresponsiveSocket =
-        (String host, int port) async => MockUnresponsiveAndroidConsoleSocket();
+      (String host, int port) async => MockUnresponsiveAndroidConsoleSocket();
     final Future<Socket> Function(String host, int port) workingSocket =
-        (String host, int port) async => MockWorkingAndroidConsoleSocket(dummyEmulatorId);
+      (String host, int port) async => MockWorkingAndroidConsoleSocket(dummyEmulatorId);
     String hardware;
     bool socketWasCreated;
 

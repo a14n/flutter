@@ -287,8 +287,7 @@ void main() {
       // Crash if called a third time which is unexpected.
       mockTimes = <int>[1000, 2000];
 
-      final DummyFlutterCommand flutterCommand =
-          DummyFlutterCommand(noUsagePath: true);
+      final DummyFlutterCommand flutterCommand = DummyFlutterCommand(noUsagePath: true);
       await flutterCommand.run();
       verify(clock.now()).called(2);
       verifyNever(usage.sendTiming(

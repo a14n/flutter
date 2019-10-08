@@ -42,8 +42,7 @@ void main() {
     mockProcessManager = MockProcessManager();
     memoryFilesystem = MemoryFileSystem(style: FileSystemStyle.windows);
     mockProcess = MockProcess();
-    windowsPlatform = MockPlatform()
-        ..environment['PROGRAMFILES(X86)'] = r'C:\Program Files (x86)\';
+    windowsPlatform = MockPlatform()..environment['PROGRAMFILES(X86)'] = r'C:\Program Files (x86)\';
     notWindowsPlatform = MockPlatform();
     mockVisualStudio = MockVisualStudio();
     when(mockProcess.exitCode).thenAnswer((Invocation invocation) async {

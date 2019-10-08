@@ -32,8 +32,13 @@ void main() {
       verboseLogger.printTrace('Oooh, I do I do I do');
       verboseLogger.printError('Helpless!');
 
-      expect(mockLogger.statusText, matches(r'^\[ (?: {0,2}\+[0-9]{1,4} ms|       )\] Hey Hey Hey Hey\n'
-                                             r'\[ (?: {0,2}\+[0-9]{1,4} ms|       )\] Oooh, I do I do I do\n$'));
+      expect(
+        mockLogger.statusText,
+        matches(
+          r'^\[ (?: {0,2}\+[0-9]{1,4} ms|       )\] Hey Hey Hey Hey\n'
+          r'\[ (?: {0,2}\+[0-9]{1,4} ms|       )\] Oooh, I do I do I do\n$',
+        ),
+      );
       expect(mockLogger.traceText, '');
       expect(mockLogger.errorText, matches( r'^\[ (?: {0,2}\+[0-9]{1,4} ms|       )\] Helpless!\n$'));
     }, overrides: <Type, Generator>{
@@ -171,11 +176,17 @@ void main() {
           expect(outputStderr().length, equals(1));
           expect(outputStderr().first, isEmpty);
           // the 5 below is the margin that is always included between the message and the time.
-          expect(outputStdout().join('\n'), matches(platform.isWindows ? r'^Hello {15} {5} {8}[\b]{8} {7}\\$' :
-                                                                         r'^Hello {15} {5} {8}[\b]{8} {7}⣽$'));
+          expect(outputStdout().join('\n'), matches(
+            platform.isWindows
+              ? r'^Hello {15} {5} {8}[\b]{8} {7}\\$'
+              : r'^Hello {15} {5} {8}[\b]{8} {7}⣽$',
+          ));
           status.stop();
-          expect(outputStdout().join('\n'), matches(platform.isWindows ? r'^Hello {15} {5} {8}[\b]{8} {7}\\[\b]{8} {8}[\b]{8}[\d, ]{4}[\d]\.[\d]s[\n]$' :
-                                                                         r'^Hello {15} {5} {8}[\b]{8} {7}⣽[\b]{8} {8}[\b]{8}[\d, ]{4}[\d]\.[\d]s[\n]$'));
+          expect(outputStdout().join('\n'), matches(
+            platform.isWindows
+              ? r'^Hello {15} {5} {8}[\b]{8} {7}\\[\b]{8} {8}[\b]{8}[\d, ]{4}[\d]\.[\d]s[\n]$'
+              : r'^Hello {15} {5} {8}[\b]{8} {7}⣽[\b]{8} {8}[\b]{8}[\d, ]{4}[\d]\.[\d]s[\n]$',
+          ));
           done = true;
         });
         expect(done, isTrue);
@@ -598,11 +609,17 @@ void main() {
         expect(outputStderr().length, equals(1));
         expect(outputStderr().first, isEmpty);
         // the 5 below is the margin that is always included between the message and the time.
-        expect(outputStdout().join('\n'), matches(platform.isWindows ? r'^Hello {15} {5}$' :
-                                                                       r'^Hello {15} {5}$'));
+        expect(outputStdout().join('\n'), matches(
+          platform.isWindows
+            ? r'^Hello {15} {5}$'
+            : r'^Hello {15} {5}$',
+        ));
         status.stop();
-        expect(outputStdout().join('\n'), matches(platform.isWindows ? r'^Hello {15} {5}[\d, ]{4}[\d]\.[\d]s[\n]$' :
-                                                                       r'^Hello {15} {5}[\d, ]{4}[\d]\.[\d]s[\n]$'));
+        expect(outputStdout().join('\n'), matches(
+          platform.isWindows
+            ? r'^Hello {15} {5}[\d, ]{4}[\d]\.[\d]s[\n]$'
+            : r'^Hello {15} {5}[\d, ]{4}[\d]\.[\d]s[\n]$',
+        ));
         done = true;
       });
       expect(done, isTrue);

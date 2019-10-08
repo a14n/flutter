@@ -40,8 +40,7 @@ void main() {
       expect(fuchsiaWorkflow.canListDevices, true);
       expect(fuchsiaWorkflow.canListEmulators, false);
     }, overrides: <Type, Generator>{
-      FuchsiaArtifacts: () =>
-          FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
+      FuchsiaArtifacts: () => FuchsiaArtifacts(devFinder: devFinder, sshConfig: sshConfig),
     });
   });
 }

@@ -34,13 +34,11 @@ class FuchsiaSdk {
 
   /// Interface to the 'dev_finder' tool.
   FuchsiaDevFinder _fuchsiaDevFinder;
-  FuchsiaDevFinder get fuchsiaDevFinder =>
-      _fuchsiaDevFinder ??= FuchsiaDevFinder();
+  FuchsiaDevFinder get fuchsiaDevFinder => _fuchsiaDevFinder ??= FuchsiaDevFinder();
 
   /// Interface to the 'kernel_compiler' tool.
   FuchsiaKernelCompiler _fuchsiaKernelCompiler;
-  FuchsiaKernelCompiler get fuchsiaKernelCompiler =>
-      _fuchsiaKernelCompiler ??= FuchsiaKernelCompiler();
+  FuchsiaKernelCompiler get fuchsiaKernelCompiler => _fuchsiaKernelCompiler ??= FuchsiaKernelCompiler();
 
   /// Example output:
   ///    $ dev_finder list -full

@@ -468,8 +468,8 @@ class ValidationResult {
           'please let us know about this issue at https://github.com/flutter/flutter/issues.'),
       ValidationMessage.error('$error'),
       if (stackTrace != null)
-          // Stacktrace is informational. Printed in verbose mode only.
-          ValidationMessage('$stackTrace'),
+        // Stacktrace is informational. Printed in verbose mode only.
+        ValidationMessage('$stackTrace'),
     ], statusInfo: 'the doctor check crashed');
   }
 

@@ -138,13 +138,13 @@ Future<int> _handleToolError(
       final File file = await _createLocalCrashReport(args, error, stackTrace);
       stderr.writeln(
         'Crash report written to ${file.path};\n'
-            'please let us know at https://github.com/flutter/flutter/issues.',
+        'please let us know at https://github.com/flutter/flutter/issues.',
       );
       return _exit(1);
     } catch (error) {
       stderr.writeln(
         'Unable to generate crash report due to secondary error: $error\n'
-            'please let us know at https://github.com/flutter/flutter/issues.',
+        'please let us know at https://github.com/flutter/flutter/issues.',
       );
       // Any exception throw here (including one thrown by `_exit()`) will
       // get caught by our zone's `onError` handler. In order to avoid an

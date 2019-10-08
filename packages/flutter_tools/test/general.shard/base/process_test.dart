@@ -14,9 +14,7 @@ import 'package:process/process.dart';
 
 import '../../src/common.dart';
 import '../../src/context.dart';
-import '../../src/mocks.dart' show MockProcess,
-                                   MockProcessManager,
-                                   flakyProcessFactory;
+import '../../src/mocks.dart' show MockProcess, MockProcessManager, flakyProcessFactory;
 
 void main() {
   group('process exceptions', () {
@@ -78,9 +76,9 @@ void main() {
 
     MockProcess Function(List<String>) processMetaFactory(List<String> stdout, { List<String> stderr = const <String>[] }) {
       final Stream<List<int>> stdoutStream =
-          Stream<List<int>>.fromIterable(stdout.map<List<int>>((String s) => s.codeUnits));
+        Stream<List<int>>.fromIterable(stdout.map<List<int>>((String s) => s.codeUnits));
       final Stream<List<int>> stderrStream =
-      Stream<List<int>>.fromIterable(stderr.map<List<int>>((String s) => s.codeUnits));
+        Stream<List<int>>.fromIterable(stderr.map<List<int>>((String s) => s.codeUnits));
       return (List<String> command) => MockProcess(stdout: stdoutStream, stderr: stderrStream);
     }
 

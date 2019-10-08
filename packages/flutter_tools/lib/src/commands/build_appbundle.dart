@@ -36,17 +36,17 @@ class BuildAppBundleCommand extends BuildSubCommand {
 
   @override
   final String description =
-      'Build an Android App Bundle file from your app.\n\n'
-      'This command can build debug and release versions of an app bundle for your application. \'debug\' builds support '
-      'debugging and a quick development cycle. \'release\' builds don\'t support debugging and are '
-      'suitable for deploying to app stores. \n app bundle improves your app size';
+    'Build an Android App Bundle file from your app.\n\n'
+    'This command can build debug and release versions of an app bundle for your application. \'debug\' builds support '
+    'debugging and a quick development cycle. \'release\' builds don\'t support debugging and are '
+    'suitable for deploying to app stores. \n app bundle improves your app size';
 
   @override
   Future<Map<CustomDimensions, String>> get usageValues async {
     final Map<CustomDimensions, String> usage = <CustomDimensions, String>{};
 
     usage[CustomDimensions.commandBuildAppBundleTargetPlatform] =
-        (argResults['target-platform'] as List<String>).join(',');
+      (argResults['target-platform'] as List<String>).join(',');
 
     if (argResults['release']) {
       usage[CustomDimensions.commandBuildAppBundleBuildMode] = 'release';

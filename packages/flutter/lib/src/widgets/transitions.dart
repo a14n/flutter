@@ -115,7 +115,7 @@ export 'package:flutter/rendering.dart' show RelativeRect;
 ///    its normal position.
 ///  * [FadeTransition], which is an animated version of [Opacity].
 ///  * [AnimatedModalBarrier], which is an animated version of [ModalBarrier].
-abstract class AnimatedWidget extends StatefulWidget {
+abstract class AnimatedWidget<T extends Listenable> extends StatefulWidget {
   /// Creates a widget that rebuilds when the given listenable changes.
   ///
   /// The [listenable] argument is required.
@@ -128,7 +128,7 @@ abstract class AnimatedWidget extends StatefulWidget {
   /// The [Listenable] to which this widget is listening.
   ///
   /// Commonly an [Animation] or a [ChangeNotifier].
-  final Listenable listenable;
+  final T listenable;
 
   /// Override this method to build widgets that depend on the state of the
   /// listenable (e.g., the current value of the animation).
@@ -137,7 +137,7 @@ abstract class AnimatedWidget extends StatefulWidget {
 
   /// Subclasses typically do not override this method.
   @override
-  _AnimatedState createState() => _AnimatedState();
+  _AnimatedState<T> createState() => _AnimatedState<T>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -146,7 +146,7 @@ abstract class AnimatedWidget extends StatefulWidget {
   }
 }
 
-class _AnimatedState extends State<AnimatedWidget> {
+class _AnimatedState<T extends Listenable> extends State<AnimatedWidget<T>> {
   @override
   void initState() {
     super.initState();
@@ -154,7 +154,7 @@ class _AnimatedState extends State<AnimatedWidget> {
   }
 
   @override
-  void didUpdateWidget(AnimatedWidget oldWidget) {
+  void didUpdateWidget(AnimatedWidget<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.listenable != oldWidget.listenable) {
       oldWidget.listenable.removeListener(_handleChange);
@@ -247,7 +247,7 @@ class _AnimatedState extends State<AnimatedWidget> {
 ///    position to an end position over the lifetime of the animation.
 ///  * [RelativePositionedTransition], a widget that transitions its child's
 ///    position based on the value of a rectangle relative to a bounding box.
-class SlideTransition extends AnimatedWidget {
+class SlideTransition extends AnimatedWidget<Animation<Offset>> {
   /// Creates a fractional translation transition.
   ///
   /// The [position] argument must not be null.
@@ -265,7 +265,7 @@ class SlideTransition extends AnimatedWidget {
   /// If the current value of the position animation is `(dx, dy)`, the child
   /// will be translated horizontally by `width * dx` and vertically by
   /// `height * dy`, after applying the [textDirection] if available.
-  Animation<Offset> get position => listenable as Animation<Offset>;
+  Animation<Offset> get position => listenable;
 
   /// The direction to use for the x offset described by the [position].
   ///
@@ -320,7 +320,7 @@ class SlideTransition extends AnimatedWidget {
 ///    position based on the value of a rectangle relative to a bounding box.
 ///  * [SizeTransition], a widget that animates its own size and clips and
 ///    aligns its child.
-class ScaleTransition extends AnimatedWidget {
+class ScaleTransition extends AnimatedWidget<Animation<double>> {
   /// Creates a scale transition.
   ///
   /// The [scale] argument must not be null. The [alignment] argument defaults
@@ -337,7 +337,7 @@ class ScaleTransition extends AnimatedWidget {
   ///
   /// If the current value of the scale animation is v, the child will be
   /// painted v times its normal size.
-  Animation<double> get scale => listenable as Animation<double>;
+  Animation<double> get scale => listenable;
 
   /// The alignment of the origin of the coordinate system in which the scale
   /// takes place, relative to the size of the box.
@@ -375,7 +375,7 @@ class ScaleTransition extends AnimatedWidget {
 ///    widget.
 ///  * [SizeTransition], a widget that animates its own size and clips and
 ///    aligns its child.
-class RotationTransition extends AnimatedWidget {
+class RotationTransition extends AnimatedWidget<Animation<double>> {
   /// Creates a rotation transition.
   ///
   /// The [turns] argument must not be null.
@@ -391,7 +391,7 @@ class RotationTransition extends AnimatedWidget {
   ///
   /// If the current value of the turns animation is v, the child will be
   /// rotated v * 2 * pi radians before being painted.
-  Animation<double> get turns => listenable as Animation<double>;
+  Animation<double> get turns => listenable;
 
   /// The alignment of the origin of the coordinate system around which the
   /// rotation occurs, relative to the size of the box.
@@ -443,7 +443,7 @@ class RotationTransition extends AnimatedWidget {
 ///    position to an end position over the lifetime of the animation.
 ///  * [RelativePositionedTransition], a widget that transitions its child's
 ///    position based on the value of a rectangle relative to a bounding box.
-class SizeTransition extends AnimatedWidget {
+class SizeTransition extends AnimatedWidget<Animation<double>> {
   /// Creates a size transition.
   ///
   /// The [axis], [sizeFactor], and [axisAlignment] arguments must not be null.
@@ -473,7 +473,7 @@ class SizeTransition extends AnimatedWidget {
   ///
   /// If the value of [sizeFactor] is less than one, the child will be clipped
   /// in the appropriate axis.
-  Animation<double> get sizeFactor => listenable as Animation<double>;
+  Animation<double> get sizeFactor => listenable;
 
   /// Describes how to align the child along the axis that [sizeFactor] is
   /// modifying.
@@ -623,7 +623,7 @@ class RelativeRectTween extends Tween<RelativeRect> {
 ///    widget.
 ///  * [SizeTransition], a widget that animates its own size and clips and
 ///    aligns its child.
-class PositionedTransition extends AnimatedWidget {
+class PositionedTransition extends AnimatedWidget<Animation<RelativeRect>> {
   /// Creates a transition for [Positioned].
   ///
   /// The [rect] argument must not be null.
@@ -635,7 +635,7 @@ class PositionedTransition extends AnimatedWidget {
        super(key: key, listenable: rect);
 
   /// The animation that controls the child's size and position.
-  Animation<RelativeRect> get rect => listenable as Animation<RelativeRect>;
+  Animation<RelativeRect> get rect => listenable;
 
   /// The widget below this widget in the tree.
   ///
@@ -673,7 +673,7 @@ class PositionedTransition extends AnimatedWidget {
 ///    aligns its child.
 ///  * [SlideTransition], a widget that animates the position of a widget
 ///    relative to its normal position.
-class RelativePositionedTransition extends AnimatedWidget {
+class RelativePositionedTransition extends AnimatedWidget<Animation<Rect>> {
   /// Create an animated version of [Positioned].
   ///
   /// Each frame, the [Positioned] widget will be configured to represent the
@@ -695,7 +695,7 @@ class RelativePositionedTransition extends AnimatedWidget {
   ///
   ///  * [size], which gets the size of the box that the [Positioned] widget's
   ///    offsets are relative to.
-  Animation<Rect> get rect => listenable as Animation<Rect>;
+  Animation<Rect> get rect => listenable;
 
   /// The [Positioned] widget's offsets are relative to a box of this
   /// size whose origin is 0,0.
@@ -731,7 +731,7 @@ class RelativePositionedTransition extends AnimatedWidget {
 ///  * [DecoratedBox], which also draws a [Decoration] but is not animated.
 ///  * [AnimatedContainer], a more full-featured container that also animates on
 ///    decoration using an internal animation.
-class DecoratedBoxTransition extends AnimatedWidget {
+class DecoratedBoxTransition extends AnimatedWidget<Animation<Decoration>> {
   /// Creates an animated [DecoratedBox] whose [Decoration] animation updates
   /// the widget.
   ///
@@ -791,7 +791,7 @@ class DecoratedBoxTransition extends AnimatedWidget {
 ///    aligns its child.
 ///  * [SlideTransition], a widget that animates the position of a widget
 ///    relative to its normal position.
-class AlignTransition extends AnimatedWidget {
+class AlignTransition extends AnimatedWidget<Animation<AlignmentGeometry>> {
   /// Creates an animated [Align] whose [AlignmentGeometry] animation updates
   /// the widget.
   ///
@@ -809,7 +809,7 @@ class AlignTransition extends AnimatedWidget {
        super(key: key, listenable: alignment);
 
   /// The animation that controls the child's alignment.
-  Animation<AlignmentGeometry> get alignment => listenable as Animation<AlignmentGeometry>;
+  Animation<AlignmentGeometry> get alignment => listenable;
 
   /// If non-null, the child's width factor, see [Align.widthFactor].
   final double widthFactor;
@@ -842,7 +842,7 @@ class AlignTransition extends AnimatedWidget {
 ///    taking an explicit [Animation] argument.
 ///  * [DefaultTextStyle], which also defines a [TextStyle] for its descendants
 ///    but is not animated.
-class DefaultTextStyleTransition extends AnimatedWidget {
+class DefaultTextStyleTransition extends AnimatedWidget<Animation<TextStyle>> {
   /// Creates an animated [DefaultTextStyle] whose [TextStyle] animation updates
   /// the widget.
   const DefaultTextStyleTransition({
@@ -858,7 +858,7 @@ class DefaultTextStyleTransition extends AnimatedWidget {
        super(key: key, listenable: style);
 
   /// The animation that controls the descendants' text style.
-  Animation<TextStyle> get style => listenable as Animation<TextStyle>;
+  Animation<TextStyle> get style => listenable;
 
   /// How the text should be aligned horizontally.
   final TextAlign textAlign;
@@ -980,7 +980,7 @@ class DefaultTextStyleTransition extends AnimatedWidget {
 ///
 ///  * [TweenAnimationBuilder], which animates a property to a target value
 ///    without requiring manual management of an [AnimationController].
-class AnimatedBuilder extends AnimatedWidget {
+class AnimatedBuilder extends AnimatedWidget<Listenable> {
   /// Creates an animated builder.
   ///
   /// The [animation] and [builder] arguments must not be null.

@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class TestTransition extends AnimatedWidget {
+class TestTransition extends AnimatedWidget<Animation<double>> {
   const TestTransition({
     Key key,
     this.childFirstHalf,

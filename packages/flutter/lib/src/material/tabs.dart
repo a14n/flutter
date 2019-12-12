@@ -133,7 +133,7 @@ class Tab extends StatelessWidget {
   }
 }
 
-class _TabStyle extends AnimatedWidget {
+class _TabStyle extends AnimatedWidget<Animation<double>> {
   const _TabStyle({
     Key key,
     Animation<double> animation,

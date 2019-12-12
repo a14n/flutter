@@ -136,7 +136,7 @@ class ModalBarrier extends StatelessWidget {
 /// See also:
 ///
 ///  * [ModalRoute], which uses this widget.
-class AnimatedModalBarrier extends AnimatedWidget {
+class AnimatedModalBarrier extends AnimatedWidget<Animation<Color>> {
   /// Creates a widget that blocks user interaction.
   const AnimatedModalBarrier({
     Key key,
@@ -152,7 +152,7 @@ class AnimatedModalBarrier extends AnimatedWidget {
   ///
   ///  * [ModalRoute.barrierColor], which controls this property for the
   ///    [AnimatedModalBarrier] built by [ModalRoute] pages.
-  Animation<Color> get color => listenable as Animation<Color>;
+  Animation<Color> get color => listenable;
 
   /// Whether touching the barrier will pop the current route off the [Navigator].
   ///

@@ -108,7 +108,7 @@ class _FrontLayer extends StatelessWidget {
   }
 }
 
-class _BackdropTitle extends AnimatedWidget {
+class _BackdropTitle extends AnimatedWidget<Animation<double>> {
   const _BackdropTitle({
     Key key,
     Animation<double> listenable,
@@ -126,7 +126,7 @@ class _BackdropTitle extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     final Animation<double> animation = CurvedAnimation(
-      parent: listenable as Animation<double>,
+      parent: listenable,
       curve: const Interval(0.0, 0.78),
     );
 

@@ -82,7 +82,7 @@ class _TappableWhileStatusIsState extends State<_TappableWhileStatusIs> {
   }
 }
 
-class _CrossFadeTransition extends AnimatedWidget {
+class _CrossFadeTransition extends AnimatedWidget<Animation<double>> {
   const _CrossFadeTransition({
     Key key,
     this.alignment = Alignment.center,
@@ -97,15 +97,13 @@ class _CrossFadeTransition extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> progress = listenable as Animation<double>;
-
     final double opacity1 = CurvedAnimation(
-      parent: ReverseAnimation(progress),
+      parent: ReverseAnimation(listenable),
       curve: const Interval(0.5, 1.0),
     ).value;
 
     final double opacity2 = CurvedAnimation(
-      parent: progress,
+      parent: listenable,
       curve: const Interval(0.5, 1.0),
     ).value;
 

@@ -202,7 +202,7 @@ class BackdropPanel extends StatelessWidget {
 }
 
 // Cross fades between 'Select a Category' and 'Asset Viewer'.
-class BackdropTitle extends AnimatedWidget {
+class BackdropTitle extends AnimatedWidget<Animation<double>> {
   const BackdropTitle({
     Key key,
     Animation<double> listenable,
@@ -210,7 +210,6 @@ class BackdropTitle extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable as Animation<double>;
     return DefaultTextStyle(
       style: Theme.of(context).primaryTextTheme.title,
       softWrap: false,
@@ -219,14 +218,14 @@ class BackdropTitle extends AnimatedWidget {
         children: <Widget>[
           Opacity(
             opacity: CurvedAnimation(
-              parent: ReverseAnimation(animation),
+              parent: ReverseAnimation(listenable),
               curve: const Interval(0.5, 1.0),
             ).value,
             child: const Text('Select a Category'),
           ),
           Opacity(
             opacity: CurvedAnimation(
-              parent: animation,
+              parent: listenable,
               curve: const Interval(0.5, 1.0),
             ).value,
             child: const Text('Asset Viewer'),

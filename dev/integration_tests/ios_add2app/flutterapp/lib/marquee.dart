@@ -6,15 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/services.dart';
 
-class _MarqueeText extends AnimatedWidget {
+class _MarqueeText extends AnimatedWidget<Animation<double>> {
   const _MarqueeText({Key key, Animation<double> animation})
       : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable as Animation<double>;
     return Container(
-      margin: EdgeInsets.only(left: animation.value),
+      margin: EdgeInsets.only(left: listenable.value),
       child: const Text(
         'This is Marquee',
         softWrap: false,

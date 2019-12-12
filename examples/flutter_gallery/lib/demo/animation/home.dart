@@ -258,7 +258,7 @@ class _AllSectionsLayout extends MultiChildLayoutDelegate {
   }
 }
 
-class _AllSectionsView extends AnimatedWidget {
+class _AllSectionsView extends AnimatedWidget<ValueNotifier<double>> {
   _AllSectionsView({
     Key key,
     this.sectionIndex,

@@ -39,10 +39,10 @@ void main() {
       final SemanticsHandle semanticsHandle = tester.ensureSemantics();
 
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Row(
-              children: const <Widget>[
+              children: <Widget>[
                 Text('hello'),
                 Text('hello'),
               ],

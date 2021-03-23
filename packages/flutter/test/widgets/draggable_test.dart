@@ -1746,9 +1746,9 @@ void main() {
     await gesture.moveTo(secondLocation);
     await tester.pump();
 
-    await tester.pumpWidget(MaterialApp(
+    await tester.pumpWidget(const MaterialApp(
         home: Column(
-            children: const <Widget>[
+            children: <Widget>[
               Draggable<int>(
                   data: 1,
                   child: Text('Source'),
@@ -2278,9 +2278,9 @@ void main() {
     await gesture.moveTo(secondLocation);
     await tester.pump();
 
-    await tester.pumpWidget(MaterialApp(
+    await tester.pumpWidget(const MaterialApp(
       home: Column(
-        children: const <Widget>[
+        children: <Widget>[
           Draggable<int>(
             data: 1,
             child: Text('Source'),
@@ -3046,9 +3046,9 @@ void main() {
     const HitTestBehavior hitTestBehavior = HitTestBehavior.deferToChild;
 
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         home: Column(
-          children: const <Widget>[
+          children: <Widget>[
             Draggable<int>(
               hitTestBehavior: hitTestBehavior,
               feedback: SizedBox(height: 50.0, child: Text('Draggable')),

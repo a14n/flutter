@@ -1080,7 +1080,7 @@ class _ActionButtonParentData extends MultiChildLayoutParentData {
 //
 // See _RenderCupertinoAlertActions for specific layout policy details.
 class _CupertinoAlertActionsRenderWidget extends MultiChildRenderObjectWidget {
-  _CupertinoAlertActionsRenderWidget({
+  const _CupertinoAlertActionsRenderWidget({
     Key? key,
     required List<Widget> actionButtons,
     double dividerThickness = 0.0,

@@ -109,12 +109,12 @@ void main() {
 
   testWidgets('Align widthFactor', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Directionality(
+      const Directionality(
         textDirection: TextDirection.ltr,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Align(
               widthFactor: 0.5,
               child: SizedBox(
@@ -132,12 +132,12 @@ void main() {
 
   testWidgets('Align heightFactor', (WidgetTester tester) async {
     await tester.pumpWidget(
-      Directionality(
+      const Directionality(
         textDirection: TextDirection.ltr,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
+          children: <Widget>[
             Align(
               alignment: Alignment.center,
               heightFactor: 0.5,

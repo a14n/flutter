@@ -95,7 +95,7 @@ void main() {
       await tester.pumpWidget(_boilerplate(
         Semantics(
           container: true,
-          child: Row(children: const <Widget>[
+          child: const Row(children: <Widget>[
             Text('Hello'),
             Text('World'),
           ]),

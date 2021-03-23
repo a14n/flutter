@@ -115,10 +115,10 @@ void main() {
       }
 
       testWidgets('SafeArea alone.', (WidgetTester tester) async {
-        final Widget child = boilerplate(SafeArea(
+        final Widget child = boilerplate(const SafeArea(
           maintainBottomViewPadding: true,
           child: Column(
-            children: const <Widget>[
+            children: <Widget>[
               Expanded(child: Placeholder()),
             ],
           ),
@@ -150,12 +150,12 @@ void main() {
       });
 
       testWidgets('SafeArea with nested Scaffold', (WidgetTester tester) async {
-        final Widget child = boilerplate(SafeArea(
+        final Widget child = boilerplate(const SafeArea(
           maintainBottomViewPadding: true,
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Column(
-              children: const <Widget>[
+              children: <Widget>[
                 Expanded(child: Placeholder()),
               ],
             ),

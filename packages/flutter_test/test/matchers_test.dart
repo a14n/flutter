@@ -403,8 +403,8 @@ void main() {
       });
 
       testWidgets('if finder finds multiple widgets', (WidgetTester tester) async {
-        await tester.pumpWidget(boilerplate(Column(
-          children: const <Widget>[Text('hello'), Text('world')],
+        await tester.pumpWidget(boilerplate(const Column(
+          children: <Widget>[Text('hello'), Text('world')],
         )));
         final Finder finder = find.byType(Text);
         try {
